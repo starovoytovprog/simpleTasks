@@ -22,14 +22,13 @@ public class MainClassTest
 	@Test
 	public void HelloWorldMainTest()
 	{
-		/*ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		PrintStream ps = new PrintStream(baos);
 		PrintStream old = System.out;
 		System.setOut(ps);
 		HelloWorldMain.main(null);
 		System.out.flush();
 		System.setOut(old);
-		assertTrue(baos.toString().equals(HELLO_WORLD_OUT));*/
-		assertTrue(HELLO_WORLD_OUT.equals(HELLO_WORLD_OUT));
+		assertTrue(baos.toString().equals(HELLO_WORLD_OUT));
 	}
 }
