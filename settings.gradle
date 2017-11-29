@@ -1,0 +1,4 @@
+System.properties['file.encoding'] = 'UTF-8'
+rootProject.name = 'SimpleTasks'
+
+include ':HelloWorld'
