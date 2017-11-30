@@ -5,7 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Тестирование ConcurrentMatrix {@link ConcurrentIntegerMatrix}
+ * Тестирование ConcurrentIntegerMatrix {@link ConcurrentIntegerMatrix}
  *
  * @author starovoytov
  * @created 30.11.2017
@@ -37,4 +37,24 @@ public class ConcurrentIntegerMatrixTest
 		ConcurrentIntegerMatrix matrix = new ConcurrentIntegerMatrix(N, L);
 		assertEquals(checkSum, matrix.getCheckSum());
 	}
+
+	@Test
+	public void ConcurrentMatrixTestExchange()
+	{
+		ConcurrentIntegerMatrix matrix = new ConcurrentIntegerMatrix(N, L);
+
+		int i1 = 0;
+		int j1 = 0;
+		int i2 = N - 1;
+		int j2 = N - 1;
+		Object value1 = matrix.getObject(i1, j1).getValue();
+		Object value2 = matrix.getObject(i2, j2).getValue();
+
+		matrix.exchange(0, 0, N - 1, L - 1);
+
+		assertEquals(checkSum, matrix.getCheckSum());
+		assertEquals(value1, matrix.getObject(i2, j2).getValue());
+		assertEquals(value2, matrix.getObject(i1, j1).getValue());
+	}
+
 }
