@@ -6,8 +6,6 @@ buildscript {
 	}
 }
 
-apply plugin: 'java'
-
 jar {
 	baseName = 'HelloWorld'
 	manifest {
