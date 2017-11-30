@@ -6,7 +6,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * Блокирующийся объект
  *
  * @author starovoytov
- * @created 29.11.2017
+ * @created 30.11.2017
  * @$Author$
  * @$Revision$
  */

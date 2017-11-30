@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
  * Тестирование ConcurrentObject {@link ConcurrentObject}
  *
  * @author starovoytov
- * @created 29.11.2017
+ * @created 30.11.2017
  * @$Author$
  * @$Revision$
  */
