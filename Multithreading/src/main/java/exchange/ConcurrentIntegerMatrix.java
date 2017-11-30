@@ -53,7 +53,10 @@ public class ConcurrentIntegerMatrix
 		ConcurrentObject object1 = matrix[i1][j1];
 		ConcurrentObject object2 = matrix[i2][j2];
 
-		exchange(object1, object2);
+		while (!exchange(object1, object2))
+		{
+			Thread.currentThread().yield();
+		}
 	}
 
 	public ConcurrentObject getObject(int i, int j)
@@ -61,10 +64,26 @@ public class ConcurrentIntegerMatrix
 		return matrix[i][j];
 	}
 
-	private void exchange(ConcurrentObject object1, ConcurrentObject object2)
+	private boolean exchange(ConcurrentObject object1, ConcurrentObject object2)
 	{
-		Object buf = object1.getValue();
-		object1.setValue(object2.getValue());
-		object2.setValue(buf);
+		if (object1.tryLock())
+		{
+			if (object2.tryLock())
+			{
+				Object buf = object1.getValue();
+				object1.setValue(object2.getValue());
+				object1.unLock();
+				object2.setValue(buf);
+				object2.unLock();
+
+				return true;
+			}
+			else
+			{
+				object1.unLock();
+			}
+		}
+
+		return false;
 	}
 }
