@@ -28,6 +28,7 @@ public class SimpleTaskTest
 	@Test
 	public void SimpleTaskExecuteTest()
 	{
+		SimpleTask.clearCheckSum();
 		int checkSum = 0;
 		int startValue = UniqueIdGenerator.nextId() + 1;
 		for (long i = startValue; i <= startValue + 10; i++)
