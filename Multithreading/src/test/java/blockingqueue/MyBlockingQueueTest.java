@@ -26,4 +26,24 @@ public class MyBlockingQueueTest
 			assertEquals(queue.getSize(), i);
 		}
 	}
+
+	@Test
+	public void myBlockingQueueGetTest()
+	{
+		MyBlockingQueue queue = new MyBlockingQueue();
+
+		int count = 10;
+
+		for (int i = 0; i < count; i++)
+		{
+			queue.put(new SimpleTask());
+		}
+
+		for (int i = 0; i < count; i++)
+		{
+			queue.get();
+		}
+
+		assertEquals(queue.getSize(), 0);
+	}
 }
