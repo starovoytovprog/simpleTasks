@@ -17,7 +17,8 @@ public class UniqueIdGeneratorTest
 	@Test
 	public void UniqueIdGeneratorNextIdTest()
 	{
-		for (long i = 1; i <= 10; i++)
+		int startValue = UniqueIdGenerator.nextId() + 1;
+		for (long i = startValue; i <= startValue + 10; i++)
 		{
 			assertEquals(UniqueIdGenerator.nextId(), i);
 		}

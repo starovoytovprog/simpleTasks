@@ -14,7 +14,7 @@ public class UniqueIdGenerator
 {
 	private final static AtomicInteger generatorValue = new AtomicInteger(0);
 
-	public static long nextId()
+	public static int nextId()
 	{
 		return generatorValue.incrementAndGet();
 	}
