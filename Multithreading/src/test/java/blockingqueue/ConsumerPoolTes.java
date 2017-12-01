@@ -41,6 +41,7 @@ public class ConsumerPoolTes
 		}
 
 		pool.start();
+		pool.stop();
 		pool.getLatch().await();
 		assertEquals(0, queue.getSize());
 		assertEquals(SimpleTask.getCheckSum(), checkSum);

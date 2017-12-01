@@ -1,5 +1,7 @@
 package blockingqueue;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -15,19 +17,23 @@ public class ConsumerPool
 	private final MyBlockingQueue queue;
 	private final int threadCount;
 	private final CountDownLatch latch;
+	private final List<ExecuteThread> threads;
 
 	public ConsumerPool(MyBlockingQueue queue, int threadCount)
 	{
 		this.queue = queue;
 		this.threadCount = threadCount;
 		latch = new CountDownLatch(threadCount);
+		threads = new ArrayList<>(threadCount);
 	}
 
 	public void start()
 	{
 		for (int i = 0; i < threadCount; i++)
 		{
-			new ExecuteThread().start();
+			ExecuteThread thread = new ExecuteThread();
+			threads.add(thread);
+			thread.start();
 		}
 	}
 
@@ -36,19 +42,50 @@ public class ConsumerPool
 		return latch;
 	}
 
+	public void stop()
+	{
+		for (ExecuteThread thread : threads)
+		{
+			thread.interrupt();
+		}
+	}
+
 	private class ExecuteThread extends Thread
 	{
 		@Override
 		public void run()
 		{
-			ExecutableTask task;
-
-			while ((task = queue.get()) != null)
+			try
 			{
-				task.execute();
-			}
+				ExecutableTask task;
 
-			latch.countDown();
+				while (!isInterrupted() || queue.getSize() > 0)
+				{
+					task = queue.get();
+					if (task != null)
+					{
+						task.execute();
+					}
+					else
+					{
+						try
+						{
+							synchronized (queue)
+							{
+								queue.wait();
+							}
+						}
+						catch (InterruptedException e)
+						{
+							return;
+						}
+					}
+				}
+			}
+			finally
+			{
+				latch.countDown();
+			}
 		}
 	}
 }

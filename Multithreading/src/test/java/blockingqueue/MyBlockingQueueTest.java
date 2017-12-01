@@ -46,4 +46,35 @@ public class MyBlockingQueueTest
 
 		assertEquals(queue.getSize(), 0);
 	}
+
+	@Test
+	public void queueProducerConsumerTest() throws InterruptedException
+	{
+		SimpleTask.clearCheckSum();
+		MyBlockingQueue queue = new MyBlockingQueue();
+		int checkSum = addInQueue(queue, 10, 10_000);
+		ConsumerPool consumers = new ConsumerPool(queue, 5);
+		consumers.start();
+		checkSum += addInQueue(queue, 10, 10_000);
+		consumers.stop();
+		consumers.getLatch().await();
+
+		assertEquals(checkSum, SimpleTask.getCheckSum());
+		assertEquals(queue.getSize(), 0);
+	}
+
+	private int addInQueue(MyBlockingQueue queue, int threadCount, int countTaskForThread) throws InterruptedException
+	{
+		int startValue = UniqueIdGenerator.nextId() + 1;
+		int checkSum = 0;
+		for (int i = startValue; i <  startValue + threadCount * countTaskForThread; i++)
+		{
+			checkSum += i;
+		}
+
+		ProducerPool pool = new ProducerPool(queue, threadCount, countTaskForThread);
+		pool.start();
+		pool.getLatch().await();
+		return checkSum;
+	}
 }

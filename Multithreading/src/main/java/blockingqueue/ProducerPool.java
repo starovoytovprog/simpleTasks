@@ -46,6 +46,10 @@ public class ProducerPool
 			for (int i = 0; i < countTaskForThread; i++)
 			{
 				queue.put(new SimpleTask());
+				synchronized (queue)
+				{
+					queue.notify();
+				}
 			}
 
 			latch.countDown();
