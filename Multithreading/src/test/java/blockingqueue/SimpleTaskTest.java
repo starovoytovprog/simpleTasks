@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 public class SimpleTaskTest
 {
 	@Test
-	public void SimpleTaskConstructorTest()
+	public void simpleTaskConstructorTest()
 	{
 		int startValue = UniqueIdGenerator.nextId() + 1;
 		for (int i = startValue; i <= startValue + 10; i++)
@@ -26,7 +26,7 @@ public class SimpleTaskTest
 	}
 
 	@Test
-	public void SimpleTaskExecuteTest()
+	public void simpleTaskExecuteTest()
 	{
 		SimpleTask.clearCheckSum();
 		int checkSum = 0;

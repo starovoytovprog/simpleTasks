@@ -15,13 +15,13 @@ import static org.junit.Assert.assertEquals;
 public class ProducerPoolTest
 {
 	@Test
-	public void ProducerPoolOneThreadTest() throws InterruptedException
+	public void producerPoolOneThreadTest() throws InterruptedException
 	{
 		poolTest(1, 10);
 	}
 
 	@Test
-	public void ProducerPoolMultiThreadTest() throws InterruptedException
+	public void producerPoolMultiThreadTest() throws InterruptedException
 	{
 		poolTest(30, 100);
 	}

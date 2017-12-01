@@ -67,7 +67,7 @@ public class MyBlockingQueueTest
 	{
 		int startValue = UniqueIdGenerator.nextId() + 1;
 		int checkSum = 0;
-		for (int i = startValue; i <  startValue + threadCount * countTaskForThread; i++)
+		for (int i = startValue; i < startValue + threadCount * countTaskForThread; i++)
 		{
 			checkSum += i;
 		}

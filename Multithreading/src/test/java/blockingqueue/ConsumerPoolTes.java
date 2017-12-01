@@ -15,13 +15,13 @@ import static org.junit.Assert.assertEquals;
 public class ConsumerPoolTes
 {
 	@Test
-	public void ConsumerPoolOneThreadTest() throws InterruptedException
+	public void consumerPoolOneThreadTest() throws InterruptedException
 	{
 		testConsumer(1, 10000);
 	}
 
 	@Test
-	public void ConsumerPoolMultiThreadTest() throws InterruptedException
+	public void consumerPoolMultiThreadTest() throws InterruptedException
 	{
 		testConsumer(10, 10);
 	}

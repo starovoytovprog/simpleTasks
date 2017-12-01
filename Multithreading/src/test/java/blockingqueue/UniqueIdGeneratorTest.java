@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 public class UniqueIdGeneratorTest
 {
 	@Test
-	public void UniqueIdGeneratorNextIdTest()
+	public void uniqueIdGeneratorNextIdTest()
 	{
 		int startValue = UniqueIdGenerator.nextId() + 1;
 		for (long i = startValue; i <= startValue + 10; i++)

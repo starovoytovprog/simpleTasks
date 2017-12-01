@@ -38,14 +38,14 @@ public class ConcurrentIntegerMatrixTest
 	}
 
 	@Test
-	public void ConcurrentMatrixTestConstructor()
+	public void concurrentMatrixTestConstructor()
 	{
 		ConcurrentIntegerMatrix matrix = new ConcurrentIntegerMatrix(N, L);
 		assertEquals(checkSum, matrix.getCheckSum());
 	}
 
 	@Test
-	public void ConcurrentMatrixTestExchange()
+	public void concurrentMatrixTestExchange()
 	{
 		ConcurrentIntegerMatrix matrix = new ConcurrentIntegerMatrix(N, L);
 
@@ -64,7 +64,7 @@ public class ConcurrentIntegerMatrixTest
 	}
 
 	@Test
-	public void ConcurrentMatrixTestMultithradingExchange() throws InterruptedException
+	public void concurrentMatrixTestMultithradingExchange() throws InterruptedException
 	{
 		ConcurrentIntegerMatrix matrix = new ConcurrentIntegerMatrix(N, L);
 
