@@ -36,6 +36,9 @@ public class MyBlockingQueue
 
 	public ExecutableTask get()
 	{
-		return taskCollection.pollFirst();
+		operationLocker.lock();
+		ExecutableTask t = taskCollection.pollFirst();
+		operationLocker.unlock();
+		return t;
 	}
 }

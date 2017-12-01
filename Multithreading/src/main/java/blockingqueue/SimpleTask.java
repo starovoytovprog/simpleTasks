@@ -25,6 +25,11 @@ public class SimpleTask implements ExecutableTask
 		return checkSum.get();
 	}
 
+	public static void clearCheckSum()
+	{
+		checkSum.set(0);
+	}
+
 	public int getId()
 	{
 		return id;
