@@ -6,7 +6,11 @@ subprojects {
 	
 	compileJava.options.encoding = 'UTF-8'
 	compileTestJava.options.encoding = 'UTF-8'
-	
+
+	ext {
+		jUnitVersion = '4.11'
+	}
+
 	tasks.withType(JavaCompile) {
 		sourceCompatibility = JavaVersion.VERSION_1_8
 		targetCompatibility = JavaVersion.VERSION_1_8
@@ -16,5 +20,9 @@ subprojects {
 		maven {
 			url 'http://repo1.maven.org/maven2'
 		}
+	}
+
+	dependencies {
+		testCompile(group: 'junit', name: 'junit', version: jUnitVersion)
 	}
 }
