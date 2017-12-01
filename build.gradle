@@ -8,7 +8,7 @@ subprojects {
 	compileTestJava.options.encoding = 'UTF-8'
 
 	ext {
-		jUnitVersion = '4.11'
+		jUnitVersion = '4.12'
 	}
 
 	tasks.withType(JavaCompile) {
