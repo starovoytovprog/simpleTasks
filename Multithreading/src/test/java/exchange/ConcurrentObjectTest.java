@@ -21,7 +21,7 @@ public class ConcurrentObjectTest
 	private final CountDownLatch whileUnLockObject = new CountDownLatch(1);
 
 	@Test
-	public void ConcurrentObjectLockTest() throws InterruptedException
+	public void concurrentObjectLockTest() throws InterruptedException
 	{
 		Integer lockedObject = 14;
 		ConcurrentObject<Integer> myObject = new ConcurrentObject<>(lockedObject);
