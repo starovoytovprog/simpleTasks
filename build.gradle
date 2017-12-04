@@ -1,21 +1,21 @@
 apply plugin: "idea"
 
 subprojects {
-	
 	apply plugin: 'java'
-	
+
 	compileJava.options.encoding = 'UTF-8'
 	compileTestJava.options.encoding = 'UTF-8'
 
 	ext {
 		jUnitVersion = '4.12'
+		mockitoVersion = '1.10.19'
 	}
 
 	tasks.withType(JavaCompile) {
 		sourceCompatibility = JavaVersion.VERSION_1_8
 		targetCompatibility = JavaVersion.VERSION_1_8
 	}
-	
+
 	repositories {
 		maven {
 			url 'http://repo1.maven.org/maven2'
@@ -24,5 +24,6 @@ subprojects {
 
 	dependencies {
 		testCompile(group: 'junit', name: 'junit', version: jUnitVersion)
+		testCompile(group: 'org.mockito', name: 'mockito-all', version: mockitoVersion)
 	}
 }

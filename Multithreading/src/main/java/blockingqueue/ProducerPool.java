@@ -16,13 +16,15 @@ public class ProducerPool
 	private final CountDownLatch latch;
 	private final int threadCount;
 	private final int countTaskForThread;
+	private final ExecutableTaskCreator taskCreator;
 
-	public ProducerPool(MyBlockingQueue queue, int threadCount, int countTaskForThread)
+	public ProducerPool(MyBlockingQueue queue, int threadCount, int countTaskForThread, ExecutableTaskCreator taskCreator)
 	{
 		this.queue = queue;
 		latch = new CountDownLatch(threadCount);
 		this.threadCount = threadCount;
 		this.countTaskForThread = countTaskForThread;
+		this.taskCreator = taskCreator;
 	}
 
 	public void start()
@@ -45,7 +47,7 @@ public class ProducerPool
 		{
 			for (int i = 0; i < countTaskForThread; i++)
 			{
-				queue.put(new SimpleTask());
+				queue.put(taskCreator.create());
 				synchronized (queue)
 				{
 					queue.notify();
