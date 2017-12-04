@@ -61,24 +61,25 @@ public class ConsumerPool
 
 				while (!isInterrupted() || queue.getSize() > 0)
 				{
-					task = queue.get();
-					if (task != null)
+					synchronized (queue)
 					{
-						task.execute();
-					}
-					else
-					{
-						try
+						task = queue.get();
+						if (task == null)
 						{
-							synchronized (queue)
+							try
 							{
 								queue.wait();
 							}
+							catch (InterruptedException e)
+							{
+								return;
+							}
 						}
-						catch (InterruptedException e)
-						{
-							return;
-						}
+					}
+
+					if (task != null)
+					{
+						task.execute();
 					}
 				}
 			}
