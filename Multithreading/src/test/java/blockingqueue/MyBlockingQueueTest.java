@@ -1,8 +1,11 @@
 package blockingqueue;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
+import static org.mockito.Mockito.*;
 
 /**
  * Тестирование MyBlockingQueue {@link MyBlockingQueue}
@@ -14,15 +17,24 @@ import static junit.framework.TestCase.assertEquals;
  */
 public class MyBlockingQueueTest
 {
+	private static final int EMPTY = 0;
+	ExecutableTaskCreator mockCreator;
+
+	@Before
+	public void init()
+	{
+		mockCreator = new MockTaskCreator();
+	}
+
 	@Test
 	public void myBlockingQueuePutTest()
 	{
 		MyBlockingQueue queue = new MyBlockingQueue();
-		assertEquals(queue.getSize(), 0);
+		assertEquals(queue.getSize(), EMPTY);
 
 		for (int i = 1; i <= 10; i++)
 		{
-			queue.put(new SimpleTask());
+			queue.put(mockCreator.create());
 			assertEquals(queue.getSize(), i);
 		}
 	}
@@ -36,7 +48,7 @@ public class MyBlockingQueueTest
 
 		for (int i = 0; i < count; i++)
 		{
-			queue.put(new SimpleTask());
+			queue.put(mockCreator.create());
 		}
 
 		for (int i = 0; i < count; i++)
@@ -44,37 +56,40 @@ public class MyBlockingQueueTest
 			queue.get();
 		}
 
-		assertEquals(queue.getSize(), 0);
+		assertEquals(queue.getSize(), EMPTY);
 	}
 
 	@Test
 	public void queueProducerConsumerTest() throws InterruptedException
 	{
-		SimpleTask.clearCheckSum();
+		int threadCount = 10;
+		int countTaskForThread = 10_000;
 		MyBlockingQueue queue = new MyBlockingQueue();
-		int checkSum = addInQueue(queue, 10, 10_000);
-		ConsumerPool consumers = new ConsumerPool(queue, 5);
+		addInQueue(queue, threadCount, countTaskForThread, mockCreator);
+
+		int consumerThreadCount = 5;
+		ConsumerPool consumers = new ConsumerPool(queue, consumerThreadCount);
 		consumers.start();
-		checkSum += addInQueue(queue, 10, 10_000);
+
+		addInQueue(queue, threadCount, countTaskForThread, mockCreator);
+
 		consumers.stop();
 		consumers.getLatch().await();
 
-		assertEquals(checkSum, SimpleTask.getCheckSum());
-		assertEquals(queue.getSize(), 0);
+		verify(mockCreator.create(), times(threadCount * countTaskForThread * 2)).execute();
+		assertEquals(queue.getSize(), EMPTY);
 	}
 
-	private int addInQueue(MyBlockingQueue queue, int threadCount, int countTaskForThread) throws InterruptedException
+	private void addInQueue(MyBlockingQueue queue, int threadCount, int countTaskForThread, ExecutableTaskCreator mockTaskCreator) throws InterruptedException
 	{
-		int startValue = UniqueIdGenerator.nextId() + 1;
-		int checkSum = 0;
-		for (int i = startValue; i < startValue + threadCount * countTaskForThread; i++)
-		{
-			checkSum += i;
-		}
-
-		ProducerPool pool = new ProducerPool(queue, threadCount, countTaskForThread);
+		ProducerPool pool = new ProducerPool(queue, threadCount, countTaskForThread, mockTaskCreator);
 		pool.start();
 		pool.getLatch().await();
-		return checkSum;
+	}
+
+	@After
+	public void validate()
+	{
+		validateMockitoUsage();
 	}
 }

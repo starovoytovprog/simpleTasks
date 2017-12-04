@@ -1,8 +1,11 @@
 package blockingqueue;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.validateMockitoUsage;
 
 /**
  * Тестирование ProducerPool {@link ProducerPool}
@@ -14,6 +17,14 @@ import static org.junit.Assert.assertEquals;
  */
 public class ProducerPoolTest
 {
+	private MockTaskCreator mockTaskCreator;
+
+	@Before
+	public void init()
+	{
+		mockTaskCreator = new MockTaskCreator();
+	}
+
 	@Test
 	public void producerPoolOneThreadTest() throws InterruptedException
 	{
@@ -29,9 +40,15 @@ public class ProducerPoolTest
 	private void poolTest(int threadCount, int countTaskForThread) throws InterruptedException
 	{
 		MyBlockingQueue queue = new MyBlockingQueue();
-		ProducerPool pool = new ProducerPool(queue, threadCount, countTaskForThread);
+		ProducerPool pool = new ProducerPool(queue, threadCount, countTaskForThread, mockTaskCreator);
 		pool.start();
 		pool.getLatch().await();
 		assertEquals(threadCount * countTaskForThread, queue.getSize());
+	}
+
+	@After
+	public void validate()
+	{
+		validateMockitoUsage();
 	}
 }
