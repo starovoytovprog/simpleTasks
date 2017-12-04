@@ -1,7 +1,6 @@
 package blockingqueue;
 
 import java.util.LinkedList;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Реализация блокирующей очереди
@@ -14,12 +13,10 @@ import java.util.concurrent.locks.ReentrantLock;
 public class MyBlockingQueue
 {
 	private final LinkedList<ExecutableTask> taskCollection;
-	private final ReentrantLock operationLocker;
 
 	public MyBlockingQueue()
 	{
 		taskCollection = new LinkedList<>();
-		operationLocker = new ReentrantLock();
 	}
 
 	public int getSize()
@@ -29,16 +26,20 @@ public class MyBlockingQueue
 
 	public void put(ExecutableTask newTask)
 	{
-		operationLocker.lock();
-		taskCollection.add(newTask);
-		operationLocker.unlock();
+		synchronized (taskCollection)
+		{
+			taskCollection.add(newTask);
+		}
 	}
 
 	public ExecutableTask get()
 	{
-		operationLocker.lock();
-		ExecutableTask t = taskCollection.pollFirst();
-		operationLocker.unlock();
+		ExecutableTask t;
+		synchronized (taskCollection)
+		{
+			t = taskCollection.pollFirst();
+		}
+
 		return t;
 	}
 }
