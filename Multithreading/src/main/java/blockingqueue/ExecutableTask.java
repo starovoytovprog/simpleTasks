@@ -10,5 +10,8 @@ package blockingqueue;
  */
 public interface ExecutableTask
 {
-	Object execute();
+	/**
+	 * Выполнить задачу
+	 */
+	void execute();
 }

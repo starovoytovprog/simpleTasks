@@ -10,5 +10,10 @@ package blockingqueue;
  */
 public interface ExecutableTaskCreator
 {
+	/**
+	 * Создать новую задачу
+	 *
+	 * @return Новая задача
+	 */
 	ExecutableTask create();
 }

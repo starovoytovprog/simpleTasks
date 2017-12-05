@@ -14,11 +14,18 @@ import java.util.concurrent.CountDownLatch;
  */
 public class ConsumerPool
 {
+
 	private final MyBlockingQueue queue;
 	private final int threadCount;
 	private final CountDownLatch latch;
 	private final List<ExecuteThread> threads;
 
+	/**
+	 * Конструктор пула обработчиков
+	 *
+	 * @param queue Очередь, из которой потоки-обработчики будут выбирать задачи на обработку
+	 * @param threadCount Количество потоков-обработчиков
+	 */
 	public ConsumerPool(MyBlockingQueue queue, int threadCount)
 	{
 		this.queue = queue;
@@ -27,6 +34,9 @@ public class ConsumerPool
 		threads = new ArrayList<>(threadCount);
 	}
 
+	/**
+	 * Старт потоков-обработчиков
+	 */
 	public void start()
 	{
 		for (int i = 0; i < threadCount; i++)
@@ -37,19 +47,31 @@ public class ConsumerPool
 		}
 	}
 
-	public CountDownLatch getLatch()
+	/**
+	 * Ожидание завершения работы потоков-обработчиков
+	 *
+	 * @throws InterruptedException
+	 */
+	public void await() throws InterruptedException
 	{
-		return latch;
+		latch.await();
 	}
 
+	/**
+	 * Команда потокам-обработчикам завершить работу, после обработки всех, имеющихся заданий в очереди, не ожидая новых
+	 */
 	public void stop()
 	{
 		for (ExecuteThread thread : threads)
 		{
 			thread.interrupt();
 		}
+		threads.clear();
 	}
 
+	/**
+	 * Класс потока-обработчика
+	 */
 	private class ExecuteThread extends Thread
 	{
 		@Override

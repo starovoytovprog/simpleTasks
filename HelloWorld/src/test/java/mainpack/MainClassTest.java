@@ -19,6 +19,9 @@ public class MainClassTest
 {
 	private static final String HELLO_WORLD_OUT = "Hello World!\r\n";
 
+	/**
+	 * Сравнивание вывода сообщения в консоль с эталонной строкой
+	 */
 	@Test
 	public void HelloWorldMainTest()
 	{

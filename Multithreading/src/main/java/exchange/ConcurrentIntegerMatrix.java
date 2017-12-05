@@ -12,6 +12,12 @@ public class ConcurrentIntegerMatrix
 {
 	private final ConcurrentObject<Integer>[][] matrix;
 
+	/**
+	 * Конструктор матрицы
+	 *
+	 * @param arrayCount Количество массивов
+	 * @param arraySize Расмер массивов
+	 */
 	public ConcurrentIntegerMatrix(int arrayCount, int arraySize)
 	{
 		matrix = new ConcurrentObject[arrayCount][arraySize];
@@ -25,6 +31,11 @@ public class ConcurrentIntegerMatrix
 		}
 	}
 
+	/**
+	 * Посчитать контрольную сумму матрицы
+	 *
+	 * @return Контрольная сумма
+	 */
 	public int getCheckSum()
 	{
 		int sum = 0;
@@ -59,11 +70,25 @@ public class ConcurrentIntegerMatrix
 		}
 	}
 
+	/**
+	 * Получить объект из матрицы по координатам
+	 *
+	 * @param i Номер массива
+	 * @param j Номер элемента в массиве
+	 * @return Объект из матрицы
+	 */
 	public ConcurrentObject getObject(int i, int j)
 	{
 		return matrix[i][j];
 	}
 
+	/**
+	 * Производит обмен объектов
+	 *
+	 * @param object1 Первый объект
+	 * @param object2 Второй объект
+	 * @return true, если замена была успешной
+	 */
 	private boolean exchange(ConcurrentObject object1, ConcurrentObject object2)
 	{
 		if (object1.tryLock())

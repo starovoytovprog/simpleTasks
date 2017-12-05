@@ -25,24 +25,41 @@ public class ProducerPoolTest
 		mockTaskCreator = new MockTaskCreator();
 	}
 
+	/**
+	 * Тестирование пула добавления задач с одним потоком
+	 *
+	 * @throws InterruptedException
+	 */
 	@Test
 	public void producerPoolOneThreadTest() throws InterruptedException
 	{
 		poolTest(1, 10);
 	}
 
+	/**
+	 * Тестирование пула добавления задач с несколькими потоками
+	 *
+	 * @throws InterruptedException
+	 */
 	@Test
 	public void producerPoolMultiThreadTest() throws InterruptedException
 	{
 		poolTest(30, 100);
 	}
 
+	/**
+	 * Тестирование пула добавления задач
+	 *
+	 * @param threadCount Количество потоков-генераторов
+	 * @param countTaskForThread Количество задач, генерируемых каждым потоком
+	 * @throws InterruptedException
+	 */
 	private void poolTest(int threadCount, int countTaskForThread) throws InterruptedException
 	{
 		MyBlockingQueue queue = new MyBlockingQueue();
 		ProducerPool pool = new ProducerPool(queue, threadCount, countTaskForThread, mockTaskCreator);
 		pool.start();
-		pool.getLatch().await();
+		pool.await();
 		assertEquals(threadCount * countTaskForThread, queue.getSize());
 	}
 
