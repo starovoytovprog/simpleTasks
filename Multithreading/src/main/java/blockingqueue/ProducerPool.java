@@ -18,6 +18,14 @@ public class ProducerPool
 	private final int countTaskForThread;
 	private final ExecutableTaskCreator taskCreator;
 
+	/**
+	 * Конструктор пула генераторов задач
+	 *
+	 * @param queue Очередь, в которую добавляются задачи
+	 * @param threadCount Количество потоков-генераторов
+	 * @param countTaskForThread Количество задач, добавляемых каждым потоком
+	 * @param taskCreator Фабрика, формирующая новые задачи
+	 */
 	public ProducerPool(MyBlockingQueue queue, int threadCount, int countTaskForThread, ExecutableTaskCreator taskCreator)
 	{
 		this.queue = queue;
@@ -27,6 +35,9 @@ public class ProducerPool
 		this.taskCreator = taskCreator;
 	}
 
+	/**
+	 * Старт потоков-генераторов
+	 */
 	public void start()
 	{
 		for (int i = 0; i < threadCount; i++)
@@ -35,11 +46,19 @@ public class ProducerPool
 		}
 	}
 
-	public CountDownLatch getLatch()
+	/**
+	 * Ожидание выполнения потоков-генераторов
+	 *
+	 * @throws InterruptedException
+	 */
+	public void await() throws InterruptedException
 	{
-		return latch;
+		latch.await();
 	}
 
+	/**
+	 * Класс потока-генератора
+	 */
 	private class GenerateThread extends Thread
 	{
 		@Override

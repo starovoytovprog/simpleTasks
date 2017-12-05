@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
 public class MyBlockingQueueTest
 {
 	private static final int EMPTY = 0;
-	ExecutableTaskCreator mockCreator;
+	private ExecutableTaskCreator mockCreator;
 
 	@Before
 	public void init()
@@ -26,6 +26,9 @@ public class MyBlockingQueueTest
 		mockCreator = new MockTaskCreator();
 	}
 
+	/**
+	 * Тестирование добавления задачи в очередь
+	 */
 	@Test
 	public void myBlockingQueuePutTest()
 	{
@@ -39,6 +42,9 @@ public class MyBlockingQueueTest
 		}
 	}
 
+	/**
+	 * Тестирование получение задачи из очереди
+	 */
 	@Test
 	public void myBlockingQueueGetTest()
 	{
@@ -59,6 +65,11 @@ public class MyBlockingQueueTest
 		assertEquals(queue.getSize(), EMPTY);
 	}
 
+	/**
+	 * Тестирование очереди с изпользованием пулов добавления и обработки
+	 *
+	 * @throws InterruptedException
+	 */
 	@Test
 	public void queueProducerConsumerTest() throws InterruptedException
 	{
@@ -74,17 +85,26 @@ public class MyBlockingQueueTest
 		addInQueue(queue, threadCount, countTaskForThread, mockCreator);
 
 		consumers.stop();
-		consumers.getLatch().await();
+		consumers.await();
 
 		verify(mockCreator.create(), times(threadCount * countTaskForThread * 2)).execute();
 		assertEquals(queue.getSize(), EMPTY);
 	}
 
+	/**
+	 * Добавление задач в очередь
+	 *
+	 * @param queue Очередь, в которую добавляются задачи
+	 * @param threadCount Количество потоков пула генератора задач
+	 * @param countTaskForThread Количество задач, генерируемых каждым потоком
+	 * @param mockTaskCreator Фабрика задач
+	 * @throws InterruptedException
+	 */
 	private void addInQueue(MyBlockingQueue queue, int threadCount, int countTaskForThread, ExecutableTaskCreator mockTaskCreator) throws InterruptedException
 	{
 		ProducerPool pool = new ProducerPool(queue, threadCount, countTaskForThread, mockTaskCreator);
 		pool.start();
-		pool.getLatch().await();
+		pool.await();
 	}
 
 	@After

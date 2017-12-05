@@ -20,6 +20,10 @@ public class ConcurrentObjectTest
 	private final CountDownLatch whileLockObject = new CountDownLatch(1);
 	private final CountDownLatch whileUnLockObject = new CountDownLatch(1);
 
+	/**
+	 * Тестирование блокировки объекта
+	 * @throws InterruptedException
+	 */
 	@Test
 	public void concurrentObjectLockTest() throws InterruptedException
 	{
@@ -38,6 +42,9 @@ public class ConcurrentObjectTest
 		myObject.unLock();
 	}
 
+	/**
+	 * Класс-поток, блокирующий и разблокирующий объект
+	 */
 	private class LockAndUnlock extends Thread
 	{
 		private final ConcurrentObject myObject;

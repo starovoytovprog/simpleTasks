@@ -19,11 +19,21 @@ public class MyBlockingQueue
 		taskCollection = new LinkedList<>();
 	}
 
+	/**
+	 * Возвращает количество задач в очереди
+	 *
+	 * @return Количество задач в очереди
+	 */
 	public int getSize()
 	{
 		return taskCollection.size();
 	}
 
+	/**
+	 * Добавить задачу в очередь
+	 *
+	 * @param newTask Новая задача
+	 */
 	public void put(ExecutableTask newTask)
 	{
 		synchronized (taskCollection)
@@ -32,6 +42,11 @@ public class MyBlockingQueue
 		}
 	}
 
+	/**
+	 * Забрать задачу из очереди
+	 *
+	 * @return Забранная задача
+	 */
 	public ExecutableTask get()
 	{
 		ExecutableTask t;

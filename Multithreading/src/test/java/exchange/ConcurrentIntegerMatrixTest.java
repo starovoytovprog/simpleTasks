@@ -37,6 +37,9 @@ public class ConcurrentIntegerMatrixTest
 		checkSum = sum;
 	}
 
+	/**
+	 * Тестирование конструктора матрицы
+	 */
 	@Test
 	public void concurrentMatrixTestConstructor()
 	{
@@ -44,6 +47,9 @@ public class ConcurrentIntegerMatrixTest
 		assertEquals(checkSum, matrix.getCheckSum());
 	}
 
+	/**
+	 * Тестирование обмена элементов в матрице
+	 */
 	@Test
 	public void concurrentMatrixTestExchange()
 	{
@@ -63,6 +69,9 @@ public class ConcurrentIntegerMatrixTest
 		assertEquals(value2, matrix.getObject(i1, j1).getValue());
 	}
 
+	/**
+	 * Тестирование многопоточного обмена элементов в матрице
+	 */
 	@Test
 	public void concurrentMatrixTestMultithradingExchange() throws InterruptedException
 	{
@@ -88,6 +97,9 @@ public class ConcurrentIntegerMatrixTest
 		assertEquals(checkSum, matrix.getCheckSum());
 	}
 
+	/**
+	 * Класс-поток, меняющий элементы в матрице
+	 */
 	private class ExchangeThread extends Thread
 	{
 		private final ConcurrentIntegerMatrix matrix;
@@ -107,6 +119,9 @@ public class ConcurrentIntegerMatrixTest
 			}
 		}
 
+		/**
+		 * Замена случайных элементов в матрице
+		 */
 		private void exchange()
 		{
 			int i1 = r.nextInt(N);
