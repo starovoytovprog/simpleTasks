@@ -1,12 +1,10 @@
 package mainpack;
 
 /**
- * Стартовый класс HelloWorld
+ * HelloWorld
  *
- * @author starovoytov
- * @created 29.11.2017
- * @$Author$
- * @$Revision$
+ * @author Starovoytov
+ * @since 29.11.2017
  */
 public class HelloWorldMain
 {

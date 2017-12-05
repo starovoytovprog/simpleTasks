@@ -5,10 +5,8 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * Блокирующийся объект
  *
- * @author starovoytov
- * @created 30.11.2017
- * @$Author$
- * @$Revision$
+ * @author Starovoytov
+ * @since 30.11.2017
  */
 public class ConcurrentObject<T>
 {

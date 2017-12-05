@@ -3,10 +3,8 @@ package blockingqueue;
 /**
  * Базовая фабрика создания ExecutableTask-экземпляров
  *
- * @author starovoytov
- * @created 04.12.2017
- * @$Author$
- * @$Revision$
+ * @author Starovoytov
+ * @since 04.12.2017
  */
 public interface ExecutableTaskCreator
 {

@@ -10,10 +10,8 @@ import static org.mockito.Mockito.*;
 /**
  * Тестирование MyBlockingQueue {@link MyBlockingQueue}
  *
- * @author starovoytov
- * @created 30.11.2017
- * @$Author$
- * @$Revision$
+ * @author Starovoytov
+ * @since 30.11.2017
  */
 public class MyBlockingQueueTest
 {

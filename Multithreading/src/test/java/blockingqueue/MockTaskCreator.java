@@ -5,10 +5,8 @@ import static org.mockito.Mockito.mock;
 /**
  * Реализация фабрики создания ExecutableTask-экземпляров, создающая mock-заглушку
  *
- * @author starovoytov
- * @created 04.12.2017
- * @$Author$
- * @$Revision$
+ * @author Starovoytov
+ * @since 04.12.2017
  */
 public class MockTaskCreator implements ExecutableTaskCreator
 {

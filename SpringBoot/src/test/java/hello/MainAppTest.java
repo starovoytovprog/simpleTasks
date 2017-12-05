@@ -10,10 +10,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 /**
  * Тест инициализации и запуска Spring Boot {@link MainApp}
  *
- * @author starovoytov
- * @created 01.12.2017
- * @$Author$
- * @$Revision$
+ * @author Starovoytov
+ * @since 01.12.2017
  */
 
 @RunWith(SpringRunner.class)

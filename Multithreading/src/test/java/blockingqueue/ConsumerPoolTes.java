@@ -10,10 +10,8 @@ import static org.mockito.Mockito.*;
 /**
  * Тестирование ConsumerPool {@link ConsumerPool}
  *
- * @author starovoytov
- * @created 01.12.2017
- * @$Author$
- * @$Revision$
+ * @author Starovoytov
+ * @since 01.12.2017
  */
 public class ConsumerPoolTes
 {
