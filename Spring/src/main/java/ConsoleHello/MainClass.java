@@ -1,5 +1,8 @@
 package ConsoleHello;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 /**
  * Стартовый класс для консольного "hello world" приложения
  *
@@ -15,10 +18,8 @@ public class MainClass
 	 */
 	public static void main(String[] args)
 	{
-		MessageSupportFactory.getInstance();
-		MessageRenderer mr = MessageSupportFactory.getInstance().getRenderer();
-		MessageProvider mp = MessageSupportFactory.getInstance().getProvider();
-		mr.setMessageProvider(mp);
+		ApplicationContext context = new ClassPathXmlApplicationContext("ConsoleHello\\app-context.xml");
+		MessageRenderer mr = context.getBean("renderer", MessageRenderer.class);
 		mr.render();
 	}
 }
