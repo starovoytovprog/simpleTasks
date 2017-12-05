@@ -7,6 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * Тест инициализации и запуска Spring Boot {@link MainApp}
  *
@@ -18,6 +20,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class MainAppTest
 {
+	private static final String HELLO_WORLD_OUT = "Hello World SpringBoot!";
+	private static final String HELLO_WORLD_PATH = "/";
+
 	@Autowired
 	private TestRestTemplate restTemplate;
 
@@ -27,7 +32,7 @@ public class MainAppTest
 	@Test
 	public void helloWorldTest()
 	{
-		String body = this.restTemplate.getForObject("/", String.class);
-		org.junit.Assert.assertEquals("Hello World SpringBoot!", body);
+		String body = this.restTemplate.getForObject(HELLO_WORLD_PATH, String.class);
+		assertEquals(HELLO_WORLD_OUT, body);
 	}
 }
