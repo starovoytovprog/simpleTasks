@@ -7,10 +7,8 @@ import java.util.concurrent.CountDownLatch;
 /**
  * Пул консьюмеров, обрабатывают ExecutableTask из очереди
  *
- * @author starovoytov
- * @created 01.12.2017
- * @$Author$
- * @$Revision$
+ * @author Starovoytov
+ * @since 01.12.2017
  */
 public class ConsumerPool
 {

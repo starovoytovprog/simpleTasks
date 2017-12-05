@@ -11,6 +11,10 @@ subprojects {
 		mockitoVersion = '1.10.19'
 	}
 
+	javadoc {
+		options.encoding = 'UTF-8'
+	}
+
 	tasks.withType(JavaCompile) {
 		sourceCompatibility = JavaVersion.VERSION_1_8
 		targetCompatibility = JavaVersion.VERSION_1_8

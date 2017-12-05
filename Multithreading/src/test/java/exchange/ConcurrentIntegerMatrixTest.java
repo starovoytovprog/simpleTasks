@@ -11,10 +11,8 @@ import static org.junit.Assert.assertEquals;
 /**
  * Тестирование ConcurrentIntegerMatrix {@link ConcurrentIntegerMatrix}
  *
- * @author starovoytov
- * @created 30.11.2017
- * @$Author$
- * @$Revision$
+ * @author Starovoytov
+ * @since 30.11.2017
  */
 public class ConcurrentIntegerMatrixTest
 {

@@ -10,10 +10,8 @@ import static org.junit.Assert.assertTrue;
 /**
  * Тестирование HelloWorld {@link HelloWorldMain}
  *
- * @author starovoytov
- * @created 29.11.2017
- * @$Author$
- * @$Revision$
+ * @author Starovoytov
+ * @since 29.11.2017
  */
 public class MainClassTest
 {

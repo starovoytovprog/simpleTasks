@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * Инициализация и запуск Spring Boot
  *
- * @author starovoytov
- * @created 01.12.2017
- * @$Author$
- * @$Revision$
+ * @author Starovoytov
+ * @since 01.12.2017
  */
 @Controller
 @SpringBootApplication
