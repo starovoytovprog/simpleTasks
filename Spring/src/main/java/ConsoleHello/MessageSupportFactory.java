@@ -56,4 +56,24 @@ public class MessageSupportFactory
 	{
 		return instance;
 	}
+
+	/**
+	 * Получить созданный фабрикой провайдер
+	 *
+	 * @return созданный провайдер
+	 */
+	public MessageProvider getProvider()
+	{
+		return provider;
+	}
+
+	/**
+	 * Получить созданный фабрикой рендерер
+	 *
+	 * @return созданный рендерер
+	 */
+	public MessageRenderer getRenderer()
+	{
+		return renderer;
+	}
 }
