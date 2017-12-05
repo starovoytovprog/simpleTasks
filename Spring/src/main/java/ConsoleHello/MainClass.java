@@ -15,6 +15,7 @@ public class MainClass
 	 */
 	public static void main(String[] args)
 	{
+		MessageSupportFactory.getInstance();
 		MessageRenderer mr = new StandardOutMessageRenderer();
 		MessageProvider mp = new HelloWorldMessageProvider();
 		mr.setMessageProvider(mp);
