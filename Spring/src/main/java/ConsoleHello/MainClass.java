@@ -15,6 +15,9 @@ public class MainClass
 	 */
 	public static void main(String[] args)
 	{
-		System.out.println("Hello World!");
+		MessageRenderer mr = new StandardOutMessageRenderer();
+		MessageProvider mp = new HelloWorldMessageProvider();
+		mr.setMessageProvider(mp);
+		mr.render();
 	}
 }
