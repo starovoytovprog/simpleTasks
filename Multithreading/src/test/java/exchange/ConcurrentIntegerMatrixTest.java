@@ -69,6 +69,8 @@ public class ConcurrentIntegerMatrixTest
 
 	/**
 	 * Тестирование многопоточного обмена элементов в матрице
+	 *
+	 * @throws InterruptedException Получен сигнал прерывания
 	 */
 	@Test
 	public void concurrentMatrixTestMultithradingExchange() throws InterruptedException

@@ -26,7 +26,7 @@ public class ProducerPoolTest
 	/**
 	 * Тестирование пула добавления задач с одним потоком
 	 *
-	 * @throws InterruptedException
+	 * @throws InterruptedException Получен сигнал прерывания
 	 */
 	@Test
 	public void producerPoolOneThreadTest() throws InterruptedException
@@ -37,7 +37,7 @@ public class ProducerPoolTest
 	/**
 	 * Тестирование пула добавления задач с несколькими потоками
 	 *
-	 * @throws InterruptedException
+	 * @throws InterruptedException Получен сигнал прерывания
 	 */
 	@Test
 	public void producerPoolMultiThreadTest() throws InterruptedException
@@ -50,7 +50,7 @@ public class ProducerPoolTest
 	 *
 	 * @param threadCount Количество потоков-генераторов
 	 * @param countTaskForThread Количество задач, генерируемых каждым потоком
-	 * @throws InterruptedException
+	 * @throws InterruptedException Получен сигнал прерывания
 	 */
 	private void poolTest(int threadCount, int countTaskForThread) throws InterruptedException
 	{

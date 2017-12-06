@@ -10,6 +10,8 @@ public interface MessageRenderer
 {
 	/**
 	 * Установить провайдера сообщений
+	 *
+	 * @param provider Используемый провайдер
 	 */
 	void setMessageProvider(MessageProvider provider);
 

@@ -66,7 +66,7 @@ public class MyBlockingQueueTest
 	/**
 	 * Тестирование очереди с изпользованием пулов добавления и обработки
 	 *
-	 * @throws InterruptedException
+	 * @throws InterruptedException Получен сигнал прерывания
 	 */
 	@Test
 	public void queueProducerConsumerTest() throws InterruptedException
@@ -96,7 +96,7 @@ public class MyBlockingQueueTest
 	 * @param threadCount Количество потоков пула генератора задач
 	 * @param countTaskForThread Количество задач, генерируемых каждым потоком
 	 * @param mockTaskCreator Фабрика задач
-	 * @throws InterruptedException
+	 * @throws InterruptedException Получен сигнал прерывания
 	 */
 	private void addInQueue(MyBlockingQueue queue, int threadCount, int countTaskForThread, ExecutableTaskCreator mockTaskCreator) throws InterruptedException
 	{

@@ -27,7 +27,7 @@ public class ConsumerPoolTes
 	/**
 	 * Тестирование обработчика задач в одном потоке
 	 *
-	 * @throws InterruptedException
+	 * @throws InterruptedException Получен сигнал прерывания
 	 */
 	@Test
 	public void consumerPoolOneThreadTest() throws InterruptedException
@@ -38,7 +38,7 @@ public class ConsumerPoolTes
 	/**
 	 * Тестирование обработчика задач в нескольких потоках
 	 *
-	 * @throws InterruptedException
+	 * @throws InterruptedException Получен сигнал прерывания
 	 */
 	@Test
 	public void consumerPoolMultiThreadTest() throws InterruptedException
@@ -51,7 +51,7 @@ public class ConsumerPoolTes
 	 *
 	 * @param threadCount Количество потоков-обработчиков
 	 * @param queueSize Размер очереди
-	 * @throws InterruptedException
+	 * @throws InterruptedException Получен сигнал прерывания
 	 */
 	private void testConsumer(int threadCount, int queueSize) throws InterruptedException
 	{

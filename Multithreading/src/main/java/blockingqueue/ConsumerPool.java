@@ -48,7 +48,7 @@ public class ConsumerPool
 	/**
 	 * Ожидание завершения работы потоков-обработчиков
 	 *
-	 * @throws InterruptedException
+	 * @throws InterruptedException Получен сигнал прерывания
 	 */
 	public void await() throws InterruptedException
 	{
