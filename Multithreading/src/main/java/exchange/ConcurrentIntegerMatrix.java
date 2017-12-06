@@ -6,6 +6,7 @@ package exchange;
  * @author Starovoytov
  * @since 30.11.2017
  */
+@SuppressWarnings("unchecked")
 public class ConcurrentIntegerMatrix
 {
 	private final ConcurrentObject<Integer>[][] matrix;

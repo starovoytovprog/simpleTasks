@@ -20,7 +20,8 @@ public class ConcurrentObjectTest
 
 	/**
 	 * Тестирование блокировки объекта
-	 * @throws InterruptedException
+	 *
+	 * @throws InterruptedException Получен сигнал прерывания
 	 */
 	@Test
 	public void concurrentObjectLockTest() throws InterruptedException

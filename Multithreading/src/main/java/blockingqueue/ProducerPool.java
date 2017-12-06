@@ -47,7 +47,7 @@ public class ProducerPool
 	/**
 	 * Ожидание выполнения потоков-генераторов
 	 *
-	 * @throws InterruptedException
+	 * @throws InterruptedException Получен сигнал прерывания
 	 */
 	public void await() throws InterruptedException
 	{
