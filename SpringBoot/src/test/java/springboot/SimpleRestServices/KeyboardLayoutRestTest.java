@@ -1,5 +1,6 @@
 package springboot.SimpleRestServices;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +13,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.nio.charset.Charset;
 
+import static org.mockito.Mockito.validateMockitoUsage;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
@@ -27,7 +29,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 public class KeyboardLayoutRestTest
 {
 	private final MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
-		MediaType.APPLICATION_JSON.getSubtype(),
+		MediaType.TEXT_PLAIN.getSubtype(),
 		Charset.forName("utf8"));
 
 	private MockMvc mockMvc;
@@ -45,10 +47,72 @@ public class KeyboardLayoutRestTest
 	 * Тестирование конвертации латинских букв в нижнем регистре
 	 */
 	@Test
-	public void LowerLatinLettersTest() throws Exception
+	public void lowerLatinLettersTest() throws Exception
 	{
-		String lowerLatinsAlphavite = "qwertyuiop[]asdfghjkl;'zxcvbnm,./`";
-		String validResult = "йцукенгшщзхъфывапролджэячсмитьбю.ё";
+		String lowerLatinsAlphavite = "qwertyuiop[]asdfghjkl;'zxcvbnm,.";
+		String validResult = "йцукенгшщзхъфывапролджэячсмитьбю";
+
+		mockMvc.perform(post("/KeyboardLayout")
+			.contentType(contentType)
+			.content(lowerLatinsAlphavite)).andExpect(content().string(validResult));
+	}
+
+	/**
+	 * Тестирование конвертации повторяющихся букв
+	 */
+	@Test
+	public void repeatLettersTest() throws Exception
+	{
+		String lowerLatinsAlphavite = "qqasasasasa";
+		String validResult = "ййфыфыфыфыф";
+
+		mockMvc.perform(post("/KeyboardLayout")
+			.contentType(contentType)
+			.content(lowerLatinsAlphavite)).andExpect(content().string(validResult));
+	}
+
+	/**
+	 * Тестирование конвертации латинских букв в верхнем регистре
+	 */
+	@Test
+	public void upperLatinLettersTest() throws Exception
+	{
+		String lowerLatinsAlphavite = "QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM<>";
+		String validResult = "ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ";
+
+		mockMvc.perform(post("/KeyboardLayout")
+			.contentType(contentType)
+			.content(lowerLatinsAlphavite)).andExpect(content().string(validResult));
+	}
+
+	@After
+	public void validate()
+	{
+		validateMockitoUsage();
+	}
+
+	/**
+	 * Тестирование конвертации кириллических букв в нижнем регистре
+	 */
+	@Test
+	public void lowerKirillicLettersTest() throws Exception
+	{
+		String lowerLatinsAlphavite = "йцукенгшщзфывапролдячсмить";
+		String validResult = "qwertyuiopasdfghjklzxcvbnm";
+
+		mockMvc.perform(post("/KeyboardLayout")
+			.contentType(contentType)
+			.content(lowerLatinsAlphavite)).andExpect(content().string(validResult));
+	}
+
+	/**
+	 * Тестирование конвертации кириллических букв в верхнем регистре
+	 */
+	@Test
+	public void upperKirillicLettersTest() throws Exception
+	{
+		String lowerLatinsAlphavite = "ЙЦУКЕНГШЩЗФЫВАПРОЛДЯЧСМИТЬ";
+		String validResult = "QWERTYUIOPASDFGHJKLZXCVBNM";
 
 		mockMvc.perform(post("/KeyboardLayout")
 			.contentType(contentType)
