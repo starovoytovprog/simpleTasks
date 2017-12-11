@@ -1,10 +1,7 @@
-package hello;
+package springboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Инициализация и запуск Spring Boot
@@ -12,7 +9,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author Starovoytov
  * @since 01.12.2017
  */
-@Controller
 @SpringBootApplication
 public class MainApp
 {
@@ -24,15 +20,5 @@ public class MainApp
 	public static void main(String[] args)
 	{
 		SpringApplication.run(MainApp.class, args);
-	}
-
-	/**
-	 * @return Домашняя страница http://localhost
-	 */
-	@RequestMapping("/")
-	@ResponseBody
-	String home()
-	{
-		return "Hello World SpringBoot!";
 	}
 }
