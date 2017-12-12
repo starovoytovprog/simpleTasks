@@ -135,6 +135,54 @@ public class VirtualMaschineTest
 		testExecute(machineCode, expectedResult);
 	}
 
+	/**
+	 * Тестируется переход к команде
+	 *
+	 * @throws Exception ошибка в машинном коде
+	 */
+	@Test
+	public void simpleStackJmp() throws Exception
+	{
+		String machineCode = "JMP 4" + COMMAND_LINE_DELIMITER +
+			"ECHO 1" + COMMAND_LINE_DELIMITER +
+			"HALT" + COMMAND_LINE_DELIMITER +
+			"ECHO 2";
+		String expectedResult = "2";
+
+		testExecute(machineCode, expectedResult);
+	}
+
+	/**
+	 * Тестируется условие
+	 *
+	 * @throws Exception ошибка в машинном коде
+	 */
+	@Test
+	public void simpleStackLt() throws Exception
+	{
+		String machineCode = "PUSH 2" + COMMAND_LINE_DELIMITER +
+			"PUSH 1" + COMMAND_LINE_DELIMITER +
+			"LT" + COMMAND_LINE_DELIMITER +
+			"ECHO";
+		String expectedResult = "1";
+		testExecute(machineCode, expectedResult);
+
+		machineCode = "PUSH 1" + COMMAND_LINE_DELIMITER +
+			"PUSH 1" + COMMAND_LINE_DELIMITER +
+			"LT" + COMMAND_LINE_DELIMITER +
+			"ECHO";
+		expectedResult = "0";
+		testExecute(machineCode, expectedResult);
+
+		machineCode = "PUSH 1" + COMMAND_LINE_DELIMITER +
+			"PUSH 2" + COMMAND_LINE_DELIMITER +
+			"LT" + COMMAND_LINE_DELIMITER +
+			"ECHO";
+		expectedResult = "0";
+
+		testExecute(machineCode, expectedResult);
+	}
+
 	private void testExecute(String mashineCode, String expectedResult) throws Exception
 	{
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();

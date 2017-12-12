@@ -34,13 +34,18 @@ public class VirtualMaschine
 		String[] commands = mashineCode.split(COMMAND_LINE_DELIMITER);
 
 		int res;
-		for (String command : commands)
+		for (int i = 0; i < commands.length; i++)
 		{
-			res = executeCommand(command.trim());
+			res = executeCommand(commands[i].trim());
 
 			if (res == -1)
 			{
 				return;
+			}
+
+			if (res > 0)
+			{
+				i = res - 2;
 			}
 		}
 	}
@@ -96,6 +101,15 @@ public class VirtualMaschine
 			{
 				return -1;
 			}
+			case JMP:
+			{
+				return jmpCommand(commandString);
+			}
+			case LT:
+			{
+				ltCommand(commandString);
+				break;
+			}
 		}
 
 		return 0;
@@ -147,5 +161,25 @@ public class VirtualMaschine
 	private void fetchCommand(String commandString)
 	{
 		programStack.push(variablesMap.get(commandString.split(" ")[1]));
+	}
+
+	private int jmpCommand(String commandString)
+	{
+		return Integer.parseInt(commandString.split(" ")[1]);
+	}
+
+	private void ltCommand(String commandString)
+	{
+		int value_1 = Integer.parseInt(programStack.pop());
+		int value_2 = Integer.parseInt(programStack.pop());
+
+		if (value_1 < value_2)
+		{
+			programStack.push("1");
+		}
+		else
+		{
+			programStack.push("0");
+		}
 	}
 }
