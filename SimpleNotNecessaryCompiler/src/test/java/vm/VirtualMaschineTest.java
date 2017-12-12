@@ -19,20 +19,6 @@ public class VirtualMaschineTest
 	private static final VirtualMaschine virtualMaschine = new VirtualMaschine();
 
 	/**
-	 * Тестируется простой вывод числа
-	 *
-	 * @throws Exception ошибка в машинном коде
-	 */
-	@Test
-	public void simpleOut() throws Exception
-	{
-		String machineCode = "ECHO 10";
-		String expectedResult = "10";
-
-		testExecute(machineCode, expectedResult);
-	}
-
-	/**
 	 * Тестируется простой вывод значения из стека
 	 *
 	 * @throws Exception ошибка в машинном коде
@@ -143,10 +129,12 @@ public class VirtualMaschineTest
 	@Test
 	public void simpleStackJmp() throws Exception
 	{
-		String machineCode = "JMP 4" + COMMAND_LINE_DELIMITER +
-			"ECHO 1" + COMMAND_LINE_DELIMITER +
+		String machineCode = "JMP 5" + COMMAND_LINE_DELIMITER +
+			"PUSH 1" + COMMAND_LINE_DELIMITER +
+			"ECHO" + COMMAND_LINE_DELIMITER +
 			"HALT" + COMMAND_LINE_DELIMITER +
-			"ECHO 2";
+			"PUSH 2" + COMMAND_LINE_DELIMITER +
+			"ECHO";
 		String expectedResult = "2";
 
 		testExecute(machineCode, expectedResult);
@@ -192,19 +180,23 @@ public class VirtualMaschineTest
 	public void simpleStackJz() throws Exception
 	{
 		String machineCode = "PUSH 0" + COMMAND_LINE_DELIMITER +
-			"JZ 5" + COMMAND_LINE_DELIMITER +
-			"ECHO 1" + COMMAND_LINE_DELIMITER +
+			"JZ 6" + COMMAND_LINE_DELIMITER +
+			"PUSH 1" + COMMAND_LINE_DELIMITER +
+			"ECHO" + COMMAND_LINE_DELIMITER +
 			"HALT" + COMMAND_LINE_DELIMITER +
-			"ECHO 2";
+			"PUSH 2" + COMMAND_LINE_DELIMITER +
+			"ECHO";
 		String expectedResult = "2";
 
 		testExecute(machineCode, expectedResult);
 
 		machineCode = "PUSH 1" + COMMAND_LINE_DELIMITER +
-			"JZ 5" + COMMAND_LINE_DELIMITER +
-			"ECHO 1" + COMMAND_LINE_DELIMITER +
+			"JZ 6" + COMMAND_LINE_DELIMITER +
+			"PUSH 1" + COMMAND_LINE_DELIMITER +
+			"ECHO" + COMMAND_LINE_DELIMITER +
 			"HALT" + COMMAND_LINE_DELIMITER +
-			"ECHO 2";
+			"PUSH 2" + COMMAND_LINE_DELIMITER +
+			"ECHO";
 		expectedResult = "1";
 
 		testExecute(machineCode, expectedResult);
@@ -219,19 +211,23 @@ public class VirtualMaschineTest
 	public void simpleStackJnz() throws Exception
 	{
 		String machineCode = "PUSH 0" + COMMAND_LINE_DELIMITER +
-			"JNZ 5" + COMMAND_LINE_DELIMITER +
-			"ECHO 1" + COMMAND_LINE_DELIMITER +
+			"JNZ 6" + COMMAND_LINE_DELIMITER +
+			"PUSH 1" + COMMAND_LINE_DELIMITER +
+			"ECHO" + COMMAND_LINE_DELIMITER +
 			"HALT" + COMMAND_LINE_DELIMITER +
-			"ECHO 2";
+			"PUSH 2" + COMMAND_LINE_DELIMITER +
+			"ECHO";
 		String expectedResult = "1";
 
 		testExecute(machineCode, expectedResult);
 
 		machineCode = "PUSH 1" + COMMAND_LINE_DELIMITER +
-			"JNZ 5" + COMMAND_LINE_DELIMITER +
-			"ECHO 1" + COMMAND_LINE_DELIMITER +
+			"JNZ 6" + COMMAND_LINE_DELIMITER +
+			"PUSH 1" + COMMAND_LINE_DELIMITER +
+			"ECHO" + COMMAND_LINE_DELIMITER +
 			"HALT" + COMMAND_LINE_DELIMITER +
-			"ECHO 2";
+			"PUSH 2" + COMMAND_LINE_DELIMITER +
+			"ECHO";
 		expectedResult = "2";
 
 		testExecute(machineCode, expectedResult);

@@ -125,14 +125,7 @@ public class VirtualMaschine
 
 	private void echoCommand(String commandString)
 	{
-		if (commandString.length() == 4)
-		{
-			System.out.println(programStack.pop());
-		}
-		else
-		{
-			System.out.println(commandString.substring(5));
-		}
+		System.out.println(programStack.pop());
 	}
 
 	private void pushCommand(String commandString)
