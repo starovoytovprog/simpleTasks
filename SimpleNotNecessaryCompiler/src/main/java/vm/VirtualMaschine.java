@@ -67,6 +67,11 @@ public class VirtualMaschine
 				pushCommand(commandString);
 				break;
 			}
+			case POP:
+			{
+				popCommand(commandString);
+				break;
+			}
 			case ADD:
 			{
 				addCommand(commandString);
@@ -111,6 +116,11 @@ public class VirtualMaschine
 	private void pushCommand(String commandString)
 	{
 		programStack.push(commandString.substring(5));
+	}
+
+	private void popCommand(String commandString)
+	{
+		programStack.pop();
 	}
 
 	private void addCommand(String commandString)

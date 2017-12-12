@@ -118,6 +118,23 @@ public class VirtualMaschineTest
 		testExecute(machineCode, expectedResult);
 	}
 
+	/**
+	 * Тестируется удаление значения из стека
+	 *
+	 * @throws Exception ошибка в машинном коде
+	 */
+	@Test
+	public void simpleStackPop() throws Exception
+	{
+		String machineCode = "PUSH 5" + COMMAND_LINE_DELIMITER +
+			"PUSH 10" + COMMAND_LINE_DELIMITER +
+			"POP" + COMMAND_LINE_DELIMITER +
+			"ECHO";
+		String expectedResult = "5";
+
+		testExecute(machineCode, expectedResult);
+	}
+
 	private void testExecute(String mashineCode, String expectedResult) throws Exception
 	{
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
