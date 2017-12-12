@@ -183,6 +183,60 @@ public class VirtualMaschineTest
 		testExecute(machineCode, expectedResult);
 	}
 
+	/**
+	 * Тестируется условный переход к команде если 0
+	 *
+	 * @throws Exception ошибка в машинном коде
+	 */
+	@Test
+	public void simpleStackJz() throws Exception
+	{
+		String machineCode = "PUSH 0" + COMMAND_LINE_DELIMITER +
+			"JZ 5" + COMMAND_LINE_DELIMITER +
+			"ECHO 1" + COMMAND_LINE_DELIMITER +
+			"HALT" + COMMAND_LINE_DELIMITER +
+			"ECHO 2";
+		String expectedResult = "2";
+
+		testExecute(machineCode, expectedResult);
+
+		machineCode = "PUSH 1" + COMMAND_LINE_DELIMITER +
+			"JZ 5" + COMMAND_LINE_DELIMITER +
+			"ECHO 1" + COMMAND_LINE_DELIMITER +
+			"HALT" + COMMAND_LINE_DELIMITER +
+			"ECHO 2";
+		expectedResult = "1";
+
+		testExecute(machineCode, expectedResult);
+	}
+
+	/**
+	 * Тестируется условный переход к команде если 0
+	 *
+	 * @throws Exception ошибка в машинном коде
+	 */
+	@Test
+	public void simpleStackJnz() throws Exception
+	{
+		String machineCode = "PUSH 0" + COMMAND_LINE_DELIMITER +
+			"JNZ 5" + COMMAND_LINE_DELIMITER +
+			"ECHO 1" + COMMAND_LINE_DELIMITER +
+			"HALT" + COMMAND_LINE_DELIMITER +
+			"ECHO 2";
+		String expectedResult = "1";
+
+		testExecute(machineCode, expectedResult);
+
+		machineCode = "PUSH 1" + COMMAND_LINE_DELIMITER +
+			"JNZ 5" + COMMAND_LINE_DELIMITER +
+			"ECHO 1" + COMMAND_LINE_DELIMITER +
+			"HALT" + COMMAND_LINE_DELIMITER +
+			"ECHO 2";
+		expectedResult = "2";
+
+		testExecute(machineCode, expectedResult);
+	}
+
 	private void testExecute(String mashineCode, String expectedResult) throws Exception
 	{
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();

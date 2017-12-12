@@ -110,6 +110,14 @@ public class VirtualMaschine
 				ltCommand(commandString);
 				break;
 			}
+			case JZ:
+			{
+				return jzCommand(commandString);
+			}
+			case JNZ:
+			{
+				return jnzCommand(commandString);
+			}
 		}
 
 		return 0;
@@ -181,5 +189,25 @@ public class VirtualMaschine
 		{
 			programStack.push("0");
 		}
+	}
+
+	private int jzCommand(String commandString)
+	{
+		if (Integer.parseInt(programStack.pop()) == 0)
+		{
+			return Integer.parseInt(commandString.split(" ")[1]);
+		}
+
+		return 0;
+	}
+
+	private int jnzCommand(String commandString)
+	{
+		if (Integer.parseInt(programStack.pop()) != 0)
+		{
+			return Integer.parseInt(commandString.split(" ")[1]);
+		}
+
+		return 0;
 	}
 }
