@@ -45,77 +45,98 @@ public class KeyboardLayoutRestTest
 
 	/**
 	 * Тестирование конвертации латинских букв в нижнем регистре
+	 *
+	 * @throws Exception исключения от мок-компонента
 	 */
 	@Test
 	public void lowerLatinLettersTest() throws Exception
 	{
-		String lowerLatinsAlphavite = "qwertyuiop[]asdfghjkl;'zxcvbnm,.";
-		String validResult = "йцукенгшщзхъфывапролджэячсмитьбю";
+		String to = "qwertyuiop[]asdfghjkl;'zxcvbnm,.";
+		String from = "йцукенгшщзхъфывапролджэячсмитьбю";
 
-		mockMvc.perform(post("/KeyboardLayout")
-			.contentType(contentType)
-			.content(lowerLatinsAlphavite)).andExpect(content().string(validResult));
+		sendTest(to, from);
 	}
 
 	/**
 	 * Тестирование конвертации повторяющихся букв
+	 *
+	 * @throws Exception исключения от мок-компонента
 	 */
 	@Test
 	public void repeatLettersTest() throws Exception
 	{
-		String lowerLatinsAlphavite = "qqasasasasa";
-		String validResult = "ййфыфыфыфыф";
+		String to = "qqasasasasa";
+		String from = "ййфыфыфыфыф";
 
-		mockMvc.perform(post("/KeyboardLayout")
-			.contentType(contentType)
-			.content(lowerLatinsAlphavite)).andExpect(content().string(validResult));
+		sendTest(to, from);
 	}
 
 	/**
 	 * Тестирование конвертации латинских букв в верхнем регистре
+	 *
+	 * @throws Exception исключения от мок-компонента
 	 */
 	@Test
 	public void upperLatinLettersTest() throws Exception
 	{
-		String lowerLatinsAlphavite = "QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM<>";
-		String validResult = "ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ";
+		String to = "QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM<>";
+		String from = "ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ";
 
+		sendTest(to, from);
+	}
+
+	/**
+	 * Тестирование конвертации кириллических букв в нижнем регистре
+	 *
+	 * @throws Exception исключения от мок-компонента
+	 */
+	@Test
+	public void lowerKirillicLettersTest() throws Exception
+	{
+		String to = "йцукенгшщзфывапролдячсмить";
+		String from = "qwertyuiopasdfghjklzxcvbnm";
+
+		sendTest(to, from);
+	}
+
+	/**
+	 * Тестирование конвертации кириллических букв в верхнем регистре
+	 *
+	 * @throws Exception исключения от мок-компонента
+	 */
+	@Test
+	public void upperKirillicLettersTest() throws Exception
+	{
+		String to = "ЙЦУКЕНГШЩЗФЫВАПРОЛДЯЧСМИТЬ";
+		String from = "QWERTYUIOPASDFGHJKLZXCVBNM";
+
+		sendTest(to, from);
+	}
+
+	/**
+	 * Тестирование конвертации кириллических букв в верхнем регистре
+	 *
+	 * @throws Exception исключения от мок-компонента
+	 */
+	@Test
+	public void kirillicSentenceTest() throws Exception
+	{
+		String to = "C]tim to` 'nb[ vzurb[ ahfywepcrb[ ,ekjr? lf dsgtq xf./";
+		String from = "Съешь ещё этих мягких французских булок, да выпей чаю.";
+
+		sendTest(to, from);
+	}
+
+	private void sendTest(String to, String from) throws Exception
+	{
 		mockMvc.perform(post("/KeyboardLayout")
 			.contentType(contentType)
-			.content(lowerLatinsAlphavite)).andExpect(content().string(validResult));
+			.content(to)).andExpect(content().string(from));
 	}
 
 	@After
 	public void validate()
 	{
 		validateMockitoUsage();
-	}
-
-	/**
-	 * Тестирование конвертации кириллических букв в нижнем регистре
-	 */
-	@Test
-	public void lowerKirillicLettersTest() throws Exception
-	{
-		String lowerLatinsAlphavite = "йцукенгшщзфывапролдячсмить";
-		String validResult = "qwertyuiopasdfghjklzxcvbnm";
-
-		mockMvc.perform(post("/KeyboardLayout")
-			.contentType(contentType)
-			.content(lowerLatinsAlphavite)).andExpect(content().string(validResult));
-	}
-
-	/**
-	 * Тестирование конвертации кириллических букв в верхнем регистре
-	 */
-	@Test
-	public void upperKirillicLettersTest() throws Exception
-	{
-		String lowerLatinsAlphavite = "ЙЦУКЕНГШЩЗФЫВАПРОЛДЯЧСМИТЬ";
-		String validResult = "QWERTYUIOPASDFGHJKLZXCVBNM";
-
-		mockMvc.perform(post("/KeyboardLayout")
-			.contentType(contentType)
-			.content(lowerLatinsAlphavite)).andExpect(content().string(validResult));
 	}
 }

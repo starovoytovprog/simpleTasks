@@ -14,12 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class KeyboardLayoutRest
 {
 
-	private static final String fromlatinAlphabet = "qwertyuiop[]asdfghjkl;'zxcvbnm,.QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM<>";
-	private static final String tolatinAlphabet = "йцукенгшщзхъфывапролджэячсмитьбюЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ";
+	private static final String fromlatinAlphabet = "qwertyuiop[]asdfghjkl;'zxcvbnm,.QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM<>`~/?!@#$%^&*()";
+	private static final String tolatinAlphabet = "йцукенгшщзхъфывапролджэячсмитьбюЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮёЁ.,!\"№;%:?*()";
 
-	private static final String fromKirillicAlphabet = "йцукенгшщзфывапролдячсмитьЙЦУКЕНГШЩЗФЫВАПРОЛДЯЧСМИТЬ";
-	private static final String toKirillicAlphabet = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
+	private static final String fromKirillicAlphabet = "йцукенгшщзфывапролдячсмитьЙЦУКЕНГШЩЗФЫВАПРОЛДЯЧСМИТЬёЁ.,!\"№;%:?*()";
+	private static final String toKirillicAlphabet = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM`~/?!@#$%^&*()";
 
+	/**
+	 * Обработка запроса
+	 *
+	 * @param body тело запроса, содержит фразу для обработки
+	 * @return обработанная фраза
+	 */
 	@RequestMapping("/KeyboardLayout")
 	public String simple(@RequestBody String body)
 	{
