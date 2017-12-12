@@ -56,6 +56,10 @@ public class LexicalAnalysis
 			tokenWord += ch;
 		}
 
+		bufToken = new Token();
+		bufToken.setType(EOF);
+		list.put(bufToken);
+
 		return list;
 	}
 

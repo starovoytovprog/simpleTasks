@@ -15,24 +15,9 @@ public class LexicalAnalysisTest
 {
 	private static final LexicalAnalysis lexicalAnalysis = new LexicalAnalysis();
 
-	@Test
-	public void findPrintCommandTest()
-	{
-		String programText = "print;";
-		TokenList list = lexicalAnalysis.analys(programText);
-
-		TokenList expectedList = new TokenList();
-		Token printToken = new Token();
-		printToken.setType(PRINT);
-		Token semicolon = new Token();
-		semicolon.setType(SEMICOLON);
-
-		expectedList.put(printToken);
-		expectedList.put(semicolon);
-
-		assertTrue(expectedList.equals(list));
-	}
-
+	/**
+	 * Тест распознавания команды печати
+	 */
 	@Test
 	public void printCommandTest()
 	{
@@ -51,12 +36,15 @@ public class LexicalAnalysisTest
 		rPar.setType(RPAR);
 		Token semicolon = new Token();
 		semicolon.setType(SEMICOLON);
+		Token eof = new Token();
+		eof.setType(EOF);
 
 		expectedList.put(printToken);
 		expectedList.put(lPar);
 		expectedList.put(valueToken);
 		expectedList.put(rPar);
 		expectedList.put(semicolon);
+		expectedList.put(eof);
 
 		assertTrue(expectedList.equals(list));
 	}

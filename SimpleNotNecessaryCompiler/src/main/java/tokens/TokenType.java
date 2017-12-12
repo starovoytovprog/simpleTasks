@@ -27,5 +27,9 @@ public enum TokenType
 	/**
 	 * точка с запятой
 	 */
-	SEMICOLON
+	SEMICOLON,
+	/**
+	 * конец файла
+	 */
+	EOF
 }
