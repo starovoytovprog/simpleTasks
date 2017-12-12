@@ -6,6 +6,18 @@ package nodes;
  * @author Starovoytov
  * @since 12.12.2017
  */
-public class NodeType
+public enum NodeType
 {
+	/**
+	 * Нода печати
+	 */
+	PRINT,
+	/**
+	 * Число
+	 */
+	DIGIT,
+	/**
+	 * Конец выполнения программы
+	 */
+	EOF
 }

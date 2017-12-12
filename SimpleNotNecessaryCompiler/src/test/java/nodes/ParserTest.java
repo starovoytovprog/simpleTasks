@@ -3,8 +3,9 @@ package nodes;
 import org.junit.Test;
 import tokens.Token;
 import tokens.TokenList;
+import tokens.TokenType;
 
-import static tokens.TokenType.*;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Тестирование парсера {@link Parser}
@@ -24,16 +25,16 @@ public class ParserTest
 	{
 		TokenList list = new TokenList();
 		Token printToken = new Token();
-		printToken.setType(PRINT);
+		printToken.setType(TokenType.PRINT);
 		Token valueToken = new Token();
-		valueToken.setType(DIGIT);
+		valueToken.setType(TokenType.DIGIT);
 		valueToken.setValue("1");
 		Token lPar = new Token();
-		lPar.setType(LPAR);
+		lPar.setType(TokenType.LPAR);
 		Token rPar = new Token();
-		rPar.setType(RPAR);
+		rPar.setType(TokenType.RPAR);
 		Token semicolon = new Token();
-		semicolon.setType(SEMICOLON);
+		semicolon.setType(TokenType.SEMICOLON);
 
 		list.put(printToken);
 		list.put(lPar);
@@ -42,5 +43,16 @@ public class ParserTest
 		list.put(semicolon);
 
 		Node expectedNode = new Node();
+		expectedNode.setType(NodeType.PRINT);
+		Node printValueNode = new Node();
+		expectedNode.setType(NodeType.DIGIT);
+		printValueNode.setValue("1");
+		expectedNode.addDependentNode(printValueNode);
+		Node nextNode = new Node();
+		expectedNode.setType(NodeType.EOF);
+		expectedNode.addDependentNode(nextNode);
+
+		Node parseNode = parser.parse(list);
+		assertTrue(expectedNode.equals(parseNode));
 	}
 }
