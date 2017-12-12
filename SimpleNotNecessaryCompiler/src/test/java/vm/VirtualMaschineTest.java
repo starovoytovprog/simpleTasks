@@ -9,7 +9,7 @@ import static org.junit.Assert.assertTrue;
 import static vm.Constants.COMMAND_LINE_DELIMITER;
 
 /**
- * Тестирование HelloWorld {@link VirtualMaschine}
+ * Тестирование виртуальной машины {@link VirtualMaschine}
  *
  * @author Starovoytov
  * @since 12.12.2017
