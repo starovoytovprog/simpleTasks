@@ -11,3 +11,6 @@ SpringBoot:
 
 Spring:
 Модуль с небольшими проектами на Spring.
+
+SimpleNotNecessaryCompieler:
+Простейший компилятор.
