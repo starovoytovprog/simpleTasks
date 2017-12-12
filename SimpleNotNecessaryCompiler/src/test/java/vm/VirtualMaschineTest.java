@@ -81,6 +81,43 @@ public class VirtualMaschineTest
 		testExecute(machineCode, expectedResult);
 	}
 
+	/**
+	 * Тестируется работа с переменными
+	 *
+	 * @throws Exception ошибка в машинном коде
+	 */
+	@Test
+	public void simpleStackVariables() throws Exception
+	{
+		String machineCode = "PUSH 5" + COMMAND_LINE_DELIMITER +
+			"STORE var1" + COMMAND_LINE_DELIMITER +
+			"PUSH 10" + COMMAND_LINE_DELIMITER +
+			"STORE var2" + COMMAND_LINE_DELIMITER +
+			"FETCH var2" + COMMAND_LINE_DELIMITER +
+			"FETCH var1" + COMMAND_LINE_DELIMITER +
+			"SUB" + COMMAND_LINE_DELIMITER +
+			"ECHO";
+		String expectedResult = "-5";
+
+		testExecute(machineCode, expectedResult);
+	}
+
+	/**
+	 * Тестируется выход из приложения
+	 *
+	 * @throws Exception ошибка в машинном коде
+	 */
+	@Test
+	public void simpleStackHalt() throws Exception
+	{
+		String machineCode = "PUSH 5" + COMMAND_LINE_DELIMITER +
+			"HALT" + COMMAND_LINE_DELIMITER +
+			"ECHO";
+		String expectedResult = "";
+
+		testExecute(machineCode, expectedResult);
+	}
+
 	private void testExecute(String mashineCode, String expectedResult) throws Exception
 	{
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -90,6 +127,6 @@ public class VirtualMaschineTest
 		virtualMaschine.run(mashineCode);
 		System.out.flush();
 		System.setOut(old);
-		assertTrue(baos.toString().equals(expectedResult + "\r\n"));
+		assertTrue(baos.toString().equals(expectedResult + (expectedResult.isEmpty() ? "" : "\r\n")));
 	}
 }

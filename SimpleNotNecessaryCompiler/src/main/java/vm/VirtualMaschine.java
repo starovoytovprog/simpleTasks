@@ -1,5 +1,7 @@
 package vm;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 import static vm.Constants.COMMAND_LINE_DELIMITER;
@@ -13,10 +15,12 @@ import static vm.Constants.COMMAND_LINE_DELIMITER;
 public class VirtualMaschine
 {
 	private final Stack<String> programStack;
+	private final Map<String, String> variablesMap;
 
 	public VirtualMaschine()
 	{
 		programStack = new Stack<>();
+		variablesMap = new HashMap<>();
 	}
 
 	/**
@@ -29,9 +33,15 @@ public class VirtualMaschine
 	{
 		String[] commands = mashineCode.split(COMMAND_LINE_DELIMITER);
 
+		int res;
 		for (String command : commands)
 		{
-			executeCommand(command.trim());
+			res = executeCommand(command.trim());
+
+			if (res == -1)
+			{
+				return;
+			}
 		}
 	}
 
@@ -41,7 +51,7 @@ public class VirtualMaschine
 	 * @param commandString команда
 	 * @exception Exception ошибка в команде
 	 */
-	private void executeCommand(String commandString) throws Exception
+	private int executeCommand(String commandString) throws Exception
 	{
 		VmCommands command = VmCommands.valueOf(commandString.split(" ")[0]);
 
@@ -67,7 +77,23 @@ public class VirtualMaschine
 				subCommand(commandString);
 				break;
 			}
+			case STORE:
+			{
+				storeCommand(commandString);
+				break;
+			}
+			case FETCH:
+			{
+				fetchCommand(commandString);
+				break;
+			}
+			case HALT:
+			{
+				return -1;
+			}
 		}
+
+		return 0;
 	}
 
 	private void echoCommand(String commandString)
@@ -101,5 +127,15 @@ public class VirtualMaschine
 		int value_2 = Integer.parseInt(programStack.pop());
 
 		programStack.push((value_1 - value_2) + "");
+	}
+
+	private void storeCommand(String commandString)
+	{
+		variablesMap.put(commandString.split(" ")[1], programStack.pop());
+	}
+
+	private void fetchCommand(String commandString)
+	{
+		programStack.push(variablesMap.get(commandString.split(" ")[1]));
 	}
 }
