@@ -1,4 +1,4 @@
-package hello;
+package springboot;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +15,6 @@ import static org.junit.Assert.assertEquals;
  * @author Starovoytov
  * @since 01.12.2017
  */
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class MainAppTest
