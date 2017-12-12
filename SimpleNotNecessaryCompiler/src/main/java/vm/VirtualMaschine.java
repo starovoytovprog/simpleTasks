@@ -2,6 +2,8 @@ package vm;
 
 import java.util.Stack;
 
+import static vm.Constants.COMMAND_LINE_DELIMITER;
+
 /**
  * Виртуальная машина, исполняющая байт-код
  *
@@ -25,7 +27,7 @@ public class VirtualMaschine
 	 */
 	public void run(String mashineCode) throws Exception
 	{
-		String[] commands = mashineCode.split("\r\n");
+		String[] commands = mashineCode.split(COMMAND_LINE_DELIMITER);
 
 		for (String command : commands)
 		{
@@ -55,6 +57,11 @@ public class VirtualMaschine
 				pushCommand(commandString);
 				break;
 			}
+			case ADD:
+			{
+				addCommand(commandString);
+				break;
+			}
 		}
 	}
 
@@ -73,5 +80,13 @@ public class VirtualMaschine
 	private void pushCommand(String commandString)
 	{
 		programStack.push(commandString.substring(5));
+	}
+
+	private void addCommand(String commandString)
+	{
+		int value_1 = Integer.parseInt(programStack.pop());
+		int value_2 = Integer.parseInt(programStack.pop());
+
+		programStack.push((value_1 + value_2) + "");
 	}
 }

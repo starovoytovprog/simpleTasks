@@ -6,6 +6,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.Assert.assertTrue;
+import static vm.Constants.COMMAND_LINE_DELIMITER;
 
 /**
  * Тестирование HelloWorld {@link VirtualMaschine}
@@ -39,9 +40,26 @@ public class VirtualMaschineTest
 	@Test
 	public void simpleStackValueOut() throws Exception
 	{
-		String machineCode = "PUSH 15\r\n" +
+		String machineCode = "PUSH 15" + COMMAND_LINE_DELIMITER +
 			"ECHO";
 		String expectedResult = "15";
+
+		testExecute(machineCode, expectedResult);
+	}
+
+	/**
+	 * Тестируется сложение двух чисел в стэке
+	 *
+	 * @throws Exception ошибка в машинном коде
+	 */
+	@Test
+	public void simpleStackAdd() throws Exception
+	{
+		String machineCode = "PUSH 2" + COMMAND_LINE_DELIMITER +
+			"PUSH 7" + COMMAND_LINE_DELIMITER +
+			"ADD" + COMMAND_LINE_DELIMITER +
+			"ECHO";
+		String expectedResult = "9";
 
 		testExecute(machineCode, expectedResult);
 	}
