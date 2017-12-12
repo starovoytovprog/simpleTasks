@@ -64,6 +64,23 @@ public class VirtualMaschineTest
 		testExecute(machineCode, expectedResult);
 	}
 
+	/**
+	 * Тестируется вычитание двух чисел в стэке
+	 *
+	 * @throws Exception ошибка в машинном коде
+	 */
+	@Test
+	public void simpleStackSub() throws Exception
+	{
+		String machineCode = "PUSH 2" + COMMAND_LINE_DELIMITER +
+			"PUSH 7" + COMMAND_LINE_DELIMITER +
+			"SUB" + COMMAND_LINE_DELIMITER +
+			"ECHO";
+		String expectedResult = "5";
+
+		testExecute(machineCode, expectedResult);
+	}
+
 	private void testExecute(String mashineCode, String expectedResult) throws Exception
 	{
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();

@@ -62,6 +62,11 @@ public class VirtualMaschine
 				addCommand(commandString);
 				break;
 			}
+			case SUB:
+			{
+				subCommand(commandString);
+				break;
+			}
 		}
 	}
 
@@ -88,5 +93,13 @@ public class VirtualMaschine
 		int value_2 = Integer.parseInt(programStack.pop());
 
 		programStack.push((value_1 + value_2) + "");
+	}
+
+	private void subCommand(String commandString)
+	{
+		int value_1 = Integer.parseInt(programStack.pop());
+		int value_2 = Integer.parseInt(programStack.pop());
+
+		programStack.push((value_1 - value_2) + "");
 	}
 }
