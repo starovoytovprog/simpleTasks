@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static vm.Constants.COMMAND_LINE_DELIMITER;
 
 /**
@@ -242,6 +242,6 @@ public class VirtualMaschineTest
 		virtualMaschine.run(mashineCode);
 		System.out.flush();
 		System.setOut(old);
-		assertTrue(baos.toString().equals(expectedResult + (expectedResult.isEmpty() ? "" : "\r\n")));
+		assertEquals(baos.toString(), expectedResult + (expectedResult.isEmpty() ? "" : "\r\n"));
 	}
 }
