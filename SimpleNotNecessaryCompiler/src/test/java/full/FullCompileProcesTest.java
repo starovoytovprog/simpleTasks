@@ -48,6 +48,19 @@ public class FullCompileProcesTest
 		testExecute("print(5-(1+6-1+7-1)+8-1+9);", "9");
 	}
 
+	/**
+	 * Проверка работы многострочного кода с пробелами
+	 *
+	 * @throws Exception ошибка выполнения
+	 */
+	@Test
+	public void simpleTwoStringTest() throws Exception
+	{
+		testExecute("   print   (   1   +   1    - 2    )    ;     \n" +
+			"print(2);" +
+			"", "0\r\n2");
+	}
+
 	private void testExecute(String sourceCode, String expectedResult) throws Exception
 	{
 		TokenList list = lexicalAnalysis.analys(sourceCode);

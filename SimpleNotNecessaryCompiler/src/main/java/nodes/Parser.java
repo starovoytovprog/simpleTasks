@@ -62,6 +62,12 @@ public class Parser
 				currentNode = configureEofNode(currentNode, list, nextToken);
 				break;
 			}
+			case SPACE:
+			case SEMICOLON:
+			{
+				currentNode = getNextNode(list);
+				break;
+			}
 		}
 
 		return currentNode;
@@ -73,7 +79,14 @@ public class Parser
 		Node printValueNode = getNextNode(list);
 		printNode.addDependentNode(printValueNode);
 
-		if (list.pop().getType() != TokenType.SEMICOLON)
+		Token t = list.pop();
+
+		while (t.getType() == TokenType.SPACE)
+		{
+			t = list.pop();
+		}
+
+		if (t.getType() != TokenType.SEMICOLON)
 		{
 			throw new Exception("bad syntaxis");
 		}
@@ -100,6 +113,10 @@ public class Parser
 				case RPAR:
 				{
 					return rollUpExpression(expressionNode);
+				}
+				case SPACE:
+				{
+					continue;
 				}
 				case LPAR:
 				{
