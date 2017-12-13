@@ -23,5 +23,13 @@ public enum NodeType
 	/**
 	 * Операция сложения
 	 */
-	SUM
+	SUM,
+	/**
+	 * Операция вычитания
+	 */
+	MINUS,
+	/**
+	 * Выражение
+	 */
+	EXPRESSION
 }

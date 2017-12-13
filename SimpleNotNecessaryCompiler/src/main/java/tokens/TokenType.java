@@ -35,5 +35,9 @@ public enum TokenType
 	/**
 	 * операция сложения
 	 */
-	SUM
+	SUM,
+	/**
+	 * операция вычитания
+	 */
+	MINUS
 }

@@ -4,6 +4,8 @@ import tokens.Token;
 import tokens.TokenList;
 import tokens.TokenType;
 
+import java.util.List;
+
 /**
  * Парсер
  * Строит синтаксическое дерево из списка токенов
@@ -84,31 +86,105 @@ public class Parser
 
 	private Node configureLparNode(TokenList list) throws Exception
 	{
-		Node lparValue = getNextNode(list);
+		Node expressionNode = new Node();
+		expressionNode.setType(NodeType.EXPRESSION);
 
-		Token nextToken = list.pop();
+		Token nextToken;
 
-		switch (nextToken.getType())
+		while (true)
 		{
-			case RPAR:
+			nextToken = list.pop();
+
+			switch (nextToken.getType())
 			{
-				break;
+				case RPAR:
+				{
+					return rollUpExpression(expressionNode);
+				}
+				case LPAR:
+				{
+					expressionNode.addDependentNode(configureLparNode(list));
+					break;
+				}
+				case DIGIT:
+				{
+					Node n = new Node();
+					n.setType(NodeType.DIGIT);
+					n.setValue(nextToken.getValue());
+					expressionNode.addDependentNode(n);
+					break;
+				}
+				case SUM:
+				{
+					Node n = new Node();
+					n.setType(NodeType.SUM);
+					expressionNode.addDependentNode(n);
+					break;
+				}
+				case MINUS:
+				{
+					Node n = new Node();
+					n.setType(NodeType.MINUS);
+					expressionNode.addDependentNode(n);
+					break;
+				}
 			}
-			case SUM:
+		}
+	}
+
+	private Node rollUpExpression(Node expressionNode)
+	{
+		return rollUpSumExpression(
+			rollUpMinusExpression(
+				expressionNode
+			)
+		).getDependentNode(0);
+	}
+
+	private Node rollUpMinusExpression(Node expressionNode)
+	{
+		List<Node> l = expressionNode.getDependentNodes();
+
+		for (int i = 1; i < l.size() - 1; i++)
+		{
+			if (l.get(i).getType() == NodeType.MINUS && l.get(i).getDependentNodes().isEmpty())
 			{
-				Node sumNode = new Node();
-				sumNode.setType(NodeType.SUM);
-				sumNode.addDependentNode(lparValue);
-				sumNode.addDependentNode(configureLparNode(list));
-				return sumNode;
-			}
-			default:
-			{
-				throw new Exception("bad syntaxis");
+				Node minusNode = new Node();
+				minusNode.setType(NodeType.MINUS);
+				minusNode.addDependentNode(l.get(i - 1));
+				minusNode.addDependentNode(l.get(i + 1));
+
+				l.set(i - 1, minusNode);
+				l.remove(i);
+				l.remove(i);
+				i = 1;
 			}
 		}
 
-		return lparValue;
+		return expressionNode;
+	}
+
+	private Node rollUpSumExpression(Node expressionNode)
+	{
+		List<Node> l = expressionNode.getDependentNodes();
+
+		for (int i = 1; i < l.size() - 1; i++)
+		{
+			if (l.get(i).getType() == NodeType.SUM && l.get(i).getDependentNodes().isEmpty())
+			{
+				Node minusNode = new Node();
+				minusNode.setType(NodeType.SUM);
+				minusNode.addDependentNode(l.get(i - 1));
+				minusNode.addDependentNode(l.get(i + 1));
+
+				l.set(i - 1, minusNode);
+				l.remove(i);
+				l.remove(i);
+				i = 0;
+			}
+		}
+
+		return expressionNode;
 	}
 
 	private Node configureDigitNode(Node digitNode, TokenList list, Token nextToken)

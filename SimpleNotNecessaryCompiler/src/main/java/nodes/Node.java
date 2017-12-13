@@ -16,16 +16,6 @@ public class Node
 	private String value = "";
 
 	/**
-	 * Установить значение ноды
-	 *
-	 * @param value значение ноды
-	 */
-	public void setValue(String value)
-	{
-		this.value = value;
-	}
-
-	/**
 	 * Получить значение ноды
 	 *
 	 * @return значение ноды
@@ -33,6 +23,16 @@ public class Node
 	public String getValue()
 	{
 		return value;
+	}
+
+	/**
+	 * Установить значение ноды
+	 *
+	 * @param value значение ноды
+	 */
+	public void setValue(String value)
+	{
+		this.value = value;
 	}
 
 	/**
@@ -54,6 +54,16 @@ public class Node
 	public Node getDependentNode(int i)
 	{
 		return dependentNodes.get(i);
+	}
+
+	/**
+	 * Получить все зависимые ноды
+	 *
+	 * @return зависимые ноды
+	 */
+	public List<Node> getDependentNodes()
+	{
+		return dependentNodes;
 	}
 
 	/**

@@ -54,7 +54,6 @@ public class CompilerTest
 		Node digit1Node = new Node();
 		digit1Node.setType(NodeType.DIGIT);
 		digit1Node.setValue("1");
-		sum1Node.addDependentNode(digit1Node);
 		Node sum2Node = new Node();
 		sum2Node.setType(NodeType.SUM);
 		Node digit2Node = new Node();
@@ -63,9 +62,10 @@ public class CompilerTest
 		Node digit3Node = new Node();
 		digit3Node.setType(NodeType.DIGIT);
 		digit3Node.setValue("3");
+		sum2Node.addDependentNode(digit1Node);
 		sum2Node.addDependentNode(digit2Node);
-		sum2Node.addDependentNode(digit3Node);
 		sum1Node.addDependentNode(sum2Node);
+		sum1Node.addDependentNode(digit3Node);
 		expectedNode.addDependentNode(sum1Node);
 		Node nextNode = new Node();
 		nextNode.setType(NodeType.EOF);
@@ -73,9 +73,9 @@ public class CompilerTest
 
 		String expectedMachineCode = "PUSH 1" + COMMAND_LINE_DELIMITER +
 			"PUSH 2" + COMMAND_LINE_DELIMITER +
+			"ADD" + COMMAND_LINE_DELIMITER +
 			"PUSH 3" + COMMAND_LINE_DELIMITER +
-			"SUM" + COMMAND_LINE_DELIMITER +
-			"SUM" + COMMAND_LINE_DELIMITER +
+			"ADD" + COMMAND_LINE_DELIMITER +
 			"ECHO" + COMMAND_LINE_DELIMITER +
 			"HALT";
 		String compilerString = compiler.compile(expectedNode);

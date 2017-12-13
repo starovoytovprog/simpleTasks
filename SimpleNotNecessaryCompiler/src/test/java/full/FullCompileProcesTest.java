@@ -14,7 +14,7 @@ import java.io.PrintStream;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Тестирование полного процесса исходный код -> выполнение
+ * Тестирование полного процесса от исходного кода до выполнения
  *
  * @author Starovoytov
  * @since 13.12.2017
@@ -45,7 +45,7 @@ public class FullCompileProcesTest
 	@Test
 	public void simplePrintExpressionCommandTest() throws Exception
 	{
-		testExecute("print(14+3+1);", "18");
+		testExecute("print(5-(1+6-1+7-1)+8-1+9);", "9");
 	}
 
 	private void testExecute(String sourceCode, String expectedResult) throws Exception

@@ -14,7 +14,7 @@ import static tokens.TokenType.*;
  */
 public class LexicalAnalysis
 {
-	private static final List<Character> SYMBOLS = Arrays.asList(';', '(', ')', '+');
+	private static final List<Character> SYMBOLS = Arrays.asList(';', '(', ')', '+', '-');
 
 	/**
 	 * Обработка исходного кода
@@ -87,6 +87,11 @@ public class LexicalAnalysis
 			case '+':
 			{
 				t.setType(SUM);
+				break;
+			}
+			case '-':
+			{
+				t.setType(MINUS);
 				break;
 			}
 		}

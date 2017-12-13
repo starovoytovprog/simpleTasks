@@ -13,6 +13,8 @@ import static vm.Constants.COMMAND_LINE_DELIMITER;
  */
 public class Compiler
 {
+	private String mashineCodeString;
+
 	/**
 	 * Формирование машинного кода
 	 *
@@ -21,69 +23,74 @@ public class Compiler
 	 */
 	public String compile(Node rootNode)
 	{
-		return nodeToString(rootNode);
+		mashineCodeString = "";
+		nodeToString(rootNode);
+		return mashineCodeString;
 	}
 
-	private String nodeToString(Node nextNode)
+	private void nodeToString(Node nextNode)
 	{
-		String result = "";
-
 		switch (nextNode.getType())
 		{
 			case PRINT:
 			{
-				result += printNodeToString(nextNode);
+				printNodeToString(nextNode);
 				break;
 			}
 			case DIGIT:
 			{
-				result += digitNodeToString(nextNode);
+				digitNodeToString(nextNode);
 				break;
 			}
 			case EOF:
 			{
-				result += eofNodeToString(nextNode);
+				eofNodeToString(nextNode);
 				break;
 			}
 			case SUM:
 			{
-				result += sumNodeToString(nextNode);
+				sumNodeToString(nextNode);
+				break;
+			}
+			case MINUS:
+			{
+				minusNodeToString(nextNode);
 				break;
 			}
 		}
-
-		return result;
 	}
 
-	private String printNodeToString(Node node)
+	private void printNodeToString(Node node)
 	{
-		String printNodeString = nodeToString(node.getDependentNode(0));
-		printNodeString += COMMAND_LINE_DELIMITER;
-		printNodeString += "ECHO";
-		printNodeString += COMMAND_LINE_DELIMITER;
-		printNodeString += nodeToString(node.getDependentNode(1));
-
-		return printNodeString;
+		nodeToString(node.getDependentNode(0));
+		mashineCodeString += "ECHO";
+		mashineCodeString += COMMAND_LINE_DELIMITER;
+		nodeToString(node.getDependentNode(1));
 	}
 
-	private String digitNodeToString(Node node)
+	private void digitNodeToString(Node node)
 	{
-		return "PUSH " + node.getValue();
+		mashineCodeString += "PUSH " + node.getValue() + COMMAND_LINE_DELIMITER;
 	}
 
-	private String eofNodeToString(Node node)
+	private void eofNodeToString(Node node)
 	{
-		return "HALT";
+		mashineCodeString += "HALT";
 	}
 
-	private String sumNodeToString(Node node)
+	private void sumNodeToString(Node node)
 	{
-		String sumNodeString = nodeToString(node.getDependentNode(0));
-		sumNodeString += COMMAND_LINE_DELIMITER;
-		sumNodeString += nodeToString(node.getDependentNode(1));
-		sumNodeString += COMMAND_LINE_DELIMITER;
-		sumNodeString += "ADD";
+		nodeToString(node.getDependentNode(0));
+		nodeToString(node.getDependentNode(1));
+		mashineCodeString += "ADD";
+		mashineCodeString += COMMAND_LINE_DELIMITER;
+	}
 
-		return sumNodeString;
+	private void minusNodeToString(Node node)
+	{
+		nodeToString(node.getDependentNode(1));
+		nodeToString(node.getDependentNode(0));
+		mashineCodeString += "SUB";
+		mashineCodeString += COMMAND_LINE_DELIMITER;
 	}
 }
