@@ -24,7 +24,7 @@ public class Token
 	/**
 	 * Установить тип токена
 	 *
-	 * @param type
+	 * @param type тип токена
 	 */
 	public void setType(TokenType type)
 	{
@@ -44,7 +44,7 @@ public class Token
 	/**
 	 * Установить значение токена
 	 *
-	 * @param value
+	 * @param value значение токена
 	 */
 	public void setValue(String value)
 	{

@@ -19,6 +19,7 @@ public class ParserTest
 
 	/**
 	 * Тест цепочки токенов для печати
+	 * @throws Exception синтаксическая ошибка
 	 */
 	@Test
 	public void simplePrintTest() throws Exception

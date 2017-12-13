@@ -18,6 +18,7 @@ public class Parser
 	 *
 	 * @param list список токенов
 	 * @return корневой узел
+	 * @throws Exception синтаксическая ошибка
 	 */
 	public Node parse(TokenList list) throws Exception
 	{
@@ -30,6 +31,7 @@ public class Parser
 	 *
 	 * @param list список токенов
 	 * @return следующий узел
+	 * @throws Exception синтаксическая ошибка
 	 */
 	private Node getNextNode(TokenList list) throws Exception
 	{

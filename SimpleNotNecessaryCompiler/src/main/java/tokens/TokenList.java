@@ -36,7 +36,7 @@ public class TokenList
 	/**
 	 * Взять следующий токен из списка
 	 *
-	 * @return
+	 * @return токен из списка
 	 */
 	public Token pop()
 	{
