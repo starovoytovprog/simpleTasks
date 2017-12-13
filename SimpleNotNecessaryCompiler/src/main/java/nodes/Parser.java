@@ -47,7 +47,7 @@ public class Parser
 			}
 			case LPAR:
 			{
-				currentNode = configureLparNode(currentNode, list, nextToken);
+				currentNode = configureLparNode(list);
 				break;
 			}
 			case DIGIT:
@@ -82,13 +82,30 @@ public class Parser
 		return printNode;
 	}
 
-	private Node configureLparNode(Node lparNode, TokenList list, Token nextToken) throws Exception
+	private Node configureLparNode(TokenList list) throws Exception
 	{
 		Node lparValue = getNextNode(list);
 
-		if (list.pop().getType() != TokenType.RPAR)
+		Token nextToken = list.pop();
+
+		switch (nextToken.getType())
 		{
-			throw new Exception("bad syntaxis");
+			case RPAR:
+			{
+				break;
+			}
+			case SUM:
+			{
+				Node sumNode = new Node();
+				sumNode.setType(NodeType.SUM);
+				sumNode.addDependentNode(lparValue);
+				sumNode.addDependentNode(configureLparNode(list));
+				return sumNode;
+			}
+			default:
+			{
+				throw new Exception("bad syntaxis");
+			}
 		}
 
 		return lparValue;

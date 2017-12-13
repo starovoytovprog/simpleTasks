@@ -37,6 +37,17 @@ public class FullCompileProcesTest
 		testExecute("print(14);", "14");
 	}
 
+	/**
+	 * Компиляция и исполнение команды печати выражения.
+	 *
+	 * @throws Exception ошибка выполнения
+	 */
+	@Test
+	public void simplePrintExpressionCommandTest() throws Exception
+	{
+		testExecute("print(14+3+1);", "18");
+	}
+
 	private void testExecute(String sourceCode, String expectedResult) throws Exception
 	{
 		TokenList list = lexicalAnalysis.analys(sourceCode);

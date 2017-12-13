@@ -31,5 +31,9 @@ public enum TokenType
 	/**
 	 * конец файла
 	 */
-	EOF
+	EOF,
+	/**
+	 * операция сложения
+	 */
+	SUM
 }

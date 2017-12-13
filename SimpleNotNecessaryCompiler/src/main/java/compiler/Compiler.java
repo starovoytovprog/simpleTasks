@@ -45,6 +45,11 @@ public class Compiler
 				result += eofNodeToString(nextNode);
 				break;
 			}
+			case SUM:
+			{
+				result += sumNodeToString(nextNode);
+				break;
+			}
 		}
 
 		return result;
@@ -69,5 +74,16 @@ public class Compiler
 	private String eofNodeToString(Node node)
 	{
 		return "HALT";
+	}
+
+	private String sumNodeToString(Node node)
+	{
+		String sumNodeString = nodeToString(node.getDependentNode(0));
+		sumNodeString += COMMAND_LINE_DELIMITER;
+		sumNodeString += nodeToString(node.getDependentNode(1));
+		sumNodeString += COMMAND_LINE_DELIMITER;
+		sumNodeString += "ADD";
+
+		return sumNodeString;
 	}
 }
