@@ -21,7 +21,7 @@ public class ParserTest
 	 * Тест цепочки токенов для печати
 	 */
 	@Test
-	public void simplePrintTest()
+	public void simplePrintTest() throws Exception
 	{
 		TokenList list = new TokenList();
 		Token printToken = new Token();
@@ -35,21 +35,24 @@ public class ParserTest
 		rPar.setType(TokenType.RPAR);
 		Token semicolon = new Token();
 		semicolon.setType(TokenType.SEMICOLON);
+		Token eof = new Token();
+		eof.setType(TokenType.EOF);
 
 		list.put(printToken);
 		list.put(lPar);
 		list.put(valueToken);
 		list.put(rPar);
 		list.put(semicolon);
+		list.put(eof);
 
 		Node expectedNode = new Node();
 		expectedNode.setType(NodeType.PRINT);
 		Node printValueNode = new Node();
-		expectedNode.setType(NodeType.DIGIT);
+		printValueNode.setType(NodeType.DIGIT);
 		printValueNode.setValue("1");
 		expectedNode.addDependentNode(printValueNode);
 		Node nextNode = new Node();
-		expectedNode.setType(NodeType.EOF);
+		nextNode.setType(NodeType.EOF);
 		expectedNode.addDependentNode(nextNode);
 
 		Node parseNode = parser.parse(list);

@@ -12,17 +12,43 @@ import java.util.List;
 public class TokenList
 {
 	private final List<Token> tokens;
+	private int i;
 
+	/**
+	 * Конструктор по умолчанию
+	 */
 	public TokenList()
 	{
 		tokens = new ArrayList<>();
+		i = 0;
 	}
 
+	/**
+	 * Добавить токен в список
+	 *
+	 * @param printToken новый токен
+	 */
 	public void put(Token printToken)
 	{
 		tokens.add(printToken);
 	}
 
+	/**
+	 * Взять следующий токен из списка
+	 *
+	 * @return
+	 */
+	public Token pop()
+	{
+		return tokens.get(i++);
+	}
+
+	/**
+	 * Сравнение списка токенов
+	 *
+	 * @param list список, с которым сравнивается текущий
+	 * @return true, если списки эквивалентны
+	 */
 	@Override
 	public boolean equals(Object list)
 	{
