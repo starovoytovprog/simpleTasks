@@ -21,8 +21,53 @@ public class Compiler
 	 */
 	public String compile(Node rootNode)
 	{
-		return "PUSH 1" + COMMAND_LINE_DELIMITER +
-			"ECHO" + COMMAND_LINE_DELIMITER +
-			"HALT";
+		return nodeToString(rootNode);
+	}
+
+	private String nodeToString(Node nextNode)
+	{
+		String result = "";
+
+		switch (nextNode.getType())
+		{
+			case PRINT:
+			{
+				result += printNodeToString(nextNode);
+				break;
+			}
+			case DIGIT:
+			{
+				result += digitNodeToString(nextNode);
+				break;
+			}
+			case EOF:
+			{
+				result += eofNodeToString(nextNode);
+				break;
+			}
+		}
+
+		return result;
+	}
+
+	private String printNodeToString(Node node)
+	{
+		String printNodeString = nodeToString(node.getDependentNode(0));
+		printNodeString += COMMAND_LINE_DELIMITER;
+		printNodeString += "ECHO";
+		printNodeString += COMMAND_LINE_DELIMITER;
+		printNodeString += nodeToString(node.getDependentNode(1));
+
+		return printNodeString;
+	}
+
+	private String digitNodeToString(Node node)
+	{
+		return "PUSH " + node.getValue();
+	}
+
+	private String eofNodeToString(Node node)
+	{
+		return "HALT";
 	}
 }

@@ -15,19 +15,65 @@ public class Node
 	private List<Node> dependentNodes = new ArrayList<>();
 	private String value = "";
 
-	public void setType(NodeType type)
-	{
-		this.type = type;
-	}
-
+	/**
+	 * Установить значение ноды
+	 *
+	 * @param value значение ноды
+	 */
 	public void setValue(String value)
 	{
 		this.value = value;
 	}
 
+	/**
+	 * Получить значение ноды
+	 *
+	 * @return значение ноды
+	 */
+	public String getValue()
+	{
+		return value;
+	}
+
+	/**
+	 * Добавить зависимую ноду
+	 *
+	 * @param dependentNode зависимая нода
+	 */
 	public void addDependentNode(Node dependentNode)
 	{
 		dependentNodes.add(dependentNode);
+	}
+
+	/**
+	 * Получить зависимую ноду
+	 *
+	 * @param i индекс ноды в списке
+	 * @return зависимая нода
+	 */
+	public Node getDependentNode(int i)
+	{
+		return dependentNodes.get(i);
+	}
+
+	/**
+	 * Получить тип ноды
+	 *
+	 * @return тип ноды
+	 */
+	public NodeType getType()
+	{
+		return type;
+	}
+
+	/**
+	 * Установить тип ноды
+	 *
+	 * @param type тип ноды
+	 */
+	public void setType(NodeType type)
+	{
+		this.type = type;
 	}
 
 	@Override
