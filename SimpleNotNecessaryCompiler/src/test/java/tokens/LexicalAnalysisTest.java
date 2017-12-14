@@ -96,4 +96,35 @@ public class LexicalAnalysisTest
 
 		assertTrue(expectedList.equals(list));
 	}
+
+	/**
+	 * Тест установки значения пременных
+	 */
+	@Test
+	public void setVariableTest()
+	{
+		String programText = "x=5;";
+		TokenList list = lexicalAnalysis.analys(programText);
+
+		TokenList expectedList = new TokenList();
+		Token variableToken = new Token();
+		variableToken.setType(VARIABLE);
+		variableToken.setValue("x");
+		Token setToken = new Token();
+		setToken.setType(SET);
+		Token valueToken = new Token();
+		valueToken.setType(DIGIT);
+		valueToken.setValue("5");
+		Token semicolon = new Token();
+		semicolon.setType(SEMICOLON);
+		Token eof = new Token();
+		eof.setType(EOF);
+		expectedList.put(variableToken);
+		expectedList.put(setToken);
+		expectedList.put(valueToken);
+		expectedList.put(semicolon);
+		expectedList.put(eof);
+
+		assertTrue(expectedList.equals(list));
+	}
 }

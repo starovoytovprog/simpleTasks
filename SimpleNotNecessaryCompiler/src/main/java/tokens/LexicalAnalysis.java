@@ -1,5 +1,6 @@
 package tokens;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import static tokens.TokenType.*;
  */
 public class LexicalAnalysis
 {
-	private static final List<Character> SYMBOLS = Arrays.asList(';', '(', ')', '+', '-', '\r', '\n', ' ');
+	private static final List<Character> SYMBOLS = Arrays.asList(';', '(', ')', '+', '-', '\r', '\n', ' ', '=');
 
 	/**
 	 * Обработка исходного кода
@@ -24,6 +25,8 @@ public class LexicalAnalysis
 	 */
 	public TokenList analys(String programText)
 	{
+		List<String> keyWords = getKeyWords();
+
 		TokenList list = new TokenList();
 		Token bufToken = new Token();
 		String tokenWord = "";
@@ -39,9 +42,14 @@ public class LexicalAnalysis
 						bufToken.setType(DIGIT);
 						bufToken.setValue(tokenWord);
 					}
-					else
+					else if (keyWords.contains(tokenWord.toUpperCase()))
 					{
 						bufToken.setType(TokenType.valueOf(tokenWord.toUpperCase()));
+					}
+					else
+					{
+						bufToken.setType(VARIABLE);
+						bufToken.setValue(tokenWord);
 					}
 
 					list.put(bufToken);
@@ -61,6 +69,18 @@ public class LexicalAnalysis
 		list.put(bufToken);
 
 		return list;
+	}
+
+	private List<String> getKeyWords()
+	{
+		List<String> words = new ArrayList<>();
+
+		for (TokenType type : TokenType.values())
+		{
+			words.add(type.toString());
+		}
+
+		return words;
 	}
 
 	private Token getCharToken(char ch)
@@ -99,6 +119,11 @@ public class LexicalAnalysis
 			case '-':
 			{
 				t.setType(MINUS);
+				break;
+			}
+			case '=':
+			{
+				t.setType(SET);
 				break;
 			}
 		}

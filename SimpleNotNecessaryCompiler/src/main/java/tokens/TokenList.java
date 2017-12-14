@@ -59,4 +59,12 @@ public class TokenList
 
 		return false;
 	}
+
+	/**
+	 * Вернуться на один шаг в списке
+	 */
+	public void back()
+	{
+		i--;
+	}
 }

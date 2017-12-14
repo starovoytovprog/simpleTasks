@@ -31,5 +31,17 @@ public enum NodeType
 	/**
 	 * Выражение
 	 */
-	EXPRESSION
+	EXPRESSION,
+	/**
+	 * Выражение
+	 */
+	VARIABLE,
+	/**
+	 * Установить
+	 */
+	SET,
+	/**
+	 * Вернуть
+	 */
+	GET
 }

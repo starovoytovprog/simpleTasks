@@ -43,5 +43,13 @@ public enum TokenType
 	/**
 	 * Пробел
 	 */
-	SPACE
+	SPACE,
+	/**
+	 * Переменная
+	 */
+	VARIABLE,
+	/**
+	 * Установить
+	 */
+	SET
 }

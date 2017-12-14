@@ -82,4 +82,32 @@ public class CompilerTest
 
 		assertEquals(expectedMachineCode, compilerString);
 	}
+
+	/**
+	 * Тестирование компиляции простого дерева задания переменной.
+	 */
+	@Test
+	public void simpleVariableTest()
+	{
+		Node expectedNode = new Node();
+		expectedNode.setType(NodeType.VARIABLE);
+		expectedNode.setValue("x");
+		Node setNode = new Node();
+		setNode.setType(NodeType.SET);
+		expectedNode.addDependentNode(setNode);
+		Node valueNode = new Node();
+		valueNode.setType(NodeType.DIGIT);
+		valueNode.setValue("5");
+		expectedNode.addDependentNode(valueNode);
+		Node nextNode = new Node();
+		nextNode.setType(NodeType.EOF);
+		expectedNode.addDependentNode(nextNode);
+
+		String expectedMachineCode = "PUSH 5" + COMMAND_LINE_DELIMITER +
+			"STORE x" + COMMAND_LINE_DELIMITER +
+			"HALT";
+		String compilerString = compiler.compile(expectedNode);
+
+		assertEquals(expectedMachineCode, compilerString);
+	}
 }

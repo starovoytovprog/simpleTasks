@@ -61,6 +61,20 @@ public class FullCompileProcesTest
 			"", "0\r\n2");
 	}
 
+	/**
+	 * Проверка задания значений переменным и их извлечения
+	 *
+	 * @throws Exception ошибка выполнения
+	 */
+	@Test
+	public void simpleVariableTest() throws Exception
+	{
+		testExecute("x=5+2;\n" +
+			"y=x-1;\n" +
+			"print(x+y);" +
+			"", "13");
+	}
+
 	private void testExecute(String sourceCode, String expectedResult) throws Exception
 	{
 		TokenList list = lexicalAnalysis.analys(sourceCode);

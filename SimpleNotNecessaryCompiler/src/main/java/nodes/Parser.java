@@ -49,7 +49,7 @@ public class Parser
 			}
 			case LPAR:
 			{
-				currentNode = configureLparNode(list);
+				currentNode = configureExpressionNode(list, TokenType.RPAR);
 				break;
 			}
 			case DIGIT:
@@ -66,6 +66,11 @@ public class Parser
 			case SEMICOLON:
 			{
 				currentNode = getNextNode(list);
+				break;
+			}
+			case VARIABLE:
+			{
+				currentNode = configureVariableNode(currentNode, list, nextToken);
 				break;
 			}
 		}
@@ -97,7 +102,7 @@ public class Parser
 		return printNode;
 	}
 
-	private Node configureLparNode(TokenList list) throws Exception
+	private Node configureExpressionNode(TokenList list, TokenType outTokenType) throws Exception
 	{
 		Node expressionNode = new Node();
 		expressionNode.setType(NodeType.EXPRESSION);
@@ -110,17 +115,13 @@ public class Parser
 
 			switch (nextToken.getType())
 			{
-				case RPAR:
-				{
-					return rollUpExpression(expressionNode);
-				}
 				case SPACE:
 				{
 					continue;
 				}
 				case LPAR:
 				{
-					expressionNode.addDependentNode(configureLparNode(list));
+					expressionNode.addDependentNode(configureExpressionNode(list, TokenType.RPAR));
 					break;
 				}
 				case DIGIT:
@@ -144,6 +145,27 @@ public class Parser
 					n.setType(NodeType.MINUS);
 					expressionNode.addDependentNode(n);
 					break;
+				}
+				case VARIABLE:
+				{
+					Node n = new Node();
+					n.setType(NodeType.VARIABLE);
+					n.setValue(nextToken.getValue());
+
+					Node n2 = new Node();
+					n2.setType(NodeType.GET);
+
+					n.addDependentNode(n2);
+
+					expressionNode.addDependentNode(n);
+					break;
+				}
+				default:
+				{
+					if (nextToken.getType() == outTokenType)
+					{
+						return rollUpExpression(expressionNode);
+					}
 				}
 			}
 		}
@@ -216,5 +238,35 @@ public class Parser
 	{
 		eofNode.setType(NodeType.EOF);
 		return eofNode;
+	}
+
+	private Node configureVariableNode(Node variableNode, TokenList list, Token nextToken) throws Exception
+	{
+		variableNode.setType(NodeType.VARIABLE);
+		variableNode.setValue(nextToken.getValue());
+
+		Token doToken = list.pop();
+
+		if (doToken.getType() == TokenType.SET)
+		{
+			Node setNode = new Node();
+			setNode.setType(NodeType.SET);
+			variableNode.addDependentNode(setNode);
+
+			Node valueNode = configureExpressionNode(list, TokenType.SEMICOLON);
+			variableNode.addDependentNode(valueNode);
+		}
+		else
+		{
+			Node getNode = new Node();
+			getNode.setType(NodeType.GET);
+			variableNode.addDependentNode(getNode);
+			list.back();
+		}
+
+		Node nextNode = getNextNode(list);
+		variableNode.addDependentNode(nextNode);
+
+		return variableNode;
 	}
 }

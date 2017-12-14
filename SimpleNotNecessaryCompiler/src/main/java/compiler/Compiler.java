@@ -1,6 +1,7 @@
 package compiler;
 
 import nodes.Node;
+import nodes.NodeType;
 
 import static vm.Constants.COMMAND_LINE_DELIMITER;
 
@@ -57,6 +58,28 @@ public class Compiler
 				minusNodeToString(nextNode);
 				break;
 			}
+			case VARIABLE:
+			{
+				variableNodeToString(nextNode);
+				break;
+			}
+		}
+	}
+
+	private void variableNodeToString(Node node)
+	{
+
+		if (node.getDependentNode(0).getType() == NodeType.SET)
+		{
+			nodeToString(node.getDependentNode(1));
+			mashineCodeString += "STORE " + node.getValue();
+			mashineCodeString += COMMAND_LINE_DELIMITER;
+			nodeToString(node.getDependentNode(2));
+		}
+		else
+		{
+			mashineCodeString += "FETCH " + node.getValue();
+			mashineCodeString += COMMAND_LINE_DELIMITER;
 		}
 	}
 

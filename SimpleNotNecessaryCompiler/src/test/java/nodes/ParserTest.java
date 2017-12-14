@@ -131,4 +131,48 @@ public class ParserTest
 		Node parseNode = parser.parse(list);
 		assertTrue(expectedNode.equals(parseNode));
 	}
+
+	/**
+	 * Тест цепочки токенов для определения переменной
+	 * @throws Exception синтаксическая ошибка
+	 */
+	@Test
+	public void simpleVariableTest() throws Exception
+	{
+		TokenList list = new TokenList();
+		Token variableToken = new Token();
+		variableToken.setType(VARIABLE);
+		variableToken.setValue("x");
+		Token setToken = new Token();
+		setToken.setType(SET);
+		Token valueToken = new Token();
+		valueToken.setType(DIGIT);
+		valueToken.setValue("5");
+		Token semicolon = new Token();
+		semicolon.setType(SEMICOLON);
+		Token eof = new Token();
+		eof.setType(EOF);
+		list.put(variableToken);
+		list.put(setToken);
+		list.put(valueToken);
+		list.put(semicolon);
+		list.put(eof);
+
+		Node expectedNode = new Node();
+		expectedNode.setType(NodeType.VARIABLE);
+		expectedNode.setValue("x");
+		Node setNode = new Node();
+		setNode.setType(NodeType.SET);
+		expectedNode.addDependentNode(setNode);
+		Node valueNode = new Node();
+		valueNode.setType(NodeType.DIGIT);
+		valueNode.setValue("5");
+		expectedNode.addDependentNode(valueNode);
+		Node nextNode = new Node();
+		nextNode.setType(NodeType.EOF);
+		expectedNode.addDependentNode(nextNode);
+
+		Node parseNode = parser.parse(list);
+		assertTrue(expectedNode.equals(parseNode));
+	}
 }
