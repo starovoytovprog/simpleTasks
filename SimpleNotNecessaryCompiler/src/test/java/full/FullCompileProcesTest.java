@@ -69,9 +69,9 @@ public class FullCompileProcesTest
 	@Test
 	public void simpleVariableTest() throws Exception
 	{
-		testExecute("x=5+2;\n" +
-			"y=x-1;\n" +
-			"print(x+y);" +
+		testExecute("x = 5 + 2; \n" +
+			"y = x - 1;\r\n" +
+			"print(x + y);" +
 			"", "13");
 	}
 

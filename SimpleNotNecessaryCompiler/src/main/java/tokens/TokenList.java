@@ -44,6 +44,24 @@ public class TokenList
 	}
 
 	/**
+	 * Взять следующий токен не SPACE из списка
+	 *
+	 * @return токен из списка
+	 */
+	public Token popNotSpace()
+	{
+		for (; i < tokens.size(); i++)
+		{
+			if (tokens.get(i).getType() != TokenType.SPACE)
+			{
+				return tokens.get(i);
+			}
+		}
+
+		return null;
+	}
+
+	/**
 	 * Сравнение списка токенов
 	 *
 	 * @param list список, с которым сравнивается текущий

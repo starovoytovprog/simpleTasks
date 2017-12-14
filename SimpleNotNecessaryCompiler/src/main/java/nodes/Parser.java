@@ -63,6 +63,10 @@ public class Parser
 				break;
 			}
 			case SPACE:
+			{
+				currentNode = getNextNode(list);
+				break;
+			}
 			case SEMICOLON:
 			{
 				currentNode = getNextNode(list);
@@ -245,7 +249,7 @@ public class Parser
 		variableNode.setType(NodeType.VARIABLE);
 		variableNode.setValue(nextToken.getValue());
 
-		Token doToken = list.pop();
+		Token doToken = list.popNotSpace();
 
 		if (doToken.getType() == TokenType.SET)
 		{
