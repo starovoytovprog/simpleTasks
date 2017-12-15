@@ -20,6 +20,7 @@ public class ParserTest
 
 	/**
 	 * Тест цепочки токенов для печати
+	 *
 	 * @throws Exception синтаксическая ошибка
 	 */
 	@Test
@@ -63,6 +64,7 @@ public class ParserTest
 
 	/**
 	 * Тест цепочки токенов для печати выражения +
+	 *
 	 * @throws Exception синтаксическая ошибка
 	 */
 	@Test
@@ -134,6 +136,7 @@ public class ParserTest
 
 	/**
 	 * Тест цепочки токенов для определения переменной
+	 *
 	 * @throws Exception синтаксическая ошибка
 	 */
 	@Test
@@ -178,6 +181,7 @@ public class ParserTest
 
 	/**
 	 * Тест цепочки токенов для простого условия
+	 *
 	 * @throws Exception синтаксическая ошибка
 	 */
 	@Test
@@ -267,6 +271,7 @@ public class ParserTest
 
 	/**
 	 * Тест цепочки токенов для цикла
+	 *
 	 * @throws Exception синтаксическая ошибка
 	 */
 	@Test

@@ -40,6 +40,9 @@ public class MainFrame extends JFrame implements ActionListener
 	private final JMenu operationMenu = new JMenu();
 	private final JMenuItem executionMenuItem = new JMenuItem();
 
+	/**
+	 * Конструктор по умолчанию
+	 */
 	public MainFrame()
 	{
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -52,6 +55,9 @@ public class MainFrame extends JFrame implements ActionListener
 		loadExample();
 	}
 
+	/**
+	 * Загрузка примера кода из ресурсов
+	 */
 	private void loadExample()
 	{
 		try
@@ -75,6 +81,9 @@ public class MainFrame extends JFrame implements ActionListener
 		}
 	}
 
+	/**
+	 * Инициализация компонентов формы
+	 */
 	private void initComponents()
 	{
 		mainPanel.setLayout(new BorderLayout());
@@ -98,6 +107,11 @@ public class MainFrame extends JFrame implements ActionListener
 		setJMenuBar(mainMenu);
 	}
 
+	/**
+	 * Обработчик событий формы
+	 *
+	 * @param actionEvent событие
+	 */
 	@Override
 	public void actionPerformed(ActionEvent actionEvent)
 	{
@@ -118,6 +132,11 @@ public class MainFrame extends JFrame implements ActionListener
 		}
 	}
 
+	/**
+	 * Обработка и исполнение исходного кода
+	 *
+	 * @throws Exception ошибка обработки
+	 */
 	private void execCode() throws Exception
 	{
 		TokenList list = lexicalAnalysis.analys(codeText.getText());

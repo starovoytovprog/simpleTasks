@@ -91,6 +91,12 @@ public class Node
 		this.type = type;
 	}
 
+	/**
+	 * Выполнение сравнения нод
+	 *
+	 * @param node нода, с которой сравнивается текущая
+	 * @return true, если ноды идентичны
+	 */
 	@Override
 	public boolean equals(Object node)
 	{
