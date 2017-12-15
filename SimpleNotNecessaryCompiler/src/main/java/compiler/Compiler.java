@@ -91,6 +91,10 @@ public class Compiler
 			{
 				ifNodeToString(nextNode);
 			}
+			case WHILE:
+			{
+				whileNodeToString(nextNode);
+			}
 		}
 	}
 
@@ -99,10 +103,8 @@ public class Compiler
 		return mashineCodeString.split(COMMAND_LINE_DELIMITER).length + 1;
 	}
 
-	private void ifNodeToString(Node ifNode)
+	private void printLogicExpressionNode(Node expressionNode)
 	{
-		Node expressionNode = ifNode.getDependentNode(0);
-
 		switch (expressionNode.getType())
 		{
 			case MORE_THAN:
@@ -121,6 +123,31 @@ public class Compiler
 
 		mashineCodeString += "LT";
 		mashineCodeString += COMMAND_LINE_DELIMITER;
+	}
+
+	private void whileNodeToString(Node whileNode)
+	{
+		printLogicExpressionNode(whileNode.getDependentNode(0));
+
+		int backLink = nextCodeLineNumber();
+		if (whileNode.getDependentNode(1) != null)
+		{
+			backLink++;
+
+			mashineCodeString += "JNZ " + BLOCK_INSERT_DELIMITER + blockCount;
+			mashineCodeString += COMMAND_LINE_DELIMITER;
+
+			configureNewBlock(whileNode.getDependentNode(1), blockCount, backLink, true);
+
+			blockCount++;
+		}
+
+		nodeToString(whileNode.getDependentNode(2));
+	}
+
+	private void ifNodeToString(Node ifNode)
+	{
+		printLogicExpressionNode(ifNode.getDependentNode(0));
 
 		int backLink = nextCodeLineNumber();
 		if (ifNode.getDependentNode(1) != null)
@@ -136,7 +163,7 @@ public class Compiler
 			mashineCodeString += "JNZ " + BLOCK_INSERT_DELIMITER + blockCount;
 			mashineCodeString += COMMAND_LINE_DELIMITER;
 
-			configureNewBlock(ifNode.getDependentNode(1), blockCount, backLink);
+			configureNewBlock(ifNode.getDependentNode(1), blockCount, backLink, false);
 
 			blockCount++;
 		}
@@ -146,7 +173,7 @@ public class Compiler
 			mashineCodeString += "JZ " + BLOCK_INSERT_DELIMITER + blockCount;
 			mashineCodeString += COMMAND_LINE_DELIMITER;
 
-			configureNewBlock(ifNode.getDependentNode(2), blockCount, backLink);
+			configureNewBlock(ifNode.getDependentNode(2), blockCount, backLink, false);
 
 			blockCount++;
 		}
@@ -154,7 +181,7 @@ public class Compiler
 		nodeToString(ifNode.getDependentNode(3));
 	}
 
-	private void configureNewBlock(Node blockNode, int blockNumber, int backLink)
+	private void configureNewBlock(Node blockNode, int blockNumber, int backLink, boolean isWhile)
 	{
 		String blockCode = new String();
 
@@ -163,6 +190,11 @@ public class Compiler
 		nodeToString(blockNode);
 		blockCode = mashineCodeString;
 		mashineCodeString = buf;
+
+		if (isWhile)
+		{
+			backLink -= 4;
+		}
 
 		blockCode += "JMP " + backLink;
 

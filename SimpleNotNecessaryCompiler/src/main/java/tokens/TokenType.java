@@ -75,6 +75,10 @@ public enum TokenType
 	/**
 	 * Конец блока
 	 */
-	RBRA
+	RBRA,
+	/**
+	 * Цикл
+	 */
+	WHILE
 
 }

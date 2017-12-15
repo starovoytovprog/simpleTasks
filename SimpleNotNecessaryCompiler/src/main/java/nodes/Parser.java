@@ -52,6 +52,11 @@ public class Parser
 				currentNode = configureIfNode(currentNode, list, nextToken);
 				break;
 			}
+			case WHILE:
+			{
+				currentNode = configureWhileNode(currentNode, list, nextToken);
+				break;
+			}
 			case LPAR:
 			{
 				currentNode = configureExpressionNode(list, TokenType.RPAR);
@@ -95,6 +100,27 @@ public class Parser
 		}
 
 		return currentNode;
+	}
+
+	private Node configureWhileNode(Node whileNode, TokenList list, Token nextToken) throws Exception
+	{
+		whileNode.setType(NodeType.WHILE);
+		Node conditionNode = getNextNode(list);
+		whileNode.addDependentNode(conditionNode);
+
+		Token t = list.popNotSpace();
+
+		if (t.getType() == TokenType.LBRA)
+		{
+			list.pop();
+			Node trueNode = getNextNode(list);
+			whileNode.addDependentNode(trueNode);
+		}
+
+		Node nextNode = getNextNode(list);
+		whileNode.addDependentNode(nextNode);
+
+		return whileNode;
 	}
 
 	private Node configureIfNode(Node ifNode, TokenList list, Token nextToken) throws Exception

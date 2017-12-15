@@ -156,4 +156,48 @@ public class CompilerTest
 
 		assertEquals(expectedMachineCode, compilerString);
 	}
+
+	/**
+	 * Тестирование компиляции цикла.
+	 */
+	@Test
+	public void simpleWhileTest()
+	{
+		Node whileNode = new Node();
+		whileNode.setType(NodeType.WHILE);
+		Node moreNode = new Node();
+		moreNode.setType(NodeType.MORE_THAN);
+		Node digit1 = new Node();
+		digit1.setType(NodeType.DIGIT);
+		digit1.setValue("1");
+		moreNode.addDependentNode(digit1);
+		Node digit2 = new Node();
+		digit2.setType(NodeType.DIGIT);
+		digit2.setValue("5");
+		moreNode.addDependentNode(digit2);
+		whileNode.addDependentNode(moreNode);
+		Node thrueNode = new Node();
+		thrueNode.setType(NodeType.PRINT);
+		Node printValueNode = new Node();
+		printValueNode.setType(NodeType.DIGIT);
+		printValueNode.setValue("1");
+		thrueNode.addDependentNode(printValueNode);
+		thrueNode.addDependentNode(null);
+		whileNode.addDependentNode(thrueNode);
+		Node nextNode = new Node();
+		nextNode.setType(NodeType.EOF);
+		whileNode.addDependentNode(nextNode);
+
+		String expectedMachineCode = "PUSH 1" + COMMAND_LINE_DELIMITER +
+			"PUSH 5" + COMMAND_LINE_DELIMITER +
+			"LT" + COMMAND_LINE_DELIMITER +
+			"JNZ 6" + COMMAND_LINE_DELIMITER +
+			"HALT" + COMMAND_LINE_DELIMITER +
+			"PUSH 1" + COMMAND_LINE_DELIMITER +
+			"ECHO" + COMMAND_LINE_DELIMITER +
+			"JMP 1";
+		String compilerString = compiler.compile(whileNode);
+
+		assertEquals(expectedMachineCode, compilerString);
+	}
 }

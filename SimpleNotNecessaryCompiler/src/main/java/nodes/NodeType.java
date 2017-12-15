@@ -55,5 +55,9 @@ public enum NodeType
 	/**
 	 * Меньше чем
 	 */
-	LESS_THAN
+	LESS_THAN,
+	/**
+	 * Цикл
+	 */
+	WHILE
 }

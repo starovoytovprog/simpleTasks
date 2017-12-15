@@ -87,6 +87,18 @@ public class FullCompileProcesTest
 			"", "1");
 	}
 
+	/**
+	 * Проверка простого цикла
+	 *
+	 * @throws Exception ошибка выполнения
+	 */
+	@Test
+	public void simpleWhileTest() throws Exception
+	{
+		testExecute("x=0; while(x<5) {x=x+1;} print(x);" +
+			"", "5");
+	}
+
 	private void testExecute(String sourceCode, String expectedResult) throws Exception
 	{
 		TokenList list = lexicalAnalysis.analys(sourceCode);
