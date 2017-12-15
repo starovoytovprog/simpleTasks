@@ -3,6 +3,9 @@ package compiler;
 import nodes.Node;
 import nodes.NodeType;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static vm.Constants.COMMAND_LINE_DELIMITER;
 
 /**
@@ -14,7 +17,11 @@ import static vm.Constants.COMMAND_LINE_DELIMITER;
  */
 public class Compiler
 {
+	private static final String BLOCK_INSERT_DELIMITER = "---BLOCK_";
+
 	private String mashineCodeString;
+	private int blockCount;
+	private Map<Integer, String> Blocks;
 
 	/**
 	 * Формирование машинного кода
@@ -25,12 +32,29 @@ public class Compiler
 	public String compile(Node rootNode)
 	{
 		mashineCodeString = "";
+		blockCount = 0;
+		Blocks = new HashMap<>();
 		nodeToString(rootNode);
+		blocksToCode();
 		return mashineCodeString;
 	}
 
+	private void blocksToCode()
+	{
+		for (Integer id : Blocks.keySet())
+		{
+			mashineCodeString = mashineCodeString.replaceAll(BLOCK_INSERT_DELIMITER + id, nextCodeLineNumber() + "");
+			mashineCodeString += COMMAND_LINE_DELIMITER;
+			mashineCodeString += Blocks.get(id);
+		}
+	}
+
+	//TODO: взять команды из VmCommands
 	private void nodeToString(Node nextNode)
 	{
+		if (nextNode == null)
+			return;
+
 		switch (nextNode.getType())
 		{
 			case PRINT:
@@ -63,7 +87,62 @@ public class Compiler
 				variableNodeToString(nextNode);
 				break;
 			}
+			case IF:
+			{
+				ifNodeToString(nextNode);
+			}
 		}
+	}
+
+	private int nextCodeLineNumber()
+	{
+		return mashineCodeString.split(COMMAND_LINE_DELIMITER).length + 1;
+	}
+
+	private void ifNodeToString(Node ifNode)
+	{
+		Node expressionNode = ifNode.getDependentNode(0);
+
+		if (expressionNode.getType() == NodeType.MORE_THAN)
+		{
+			nodeToString(expressionNode.getDependentNode(0));
+			nodeToString(expressionNode.getDependentNode(1));
+			mashineCodeString += "LT";
+			mashineCodeString += COMMAND_LINE_DELIMITER;
+
+			int backLink = nextCodeLineNumber() + 1;
+			if (ifNode.getDependentNode(1) != null)
+			{
+				mashineCodeString += "JNZ " + BLOCK_INSERT_DELIMITER + blockCount;
+				mashineCodeString += COMMAND_LINE_DELIMITER;
+
+				configureNewBlock(ifNode.getDependentNode(1), blockCount, backLink);
+
+				blockCount++;
+			}
+
+			if (ifNode.getDependentNode(2) != null)
+			{
+
+			}
+		}
+
+		nodeToString(ifNode.getDependentNode(3));
+	}
+
+	private void configureNewBlock(Node blockNode, int blockNumber, int backLink)
+	{
+		String blockCode = new String();
+
+		String buf = mashineCodeString;
+		mashineCodeString = "";
+		nodeToString(blockNode);
+		blockCode = mashineCodeString;
+		mashineCodeString = buf;
+
+		blockCode += "JMP " + backLink;
+
+		Blocks.put(blockNumber, blockCode);
 	}
 
 	private void variableNodeToString(Node node)

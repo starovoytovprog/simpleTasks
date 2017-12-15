@@ -175,4 +175,93 @@ public class ParserTest
 		Node parseNode = parser.parse(list);
 		assertTrue(expectedNode.equals(parseNode));
 	}
+
+	/**
+	 * Тест цепочки токенов для простого условия
+	 * @throws Exception синтаксическая ошибка
+	 */
+	@Test
+	public void simpleIfTest() throws Exception
+	{
+		TokenList list = new TokenList();
+
+		Token ifToken = new Token();
+		ifToken.setType(IF);
+		Token value1Token = new Token();
+		value1Token.setType(DIGIT);
+		value1Token.setValue("10");
+		Token moreThanToken = new Token();
+		moreThanToken.setType(MORE_THAN);
+		Token value2Token = new Token();
+		value2Token.setType(DIGIT);
+		value2Token.setValue("5");
+		Token semicolon = new Token();
+		semicolon.setType(SEMICOLON);
+		Token eof = new Token();
+		eof.setType(EOF);
+		Token lPar = new Token();
+		lPar.setType(LPAR);
+		Token rPar = new Token();
+		rPar.setType(RPAR);
+		Token printToken = new Token();
+		printToken.setType(PRINT);
+		Token value3Token = new Token();
+		value3Token.setType(DIGIT);
+		value3Token.setValue("1");
+		Token lPar2 = new Token();
+		lPar2.setType(LPAR);
+		Token rPar2 = new Token();
+		rPar2.setType(RPAR);
+		Token spaceToken = new Token();
+		spaceToken.setType(SPACE);
+		Token lbra = new Token();
+		lbra.setType(LBRA);
+		Token rbra = new Token();
+		rbra.setType(RBRA);
+		list.put(ifToken);
+		list.put(lPar);
+		list.put(value1Token);
+		list.put(moreThanToken);
+		list.put(value2Token);
+		list.put(rPar);
+		list.put(spaceToken);
+		list.put(lbra);
+		list.put(printToken);
+		list.put(lPar2);
+		list.put(value3Token);
+		list.put(rPar2);
+		list.put(semicolon);
+		list.put(rbra);
+		list.put(eof);
+
+		Node ifNode = new Node();
+		ifNode.setType(NodeType.IF);
+		Node moreNode = new Node();
+		moreNode.setType(NodeType.MORE_THAN);
+		Node digit1 = new Node();
+		digit1.setType(NodeType.DIGIT);
+		digit1.setValue("10");
+		moreNode.addDependentNode(digit1);
+		Node digit2 = new Node();
+		digit2.setType(NodeType.DIGIT);
+		digit2.setValue("5");
+		moreNode.addDependentNode(digit2);
+		ifNode.addDependentNode(moreNode);
+		Node thrueNode = new Node();
+		thrueNode.setType(NodeType.PRINT);
+		Node printValueNode = new Node();
+		printValueNode.setType(NodeType.DIGIT);
+		printValueNode.setValue("1");
+		thrueNode.addDependentNode(printValueNode);
+		thrueNode.addDependentNode(null);
+		ifNode.addDependentNode(thrueNode);
+		Node falseNode = null;
+		ifNode.addDependentNode(falseNode);
+		Node nextNode = new Node();
+		nextNode.setType(NodeType.EOF);
+		ifNode.addDependentNode(nextNode);
+
+		Node parseNode = parser.parse(list);
+		assertTrue(ifNode.equals(parseNode));
+	}
 }

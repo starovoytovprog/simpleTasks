@@ -47,6 +47,11 @@ public class Parser
 				currentNode = configurePrintNode(currentNode, list, nextToken);
 				break;
 			}
+			case IF:
+			{
+				currentNode = configureIfNode(currentNode, list, nextToken);
+				break;
+			}
 			case LPAR:
 			{
 				currentNode = configureExpressionNode(list, TokenType.RPAR);
@@ -77,9 +82,48 @@ public class Parser
 				currentNode = configureVariableNode(currentNode, list, nextToken);
 				break;
 			}
+			case RBRA:
+			{
+				currentNode = null;
+				break;
+			}
 		}
 
 		return currentNode;
+	}
+
+	private Node configureIfNode(Node ifNode, TokenList list, Token nextToken) throws Exception
+	{
+		ifNode.setType(NodeType.IF);
+		Node conditionNode = getNextNode(list);
+		ifNode.addDependentNode(conditionNode);
+
+		Token t = list.popNotSpace();
+
+		if (t.getType() == TokenType.LBRA)
+		{
+			list.pop();
+			Node trueNode = getNextNode(list);
+			ifNode.addDependentNode(trueNode);
+		}
+
+		t = list.popNotSpace();
+
+		if (t.getType() == TokenType.ELSE)
+		{
+			list.pop();
+			Node falseNode = getNextNode(list);
+			ifNode.addDependentNode(falseNode);
+		}
+		else
+		{
+			ifNode.addDependentNode(null);
+		}
+
+		Node nextNode = getNextNode(list);
+		ifNode.addDependentNode(nextNode);
+
+		return ifNode;
 	}
 
 	private Node configurePrintNode(Node printNode, TokenList list, Token nextToken) throws Exception
@@ -88,12 +132,7 @@ public class Parser
 		Node printValueNode = getNextNode(list);
 		printNode.addDependentNode(printValueNode);
 
-		Token t = list.pop();
-
-		while (t.getType() == TokenType.SPACE)
-		{
-			t = list.pop();
-		}
+		Token t = list.popNotSpace();
 
 		if (t.getType() != TokenType.SEMICOLON)
 		{
@@ -143,6 +182,13 @@ public class Parser
 					expressionNode.addDependentNode(n);
 					break;
 				}
+				case MORE_THAN:
+				{
+					Node n = new Node();
+					n.setType(NodeType.MORE_THAN);
+					expressionNode.addDependentNode(n);
+					break;
+				}
 				case MINUS:
 				{
 					Node n = new Node();
@@ -177,46 +223,25 @@ public class Parser
 
 	private Node rollUpExpression(Node expressionNode)
 	{
-		return rollUpSumExpression(
-			rollUpMinusExpression(
-				expressionNode
+		return rollUpMoreThanExpression(
+			rollUpSumExpression(
+				rollUpMinusExpression(
+					expressionNode
+				)
 			)
 		).getDependentNode(0);
 	}
 
-	private Node rollUpMinusExpression(Node expressionNode)
+	private Node rollUpNodeTypeExpression(Node expressionNode, NodeType rollType)
 	{
 		List<Node> l = expressionNode.getDependentNodes();
 
 		for (int i = 1; i < l.size() - 1; i++)
 		{
-			if (l.get(i).getType() == NodeType.MINUS && l.get(i).getDependentNodes().isEmpty())
+			if (l.get(i).getType() == rollType && l.get(i).getDependentNodes().isEmpty())
 			{
 				Node minusNode = new Node();
-				minusNode.setType(NodeType.MINUS);
-				minusNode.addDependentNode(l.get(i - 1));
-				minusNode.addDependentNode(l.get(i + 1));
-
-				l.set(i - 1, minusNode);
-				l.remove(i);
-				l.remove(i);
-				i = 1;
-			}
-		}
-
-		return expressionNode;
-	}
-
-	private Node rollUpSumExpression(Node expressionNode)
-	{
-		List<Node> l = expressionNode.getDependentNodes();
-
-		for (int i = 1; i < l.size() - 1; i++)
-		{
-			if (l.get(i).getType() == NodeType.SUM && l.get(i).getDependentNodes().isEmpty())
-			{
-				Node minusNode = new Node();
-				minusNode.setType(NodeType.SUM);
+				minusNode.setType(rollType);
 				minusNode.addDependentNode(l.get(i - 1));
 				minusNode.addDependentNode(l.get(i + 1));
 
@@ -228,6 +253,21 @@ public class Parser
 		}
 
 		return expressionNode;
+	}
+
+	private Node rollUpMoreThanExpression(Node expressionNode)
+	{
+		return rollUpNodeTypeExpression(expressionNode, NodeType.MORE_THAN);
+	}
+
+	private Node rollUpMinusExpression(Node expressionNode)
+	{
+		return rollUpNodeTypeExpression(expressionNode, NodeType.MINUS);
+	}
+
+	private Node rollUpSumExpression(Node expressionNode)
+	{
+		return rollUpNodeTypeExpression(expressionNode, NodeType.SUM);
 	}
 
 	private Node configureDigitNode(Node digitNode, TokenList list, Token nextToken)

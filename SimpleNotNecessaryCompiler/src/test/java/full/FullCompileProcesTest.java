@@ -75,6 +75,18 @@ public class FullCompileProcesTest
 			"", "13");
 	}
 
+	/**
+	 * Проверка простого условия
+	 *
+	 * @throws Exception ошибка выполнения
+	 */
+	@Test
+	public void simpleIfTest() throws Exception
+	{
+		testExecute("x=10; if(x>5){print(x);}" +
+			"", "10");
+	}
+
 	private void testExecute(String sourceCode, String expectedResult) throws Exception
 	{
 		TokenList list = lexicalAnalysis.analys(sourceCode);

@@ -43,5 +43,13 @@ public enum NodeType
 	/**
 	 * Вернуть
 	 */
-	GET
+	GET,
+	/**
+	 * Если
+	 */
+	IF,
+	/**
+	 * Больше чем
+	 */
+	MORE_THAN
 }
