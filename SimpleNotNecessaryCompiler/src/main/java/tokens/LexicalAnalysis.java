@@ -80,6 +80,11 @@ public class LexicalAnalysis
 		return list;
 	}
 
+	/**
+	 * Формирует список ключевых слов типов токенов
+	 *
+	 * @return список ключевых слов
+	 */
 	private List<String> getKeyWords()
 	{
 		List<String> words = new ArrayList<>();
@@ -92,6 +97,12 @@ public class LexicalAnalysis
 		return words;
 	}
 
+	/**
+	 * Сформировать токен из символа
+	 *
+	 * @param ch символ
+	 * @return сформированный токен
+	 */
 	private Token getCharToken(char ch)
 	{
 		Token t = new Token();

@@ -2,6 +2,7 @@ package compiler;
 
 import nodes.Node;
 import nodes.NodeType;
+import vm.VmCommands;
 
 import java.util.*;
 
@@ -43,6 +44,9 @@ public class Compiler
 		return mashineCodeString;
 	}
 
+	/**
+	 * Обработка сформированных блоков кода, установка адресов начала блоков и возврата
+	 */
 	private void backStartProcessing()
 	{
 		List<String> codeStrings = new ArrayList<>(Arrays.asList(mashineCodeString.split(COMMAND_LINE_DELIMITER)));
@@ -71,6 +75,9 @@ public class Compiler
 		}
 	}
 
+	/**
+	 * Добавление блоков кода в общий
+	 */
 	private void blocksToCode()
 	{
 		for (Integer id : blocks.keySet())
@@ -82,6 +89,12 @@ public class Compiler
 	}
 
 	//TODO: взять команды из VmCommands
+
+	/**
+	 * Преобразование ноды в машинный код
+	 *
+	 * @param nextNode преобразуемая нода
+	 */
 	private void nodeToString(Node nextNode)
 	{
 		if (nextNode == null)
@@ -101,7 +114,7 @@ public class Compiler
 			}
 			case EOF:
 			{
-				eofNodeToString(nextNode);
+				eofNodeToString();
 				break;
 			}
 			case SUM:
@@ -132,11 +145,22 @@ public class Compiler
 		}
 	}
 
+	/**
+	 * Определения номера последней строки машинного кода
+	 *
+	 * @param code машинный код
+	 * @return номер строки
+	 */
 	private int nextCodeLineNumber(String code)
 	{
 		return code.split(COMMAND_LINE_DELIMITER).length + 1;
 	}
 
+	/**
+	 * Формирование машинного кода из ноды условия
+	 *
+	 * @param expressionNode нода условия
+	 */
 	private void printLogicExpressionNode(Node expressionNode)
 	{
 		switch (expressionNode.getType())
@@ -155,10 +179,15 @@ public class Compiler
 			}
 		}
 
-		mashineCodeString += "LT";
+		mashineCodeString += VmCommands.LT;
 		mashineCodeString += COMMAND_LINE_DELIMITER;
 	}
 
+	/**
+	 * Формирование машинного кода из ноды цикла
+	 *
+	 * @param whileNode нода цикла
+	 */
 	private void whileNodeToString(Node whileNode)
 	{
 		mashineCodeString += BACK_START + ++blockCount;
@@ -169,45 +198,56 @@ public class Compiler
 		if (whileNode.getDependentNode(1) != null)
 		{
 
-			mashineCodeString += "JNZ " + BLOCK_INSERT_DELIMITER + blockCount;
+			mashineCodeString += VmCommands.JNZ + " " + BLOCK_INSERT_DELIMITER + blockCount;
 			mashineCodeString += COMMAND_LINE_DELIMITER;
 
-			configureNewBlock(whileNode.getDependentNode(1), blockCount, true);
+			configureNewBlock(whileNode.getDependentNode(1), blockCount);
 		}
 
 		nodeToString(whileNode.getDependentNode(2));
 	}
 
+	/**
+	 * Формирование машинного кода из ноды условия
+	 *
+	 * @param ifNode нода условия
+	 */
 	private void ifNodeToString(Node ifNode)
 	{
 		printLogicExpressionNode(ifNode.getDependentNode(0));
 
 		if (ifNode.getDependentNode(1) != null)
 		{
-			mashineCodeString += "JNZ " + BLOCK_INSERT_DELIMITER + ++blockCount;
+			mashineCodeString += VmCommands.JNZ + " " + BLOCK_INSERT_DELIMITER + ++blockCount;
 			mashineCodeString += COMMAND_LINE_DELIMITER;
 			mashineCodeString += BACK_START + blockCount;
 			mashineCodeString += COMMAND_LINE_DELIMITER;
 
-			configureNewBlock(ifNode.getDependentNode(1), blockCount, false);
+			configureNewBlock(ifNode.getDependentNode(1), blockCount);
 		}
 
 		if (ifNode.getDependentNode(2) != null)
 		{
-			mashineCodeString += "JZ " + BLOCK_INSERT_DELIMITER + ++blockCount;
+			mashineCodeString += VmCommands.JZ + " " + BLOCK_INSERT_DELIMITER + ++blockCount;
 			mashineCodeString += COMMAND_LINE_DELIMITER;
 			mashineCodeString += BACK_START + blockCount;
 			mashineCodeString += COMMAND_LINE_DELIMITER;
 
-			configureNewBlock(ifNode.getDependentNode(2), blockCount, false);
+			configureNewBlock(ifNode.getDependentNode(2), blockCount);
 		}
 
 		nodeToString(ifNode.getDependentNode(3));
 	}
 
-	private void configureNewBlock(Node blockNode, int blockNumber, boolean isWhile)
+	/**
+	 * Формирование блока машинного кода
+	 *
+	 * @param blockNode нода блока
+	 * @param blockNumber порядковый номер блока
+	 */
+	private void configureNewBlock(Node blockNode, int blockNumber)
 	{
-		String blockCode = new String();
+		String blockCode;
 
 		codeBuffer.add(mashineCodeString);
 		mashineCodeString = "";
@@ -216,59 +256,87 @@ public class Compiler
 		mashineCodeString = codeBuffer.get(codeBuffer.size() - 1);
 		codeBuffer.remove(codeBuffer.size() - 1);
 
-		blockCode += "JMP " + BACK_INSERT_END + blockNumber;
+		blockCode += VmCommands.JMP + " " + BACK_INSERT_END + blockNumber;
 
 		blocks.put(blockNumber, blockCode);
 	}
 
+	/**
+	 * Формирование машинного кода из ноды переменной
+	 *
+	 * @param node нода переменной
+	 */
 	private void variableNodeToString(Node node)
 	{
 
 		if (node.getDependentNode(0).getType() == NodeType.SET)
 		{
 			nodeToString(node.getDependentNode(1));
-			mashineCodeString += "STORE " + node.getValue();
+			mashineCodeString += VmCommands.STORE + " " + node.getValue();
 			mashineCodeString += COMMAND_LINE_DELIMITER;
 			nodeToString(node.getDependentNode(2));
 		}
 		else
 		{
-			mashineCodeString += "FETCH " + node.getValue();
+			mashineCodeString += VmCommands.FETCH + " " + node.getValue();
 			mashineCodeString += COMMAND_LINE_DELIMITER;
 		}
 	}
 
+	/**
+	 * Формирование машинного кода из ноды печати
+	 *
+	 * @param node нода печати
+	 */
 	private void printNodeToString(Node node)
 	{
 		nodeToString(node.getDependentNode(0));
-		mashineCodeString += "ECHO";
+		mashineCodeString += VmCommands.ECHO;
 		mashineCodeString += COMMAND_LINE_DELIMITER;
 		nodeToString(node.getDependentNode(1));
 	}
 
+	/**
+	 * Формирование машинного кода из ноды числа
+	 *
+	 * @param node нода числа
+	 */
 	private void digitNodeToString(Node node)
 	{
-		mashineCodeString += "PUSH " + node.getValue() + COMMAND_LINE_DELIMITER;
+		mashineCodeString += VmCommands.PUSH + " " + node.getValue() + COMMAND_LINE_DELIMITER;
 	}
 
-	private void eofNodeToString(Node node)
+	/**
+	 * Формирование машинного кода завершения приложения
+	 */
+	private void eofNodeToString()
 	{
-		mashineCodeString += "HALT";
+		mashineCodeString += VmCommands.HALT;
 	}
 
+	/**
+	 * Формирование машинного кода из ноды сложения
+	 *
+	 * @param node нода сложения
+	 */
 	private void sumNodeToString(Node node)
 	{
 		nodeToString(node.getDependentNode(0));
 		nodeToString(node.getDependentNode(1));
-		mashineCodeString += "ADD";
+		mashineCodeString += VmCommands.ADD;
 		mashineCodeString += COMMAND_LINE_DELIMITER;
 	}
 
+	/**
+	 * Формирование машинного кода из ноды вычитания
+	 *
+	 * @param node нода вычитания
+	 */
 	private void minusNodeToString(Node node)
 	{
 		nodeToString(node.getDependentNode(1));
 		nodeToString(node.getDependentNode(0));
-		mashineCodeString += "SUB";
+		mashineCodeString += VmCommands.SUB;
 		mashineCodeString += COMMAND_LINE_DELIMITER;
 	}
 }

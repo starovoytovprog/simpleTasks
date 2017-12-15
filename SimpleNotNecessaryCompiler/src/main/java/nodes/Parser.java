@@ -44,17 +44,17 @@ public class Parser
 		{
 			case PRINT:
 			{
-				currentNode = configurePrintNode(currentNode, list, nextToken);
+				currentNode = configurePrintNode(currentNode, list);
 				break;
 			}
 			case IF:
 			{
-				currentNode = configureIfNode(currentNode, list, nextToken);
+				currentNode = configureIfNode(currentNode, list);
 				break;
 			}
 			case WHILE:
 			{
-				currentNode = configureWhileNode(currentNode, list, nextToken);
+				currentNode = configureWhileNode(currentNode, list);
 				break;
 			}
 			case LPAR:
@@ -64,12 +64,12 @@ public class Parser
 			}
 			case DIGIT:
 			{
-				currentNode = configureDigitNode(currentNode, list, nextToken);
+				currentNode = configureDigitNode(currentNode, nextToken);
 				break;
 			}
 			case EOF:
 			{
-				currentNode = configureEofNode(currentNode, list, nextToken);
+				currentNode = configureEofNode(currentNode);
 				break;
 			}
 			case SPACE:
@@ -102,7 +102,15 @@ public class Parser
 		return currentNode;
 	}
 
-	private Node configureWhileNode(Node whileNode, TokenList list, Token nextToken) throws Exception
+	/**
+	 * Формирование ноды цикла типа while
+	 *
+	 * @param whileNode нода для формирования
+	 * @param list список токенов исходного кода
+	 * @return сформированная нода
+	 * @throws Exception ошибка обработики
+	 */
+	private Node configureWhileNode(Node whileNode, TokenList list) throws Exception
 	{
 		whileNode.setType(NodeType.WHILE);
 		Node conditionNode = getNextNode(list);
@@ -123,7 +131,15 @@ public class Parser
 		return whileNode;
 	}
 
-	private Node configureIfNode(Node ifNode, TokenList list, Token nextToken) throws Exception
+	/**
+	 * Формирование ноды условия
+	 *
+	 * @param ifNode нода для формирования
+	 * @param list список токенов исходного кода
+	 * @return сформированная нода
+	 * @throws Exception ошибка обработки
+	 */
+	private Node configureIfNode(Node ifNode, TokenList list) throws Exception
 	{
 		ifNode.setType(NodeType.IF);
 		Node conditionNode = getNextNode(list);
@@ -162,7 +178,15 @@ public class Parser
 		return ifNode;
 	}
 
-	private Node configurePrintNode(Node printNode, TokenList list, Token nextToken) throws Exception
+	/**
+	 * Формирование ноды вывода информации
+	 *
+	 * @param printNode нода для формирования
+	 * @param list список токенов исзодного кода
+	 * @return сформированная нода
+	 * @throws Exception ошибка обработки
+	 */
+	private Node configurePrintNode(Node printNode, TokenList list) throws Exception
 	{
 		printNode.setType(NodeType.PRINT);
 		Node printValueNode = getNextNode(list);
@@ -181,6 +205,14 @@ public class Parser
 		return printNode;
 	}
 
+	/**
+	 * Формирование токена выражения
+	 *
+	 * @param list
+	 * @param outTokenType
+	 * @return сформированный токен
+	 * @throws Exception ошибка обработки
+	 */
 	private Node configureExpressionNode(TokenList list, TokenType outTokenType) throws Exception
 	{
 		Node expressionNode = new Node();
@@ -264,6 +296,12 @@ public class Parser
 		}
 	}
 
+	/**
+	 * Сворачивание выражения
+	 *
+	 * @param expressionNode нода с выражением
+	 * @return свёрнутая нода
+	 */
 	private Node rollUpExpression(Node expressionNode)
 	{
 		return rollUpLessThanExpression(
@@ -277,6 +315,13 @@ public class Parser
 		).getDependentNode(0);
 	}
 
+	/**
+	 * Сворачивание выражения по типу ноды
+	 *
+	 * @param expressionNode выражение для сворачивания
+	 * @param rollType тип сворачивания
+	 * @return свёрнутая нода
+	 */
 	private Node rollUpNodeTypeExpression(Node expressionNode, NodeType rollType)
 	{
 		List<Node> l = expressionNode.getDependentNodes();
@@ -300,27 +345,58 @@ public class Parser
 		return expressionNode;
 	}
 
+	/**
+	 * Сворачивание выражения по типу меньше чем
+	 *
+	 * @param expressionNode выражение для сворачивания
+	 * @return свёрнутое выражение
+	 */
 	private Node rollUpLessThanExpression(Node expressionNode)
 	{
 		return rollUpNodeTypeExpression(expressionNode, NodeType.LESS_THAN);
 	}
 
+	/**
+	 * Сворачивание выражения по типу больше чем
+	 *
+	 * @param expressionNode выражение для сворачивания
+	 * @return свёрнутое выражение
+	 */
 	private Node rollUpMoreThanExpression(Node expressionNode)
 	{
 		return rollUpNodeTypeExpression(expressionNode, NodeType.MORE_THAN);
 	}
 
+	/**
+	 * Сворачивание выражения по типу минус
+	 *
+	 * @param expressionNode выражение для сворачивания
+	 * @return свёрнутое выражение
+	 */
 	private Node rollUpMinusExpression(Node expressionNode)
 	{
 		return rollUpNodeTypeExpression(expressionNode, NodeType.MINUS);
 	}
 
+	/**
+	 * Сворачивание выражения по типу сложение
+	 *
+	 * @param expressionNode выражение для сворачивания
+	 * @return свёрнутое выражение
+	 */
 	private Node rollUpSumExpression(Node expressionNode)
 	{
 		return rollUpNodeTypeExpression(expressionNode, NodeType.SUM);
 	}
 
-	private Node configureDigitNode(Node digitNode, TokenList list, Token nextToken)
+	/**
+	 * Формирование ноды целого числа
+	 *
+	 * @param digitNode нода для формирования
+	 * @param nextToken следующий в списке токен
+	 * @return сформированная нода
+	 */
+	private Node configureDigitNode(Node digitNode, Token nextToken)
 	{
 		digitNode.setType(NodeType.DIGIT);
 		digitNode.setValue(nextToken.getValue());
@@ -328,12 +404,27 @@ public class Parser
 		return digitNode;
 	}
 
-	private Node configureEofNode(Node eofNode, TokenList list, Token nextToken)
+	/**
+	 * Формирование ноды завершения программы
+	 *
+	 * @param eofNode нода для формирования
+	 * @return сформированная нода
+	 */
+	private Node configureEofNode(Node eofNode)
 	{
 		eofNode.setType(NodeType.EOF);
 		return eofNode;
 	}
 
+	/**
+	 * Формирование ноды переменной
+	 *
+	 * @param variableNode нода для формирования
+	 * @param list список токенов исходного кода
+	 * @param nextToken следующий токен
+	 * @return сформированный токен
+	 * @throws Exception ошибка обработки
+	 */
 	private Node configureVariableNode(Node variableNode, TokenList list, Token nextToken) throws Exception
 	{
 		variableNode.setType(NodeType.VARIABLE);

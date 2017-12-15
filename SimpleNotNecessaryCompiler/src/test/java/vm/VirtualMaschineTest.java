@@ -233,6 +233,13 @@ public class VirtualMaschineTest
 		testExecute(machineCode, expectedResult);
 	}
 
+	/**
+	 * Выполняет машинный код и сравнивает с ожидаемым результатом.
+	 *
+	 * @param mashineCode исполняемый код
+	 * @param expectedResult ожидаемый результат
+	 * @throws Exception исключение выполнения
+	 */
 	private void testExecute(String mashineCode, String expectedResult) throws Exception
 	{
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();

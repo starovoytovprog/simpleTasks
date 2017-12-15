@@ -7,7 +7,7 @@ import java.util.Stack;
 import static vm.Constants.COMMAND_LINE_DELIMITER;
 
 /**
- * Виртуальная машина, исполняющая байт-код
+ * Виртуальная машина, исполняющая машинный-код
  *
  * @author Starovoytov
  * @since 12.12.2017
@@ -17,6 +17,9 @@ public class VirtualMaschine
 	private final Stack<String> programStack;
 	private final Map<String, String> variablesMap;
 
+	/**
+	 * Конструктор по умолчанию
+	 */
 	public VirtualMaschine()
 	{
 		programStack = new Stack<>();
@@ -69,7 +72,7 @@ public class VirtualMaschine
 		{
 			case ECHO:
 			{
-				echoCommand(commandString);
+				echoCommand();
 				break;
 			}
 			case PUSH:
@@ -79,17 +82,17 @@ public class VirtualMaschine
 			}
 			case POP:
 			{
-				popCommand(commandString);
+				popCommand();
 				break;
 			}
 			case ADD:
 			{
-				addCommand(commandString);
+				addCommand();
 				break;
 			}
 			case SUB:
 			{
-				subCommand(commandString);
+				subCommand();
 				break;
 			}
 			case STORE:
@@ -112,7 +115,7 @@ public class VirtualMaschine
 			}
 			case LT:
 			{
-				ltCommand(commandString);
+				ltCommand();
 				break;
 			}
 			case JZ:
@@ -128,22 +131,36 @@ public class VirtualMaschine
 		return 0;
 	}
 
-	private void echoCommand(String commandString)
+	/**
+	 * Выполнение команды вывода
+	 */
+	private void echoCommand()
 	{
 		System.out.println(programStack.pop());
 	}
 
+	/**
+	 * Команда добавления значения в стек
+	 *
+	 * @param commandString строка команды
+	 */
 	private void pushCommand(String commandString)
 	{
 		programStack.push(commandString.substring(5));
 	}
 
-	private void popCommand(String commandString)
+	/**
+	 * Команда удаления значения из стека
+	 */
+	private void popCommand()
 	{
 		programStack.pop();
 	}
 
-	private void addCommand(String commandString)
+	/**
+	 * Команда сложения значений в стеке
+	 */
+	private void addCommand()
 	{
 		int value_1 = Integer.parseInt(programStack.pop());
 		int value_2 = Integer.parseInt(programStack.pop());
@@ -151,7 +168,10 @@ public class VirtualMaschine
 		programStack.push((value_1 + value_2) + "");
 	}
 
-	private void subCommand(String commandString)
+	/**
+	 * Команда вычитания значений в стеке
+	 */
+	private void subCommand()
 	{
 		int value_1 = Integer.parseInt(programStack.pop());
 		int value_2 = Integer.parseInt(programStack.pop());
@@ -159,22 +179,40 @@ public class VirtualMaschine
 		programStack.push((value_1 - value_2) + "");
 	}
 
+	/**
+	 * Команда сохранения значения из стека в переменной
+	 *
+	 * @param commandString строка команды
+	 */
 	private void storeCommand(String commandString)
 	{
 		variablesMap.put(commandString.split(" ")[1], programStack.pop());
 	}
 
+	/**
+	 * Команда добавления значения из переменной в стек
+	 *
+	 * @param commandString строка команды
+	 */
 	private void fetchCommand(String commandString)
 	{
 		programStack.push(variablesMap.get(commandString.split(" ")[1]));
 	}
 
+	/**
+	 * Команда безусловного перехода
+	 *
+	 * @param commandString строка команды
+	 */
 	private int jmpCommand(String commandString)
 	{
 		return Integer.parseInt(commandString.split(" ")[1]);
 	}
 
-	private void ltCommand(String commandString)
+	/**
+	 * Команда сравнения значений в стеке
+	 */
+	private void ltCommand()
 	{
 		int value_1 = Integer.parseInt(programStack.pop());
 		int value_2 = Integer.parseInt(programStack.pop());
@@ -189,6 +227,11 @@ public class VirtualMaschine
 		}
 	}
 
+	/**
+	 * Команда условного перехода, если в стеке 0
+	 *
+	 * @param commandString строка команды
+	 */
 	private int jzCommand(String commandString)
 	{
 		if (Integer.parseInt(programStack.peek()) == 0)
@@ -199,6 +242,11 @@ public class VirtualMaschine
 		return 0;
 	}
 
+	/**
+	 * Команда условного перехода, если в стеке не 0
+	 *
+	 * @param commandString строка команды
+	 */
 	private int jnzCommand(String commandString)
 	{
 		if (Integer.parseInt(programStack.peek()) != 0)

@@ -100,6 +100,13 @@ public class FullCompileProcesTest
 			"", "25");
 	}
 
+	/**
+	 * Компилирует и исполняет исходный код, сравнивает результат с ожидаемым.
+	 *
+	 * @param sourceCode исходный код.
+	 * @param expectedResult ожидаемый результат.
+	 * @throws Exception ошибка выполнения операции
+	 */
 	private void testExecute(String sourceCode, String expectedResult) throws Exception
 	{
 		TokenList list = lexicalAnalysis.analys(sourceCode);
