@@ -90,7 +90,7 @@ public class MainFrame extends JFrame implements ActionListener
 		mainPanel.setBorder(new MatteBorder(5, 5, 5, 5, Color.lightGray));
 
 		codeText.setTabSize(1);
-		mainPanel.add(codeText, BorderLayout.CENTER);
+		mainPanel.add(new JScrollPane(codeText), BorderLayout.CENTER);
 
 		resultText.setEditable(false);
 		resultText.setText("Здесь будет результат");
