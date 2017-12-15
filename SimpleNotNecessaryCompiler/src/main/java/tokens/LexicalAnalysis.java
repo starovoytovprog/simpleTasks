@@ -15,7 +15,7 @@ import static tokens.TokenType.*;
  */
 public class LexicalAnalysis
 {
-	private static final List<Character> SYMBOLS = Arrays.asList(';', '(', ')', '+', '-', '\r', '\n', ' ', '=', '>', '{', '}');
+	private static final List<Character> SYMBOLS = Arrays.asList(';', '(', ')', '+', '-', '\r', '\n', ' ', '=', '>', '{', '}', '<');
 
 	/**
 	 * Обработка исходного кода
@@ -129,6 +129,11 @@ public class LexicalAnalysis
 			case '>':
 			{
 				t.setType(MORE_THAN);
+				break;
+			}
+			case '<':
+			{
+				t.setType(LESS_THAN);
 				break;
 			}
 			case '{':

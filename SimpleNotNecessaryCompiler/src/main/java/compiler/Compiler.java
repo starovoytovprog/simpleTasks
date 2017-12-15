@@ -103,41 +103,52 @@ public class Compiler
 	{
 		Node expressionNode = ifNode.getDependentNode(0);
 
-		if (expressionNode.getType() == NodeType.MORE_THAN)
+		switch (expressionNode.getType())
 		{
-			nodeToString(expressionNode.getDependentNode(0));
-			nodeToString(expressionNode.getDependentNode(1));
-			mashineCodeString += "LT";
+			case MORE_THAN:
+			{
+				nodeToString(expressionNode.getDependentNode(0));
+				nodeToString(expressionNode.getDependentNode(1));
+				break;
+			}
+			case LESS_THAN:
+			{
+				nodeToString(expressionNode.getDependentNode(1));
+				nodeToString(expressionNode.getDependentNode(0));
+				break;
+			}
+		}
+
+		mashineCodeString += "LT";
+		mashineCodeString += COMMAND_LINE_DELIMITER;
+
+		int backLink = nextCodeLineNumber();
+		if (ifNode.getDependentNode(1) != null)
+		{
+			backLink++;
+		}
+		if (ifNode.getDependentNode(2) != null)
+		{
+			backLink++;
+		}
+		if (ifNode.getDependentNode(1) != null)
+		{
+			mashineCodeString += "JNZ " + BLOCK_INSERT_DELIMITER + blockCount;
 			mashineCodeString += COMMAND_LINE_DELIMITER;
 
-			int backLink = nextCodeLineNumber();
-			if (ifNode.getDependentNode(1) != null)
-			{
-				backLink++;
-			}
-			if (ifNode.getDependentNode(2) != null)
-			{
-				backLink++;
-			}
-			if (ifNode.getDependentNode(1) != null)
-			{
-				mashineCodeString += "JNZ " + BLOCK_INSERT_DELIMITER + blockCount;
-				mashineCodeString += COMMAND_LINE_DELIMITER;
+			configureNewBlock(ifNode.getDependentNode(1), blockCount, backLink);
 
-				configureNewBlock(ifNode.getDependentNode(1), blockCount, backLink);
+			blockCount++;
+		}
 
-				blockCount++;
-			}
+		if (ifNode.getDependentNode(2) != null)
+		{
+			mashineCodeString += "JZ " + BLOCK_INSERT_DELIMITER + blockCount;
+			mashineCodeString += COMMAND_LINE_DELIMITER;
 
-			if (ifNode.getDependentNode(2) != null)
-			{
-				mashineCodeString += "JZ " + BLOCK_INSERT_DELIMITER + blockCount;
-				mashineCodeString += COMMAND_LINE_DELIMITER;
+			configureNewBlock(ifNode.getDependentNode(2), blockCount, backLink);
 
-				configureNewBlock(ifNode.getDependentNode(2), blockCount, backLink);
-
-				blockCount++;
-			}
+			blockCount++;
 		}
 
 		nodeToString(ifNode.getDependentNode(3));

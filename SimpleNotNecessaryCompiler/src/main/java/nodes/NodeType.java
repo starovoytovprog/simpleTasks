@@ -51,5 +51,9 @@ public enum NodeType
 	/**
 	 * Больше чем
 	 */
-	MORE_THAN
+	MORE_THAN,
+	/**
+	 * Меньше чем
+	 */
+	LESS_THAN
 }

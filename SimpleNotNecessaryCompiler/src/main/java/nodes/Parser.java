@@ -199,6 +199,13 @@ public class Parser
 					expressionNode.addDependentNode(n);
 					break;
 				}
+				case LESS_THAN:
+				{
+					Node n = new Node();
+					n.setType(NodeType.LESS_THAN);
+					expressionNode.addDependentNode(n);
+					break;
+				}
 				case MINUS:
 				{
 					Node n = new Node();
@@ -233,10 +240,12 @@ public class Parser
 
 	private Node rollUpExpression(Node expressionNode)
 	{
-		return rollUpMoreThanExpression(
-			rollUpSumExpression(
-				rollUpMinusExpression(
-					expressionNode
+		return rollUpLessThanExpression(
+			rollUpMoreThanExpression(
+				rollUpSumExpression(
+					rollUpMinusExpression(
+						expressionNode
+					)
 				)
 			)
 		).getDependentNode(0);
@@ -263,6 +272,11 @@ public class Parser
 		}
 
 		return expressionNode;
+	}
+
+	private Node rollUpLessThanExpression(Node expressionNode)
+	{
+		return rollUpNodeTypeExpression(expressionNode, NodeType.LESS_THAN);
 	}
 
 	private Node rollUpMoreThanExpression(Node expressionNode)

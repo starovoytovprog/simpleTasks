@@ -57,6 +57,10 @@ public enum TokenType
 	 */
 	MORE_THAN,
 	/**
+	 * Меньше чем
+	 */
+	LESS_THAN,
+	/**
 	 * Если
 	 */
 	IF,
