@@ -44,6 +44,24 @@ public class TokenList
 	}
 
 	/**
+	 * Посмотреть последний значащий токен
+	 *
+	 * @return токен из списка
+	 */
+	public Token getLast()
+	{
+		for (int i = tokens.size() - 1; i >= 0; i--)
+		{
+			if (tokens.get(i).getType() != TokenType.SPACE)
+			{
+				return tokens.get(i);
+			}
+		}
+
+		return null;
+	}
+
+	/**
 	 * Взять следующий токен не SPACE из списка
 	 *
 	 * @return токен из списка

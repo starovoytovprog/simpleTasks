@@ -60,7 +60,7 @@ public class LexicalAnalysis
 				}
 
 				if (ch == '-' && programText.toCharArray()[i + 1] >= 48 && programText.toCharArray()[i + 1] <= 57
-					&& (programText.toCharArray()[i - 1] < 48 || programText.toCharArray()[i - 1] > 57))
+					&& list.getLast().getType() == SET)
 				{
 				}
 				else
