@@ -40,7 +40,7 @@ public class MainFrame extends JFrame implements ActionListener
 	private final JMenu operationMenu = new JMenu();
 	private final JMenuItem executionMenuItem = new JMenuItem();
 
-	public MainFrame() throws IOException
+	public MainFrame()
 	{
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -49,19 +49,30 @@ public class MainFrame extends JFrame implements ActionListener
 		setTitle("Простой не нужный компилятор");
 
 		initComponents();
+		loadExample();
+	}
 
-		ClassLoader cl = this.getClass().getClassLoader();
-		InputStream is = cl.getResourceAsStream("gui\\exampleCode.txt");
-		BufferedReader br = new BufferedReader(new InputStreamReader(is));
-		String line;
-
-		while ((line = br.readLine()) != null)
+	private void loadExample()
+	{
+		try
 		{
-			codeText.setText(codeText.getText() + line + "\n");
-		}
+			ClassLoader cl = this.getClass().getClassLoader();
+			InputStream is = cl.getResourceAsStream("gui/exampleCode.txt");
+			BufferedReader br = new BufferedReader(new InputStreamReader(is));
+			String line;
 
-		br.close();
-		is.close();
+			while ((line = br.readLine()) != null)
+			{
+				codeText.setText(codeText.getText() + line + "\n");
+			}
+
+			br.close();
+			is.close();
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace();
+		}
 	}
 
 	private void initComponents()

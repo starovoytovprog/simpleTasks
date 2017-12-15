@@ -1,11 +1,14 @@
-x = -1;
-y = 1;
+x = 0;
 
-while (x<10)
+a = 1;
+b = 2;
+
+while (x < 10)
 {
-	x = x+1;
-	y=y-1;
+	c = a + b;
+	a = b;
+	b = c;
+	x = x + 1;
 }
 
-print(x);
-print(y);
+print(b);

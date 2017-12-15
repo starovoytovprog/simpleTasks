@@ -8,4 +8,7 @@ buildscript {
 
 jar {
 	baseName = 'SimpleNotNecessaryCompiler'
+	manifest {
+		attributes "Main-Class": "gui.MainClass"
+	}
 }

@@ -1,7 +1,5 @@
 package gui;
 
-import java.io.IOException;
-
 /**
  * Графический интерфейс для компилятора
  *
@@ -10,7 +8,7 @@ import java.io.IOException;
  */
 public class MainClass
 {
-	public static void main(String[] args) throws IOException
+	public static void main(String[] args)
 	{
 		new MainFrame().setVisible(true);
 	}
