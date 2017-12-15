@@ -87,6 +87,11 @@ public class Parser
 				currentNode = null;
 				break;
 			}
+			case LBRA:
+			{
+				currentNode = null;
+				break;
+			}
 		}
 
 		return currentNode;
@@ -112,8 +117,13 @@ public class Parser
 		if (t.getType() == TokenType.ELSE)
 		{
 			list.pop();
-			Node falseNode = getNextNode(list);
-			ifNode.addDependentNode(falseNode);
+			t = list.popNotSpace();
+			if (t.getType() == TokenType.LBRA)
+			{
+				list.pop();
+				Node falseNode = getNextNode(list);
+				ifNode.addDependentNode(falseNode);
+			}
 		}
 		else
 		{

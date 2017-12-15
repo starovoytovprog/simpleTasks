@@ -110,7 +110,15 @@ public class Compiler
 			mashineCodeString += "LT";
 			mashineCodeString += COMMAND_LINE_DELIMITER;
 
-			int backLink = nextCodeLineNumber() + 1;
+			int backLink = nextCodeLineNumber();
+			if (ifNode.getDependentNode(1) != null)
+			{
+				backLink++;
+			}
+			if (ifNode.getDependentNode(2) != null)
+			{
+				backLink++;
+			}
 			if (ifNode.getDependentNode(1) != null)
 			{
 				mashineCodeString += "JNZ " + BLOCK_INSERT_DELIMITER + blockCount;
@@ -123,7 +131,12 @@ public class Compiler
 
 			if (ifNode.getDependentNode(2) != null)
 			{
+				mashineCodeString += "JZ " + BLOCK_INSERT_DELIMITER + blockCount;
+				mashineCodeString += COMMAND_LINE_DELIMITER;
 
+				configureNewBlock(ifNode.getDependentNode(2), blockCount, backLink);
+
+				blockCount++;
 			}
 		}
 

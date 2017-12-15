@@ -53,6 +53,11 @@ public class Node
 	 */
 	public Node getDependentNode(int i)
 	{
+		if (i >= dependentNodes.size())
+		{
+			return null;
+		}
+
 		return dependentNodes.get(i);
 	}
 

@@ -186,7 +186,7 @@ public class VirtualMaschine
 
 	private int jzCommand(String commandString)
 	{
-		if (Integer.parseInt(programStack.pop()) == 0)
+		if (Integer.parseInt(programStack.peek()) == 0)
 		{
 			return Integer.parseInt(commandString.split(" ")[1]);
 		}
@@ -196,7 +196,7 @@ public class VirtualMaschine
 
 	private int jnzCommand(String commandString)
 	{
-		if (Integer.parseInt(programStack.pop()) != 0)
+		if (Integer.parseInt(programStack.peek()) != 0)
 		{
 			return Integer.parseInt(commandString.split(" ")[1]);
 		}
