@@ -90,10 +90,12 @@ public class Compiler
 			case IF:
 			{
 				ifNodeToString(nextNode);
+				break;
 			}
 			case WHILE:
 			{
 				whileNodeToString(nextNode);
+				break;
 			}
 		}
 	}
