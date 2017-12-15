@@ -83,7 +83,8 @@ public class FullCompileProcesTest
 	@Test
 	public void simpleIfTest() throws Exception
 	{
-		testExecute("x=1; y=5; if(x<y) {print(x);} else {print(y);}" +
+		testExecute("x=1; y=5; if(x<y)\n" +
+			"{print(x);} else {print(y);}" +
 			"", "1");
 	}
 

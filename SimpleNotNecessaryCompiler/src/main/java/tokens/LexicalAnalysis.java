@@ -15,7 +15,7 @@ import static tokens.TokenType.*;
  */
 public class LexicalAnalysis
 {
-	private static final List<Character> SYMBOLS = Arrays.asList(';', '(', ')', '+', '-', '\r', '\n', ' ', '=', '>', '{', '}', '<');
+	private static final List<Character> SYMBOLS = Arrays.asList(';', '(', ')', '+', '-', '\r', '\n', ' ', '=', '>', '{', '}', '<', '\t');
 
 	/**
 	 * Обработка исходного кода
@@ -89,13 +89,14 @@ public class LexicalAnalysis
 
 		switch (ch)
 		{
+			case '\r':
+			case '\n':
+			case '\t':
 			case ' ':
 			{
 				t.setType(SPACE);
 				break;
 			}
-			case '\r':
-			case '\n':
 			case ';':
 			{
 				t.setType(SEMICOLON);
