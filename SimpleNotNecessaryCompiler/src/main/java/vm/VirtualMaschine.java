@@ -58,6 +58,11 @@ public class VirtualMaschine
 	 */
 	private int executeCommand(String commandString) throws Exception
 	{
+		if (commandString.isEmpty())
+		{
+			return 0;
+		}
+
 		VmCommands command = VmCommands.valueOf(commandString.split(" ")[0]);
 
 		switch (command)

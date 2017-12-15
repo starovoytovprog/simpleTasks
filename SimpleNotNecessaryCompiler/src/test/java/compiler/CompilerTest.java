@@ -35,7 +35,7 @@ public class CompilerTest
 
 		String expectedMachineCode = "PUSH 1" + COMMAND_LINE_DELIMITER +
 			"ECHO" + COMMAND_LINE_DELIMITER +
-			"HALT";
+			"HALT" + COMMAND_LINE_DELIMITER;
 		String compilerString = compiler.compile(expectedNode);
 
 		assertEquals(expectedMachineCode, compilerString);
@@ -77,7 +77,7 @@ public class CompilerTest
 			"PUSH 3" + COMMAND_LINE_DELIMITER +
 			"ADD" + COMMAND_LINE_DELIMITER +
 			"ECHO" + COMMAND_LINE_DELIMITER +
-			"HALT";
+			"HALT" + COMMAND_LINE_DELIMITER;
 		String compilerString = compiler.compile(expectedNode);
 
 		assertEquals(expectedMachineCode, compilerString);
@@ -105,7 +105,7 @@ public class CompilerTest
 
 		String expectedMachineCode = "PUSH 5" + COMMAND_LINE_DELIMITER +
 			"STORE x" + COMMAND_LINE_DELIMITER +
-			"HALT";
+			"HALT" + COMMAND_LINE_DELIMITER;
 		String compilerString = compiler.compile(expectedNode);
 
 		assertEquals(expectedMachineCode, compilerString);
@@ -147,11 +147,11 @@ public class CompilerTest
 		String expectedMachineCode = "PUSH 10" + COMMAND_LINE_DELIMITER +
 			"PUSH 5" + COMMAND_LINE_DELIMITER +
 			"LT" + COMMAND_LINE_DELIMITER +
-			"JNZ 6" + COMMAND_LINE_DELIMITER +
+			"JNZ 7" + COMMAND_LINE_DELIMITER + COMMAND_LINE_DELIMITER +
 			"HALT" + COMMAND_LINE_DELIMITER +
 			"PUSH 1" + COMMAND_LINE_DELIMITER +
 			"ECHO" + COMMAND_LINE_DELIMITER +
-			"JMP 5";
+			"JMP 5" + COMMAND_LINE_DELIMITER;
 		String compilerString = compiler.compile(ifNode);
 
 		assertEquals(expectedMachineCode, compilerString);
@@ -188,14 +188,14 @@ public class CompilerTest
 		nextNode.setType(NodeType.EOF);
 		whileNode.addDependentNode(nextNode);
 
-		String expectedMachineCode = "PUSH 1" + COMMAND_LINE_DELIMITER +
+		String expectedMachineCode = COMMAND_LINE_DELIMITER + "PUSH 1" + COMMAND_LINE_DELIMITER +
 			"PUSH 5" + COMMAND_LINE_DELIMITER +
 			"LT" + COMMAND_LINE_DELIMITER +
-			"JNZ 6" + COMMAND_LINE_DELIMITER +
+			"JNZ 7" + COMMAND_LINE_DELIMITER +
 			"HALT" + COMMAND_LINE_DELIMITER +
 			"PUSH 1" + COMMAND_LINE_DELIMITER +
 			"ECHO" + COMMAND_LINE_DELIMITER +
-			"JMP 1";
+			"JMP 1" + COMMAND_LINE_DELIMITER;
 		String compilerString = compiler.compile(whileNode);
 
 		assertEquals(expectedMachineCode, compilerString);

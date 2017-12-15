@@ -3,8 +3,7 @@ package compiler;
 import nodes.Node;
 import nodes.NodeType;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static vm.Constants.COMMAND_LINE_DELIMITER;
 
@@ -18,10 +17,13 @@ import static vm.Constants.COMMAND_LINE_DELIMITER;
 public class Compiler
 {
 	private static final String BLOCK_INSERT_DELIMITER = "---BLOCK_";
+	private static final String BACK_START = "---BACK_START_";
+	private static final String BACK_INSERT_END = "---BACK_END_";
 
 	private String mashineCodeString;
 	private int blockCount;
-	private Map<Integer, String> Blocks;
+	private Map<Integer, String> blocks;
+	private List<String> codeBuffer;
 
 	/**
 	 * Формирование машинного кода
@@ -33,19 +35,49 @@ public class Compiler
 	{
 		mashineCodeString = "";
 		blockCount = 0;
-		Blocks = new HashMap<>();
+		blocks = new HashMap<>();
+		codeBuffer = new ArrayList<>();
 		nodeToString(rootNode);
 		blocksToCode();
+		backStartProcessing();
 		return mashineCodeString;
+	}
+
+	private void backStartProcessing()
+	{
+		List<String> codeStrings = new ArrayList<>(Arrays.asList(mashineCodeString.split(COMMAND_LINE_DELIMITER)));
+		Map<Integer, String> back = new HashMap<>();
+		mashineCodeString = "";
+
+		for (int i = 0; i < codeStrings.size(); i++)
+		{
+			if (codeStrings.get(i).startsWith(BACK_START))
+			{
+				back.put(i + 1, BACK_INSERT_END + codeStrings.get(i).substring(codeStrings.get(i).lastIndexOf("_") + 1));
+				codeStrings.set(i, "");
+				i = 0;
+			}
+		}
+
+		for (String code : codeStrings)
+		{
+			mashineCodeString += code;
+			mashineCodeString += COMMAND_LINE_DELIMITER;
+		}
+
+		for (Integer i : back.keySet())
+		{
+			mashineCodeString = mashineCodeString.replaceAll(back.get(i), i.toString());
+		}
 	}
 
 	private void blocksToCode()
 	{
-		for (Integer id : Blocks.keySet())
+		for (Integer id : blocks.keySet())
 		{
-			mashineCodeString = mashineCodeString.replaceAll(BLOCK_INSERT_DELIMITER + id, nextCodeLineNumber() + "");
+			mashineCodeString = mashineCodeString.replaceAll(BLOCK_INSERT_DELIMITER + id, nextCodeLineNumber(mashineCodeString) + "");
 			mashineCodeString += COMMAND_LINE_DELIMITER;
-			mashineCodeString += Blocks.get(id);
+			mashineCodeString += blocks.get(id);
 		}
 	}
 
@@ -100,9 +132,9 @@ public class Compiler
 		}
 	}
 
-	private int nextCodeLineNumber()
+	private int nextCodeLineNumber(String code)
 	{
-		return mashineCodeString.split(COMMAND_LINE_DELIMITER).length + 1;
+		return code.split(COMMAND_LINE_DELIMITER).length + 1;
 	}
 
 	private void printLogicExpressionNode(Node expressionNode)
@@ -129,19 +161,18 @@ public class Compiler
 
 	private void whileNodeToString(Node whileNode)
 	{
+		mashineCodeString += BACK_START + ++blockCount;
+		mashineCodeString += COMMAND_LINE_DELIMITER;
+
 		printLogicExpressionNode(whileNode.getDependentNode(0));
 
-		int backLink = nextCodeLineNumber();
 		if (whileNode.getDependentNode(1) != null)
 		{
-			backLink++;
 
 			mashineCodeString += "JNZ " + BLOCK_INSERT_DELIMITER + blockCount;
 			mashineCodeString += COMMAND_LINE_DELIMITER;
 
-			configureNewBlock(whileNode.getDependentNode(1), blockCount, backLink, true);
-
-			blockCount++;
+			configureNewBlock(whileNode.getDependentNode(1), blockCount, true);
 		}
 
 		nodeToString(whileNode.getDependentNode(2));
@@ -151,56 +182,43 @@ public class Compiler
 	{
 		printLogicExpressionNode(ifNode.getDependentNode(0));
 
-		int backLink = nextCodeLineNumber();
 		if (ifNode.getDependentNode(1) != null)
 		{
-			backLink++;
-		}
-		if (ifNode.getDependentNode(2) != null)
-		{
-			backLink++;
-		}
-		if (ifNode.getDependentNode(1) != null)
-		{
-			mashineCodeString += "JNZ " + BLOCK_INSERT_DELIMITER + blockCount;
+			mashineCodeString += "JNZ " + BLOCK_INSERT_DELIMITER + ++blockCount;
+			mashineCodeString += COMMAND_LINE_DELIMITER;
+			mashineCodeString += BACK_START + blockCount;
 			mashineCodeString += COMMAND_LINE_DELIMITER;
 
-			configureNewBlock(ifNode.getDependentNode(1), blockCount, backLink, false);
-
-			blockCount++;
+			configureNewBlock(ifNode.getDependentNode(1), blockCount, false);
 		}
 
 		if (ifNode.getDependentNode(2) != null)
 		{
-			mashineCodeString += "JZ " + BLOCK_INSERT_DELIMITER + blockCount;
+			mashineCodeString += "JZ " + BLOCK_INSERT_DELIMITER + ++blockCount;
+			mashineCodeString += COMMAND_LINE_DELIMITER;
+			mashineCodeString += BACK_START + blockCount;
 			mashineCodeString += COMMAND_LINE_DELIMITER;
 
-			configureNewBlock(ifNode.getDependentNode(2), blockCount, backLink, false);
-
-			blockCount++;
+			configureNewBlock(ifNode.getDependentNode(2), blockCount, false);
 		}
 
 		nodeToString(ifNode.getDependentNode(3));
 	}
 
-	private void configureNewBlock(Node blockNode, int blockNumber, int backLink, boolean isWhile)
+	private void configureNewBlock(Node blockNode, int blockNumber, boolean isWhile)
 	{
 		String blockCode = new String();
 
-		String buf = mashineCodeString;
+		codeBuffer.add(mashineCodeString);
 		mashineCodeString = "";
 		nodeToString(blockNode);
 		blockCode = mashineCodeString;
-		mashineCodeString = buf;
+		mashineCodeString = codeBuffer.get(codeBuffer.size() - 1);
+		codeBuffer.remove(codeBuffer.size() - 1);
 
-		if (isWhile)
-		{
-			backLink -= 4;
-		}
+		blockCode += "JMP " + BACK_INSERT_END + blockNumber;
 
-		blockCode += "JMP " + backLink;
-
-		Blocks.put(blockNumber, blockCode);
+		blocks.put(blockNumber, blockCode);
 	}
 
 	private void variableNodeToString(Node node)

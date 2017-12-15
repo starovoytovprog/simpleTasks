@@ -95,8 +95,8 @@ public class FullCompileProcesTest
 	@Test
 	public void simpleWhileTest() throws Exception
 	{
-		testExecute("x=0; while(x<5) {x=x+1;} print(x);" +
-			"", "5");
+		testExecute("x=0; y=0; z=0; while(x<5) {while(y<5){y=y+1;z=z+1;}x=x+1;y=0;} print(z);" +
+			"", "25");
 	}
 
 	private void testExecute(String sourceCode, String expectedResult) throws Exception
