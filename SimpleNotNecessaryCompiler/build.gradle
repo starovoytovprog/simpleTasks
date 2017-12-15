@@ -1,0 +1,14 @@
+buildscript {
+	repositories {
+		maven {
+			url 'http://repo1.maven.org/maven2'
+		}
+	}
+}
+
+jar {
+	baseName = 'SimpleNotNecessaryCompiler'
+	manifest {
+		attributes "Main-Class": "gui.MainClass"
+	}
+}
