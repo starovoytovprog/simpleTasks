@@ -34,7 +34,7 @@ public class FullCompileProcesTest
 	@Test
 	public void simplePrintCommandTest() throws Exception
 	{
-		testExecute("print(14);", "14");
+		testExecute("print(14-1);", "13");
 	}
 
 	/**
@@ -83,9 +83,9 @@ public class FullCompileProcesTest
 	@Test
 	public void simpleIfTest() throws Exception
 	{
-		testExecute("x=1; y=5; if(x<y)\n" +
+		testExecute("x=-1; y=5; if(x<y)\n" +
 			"{print(x);} else {print(y);}" +
-			"", "1");
+			"", "-1");
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class FullCompileProcesTest
 	@Test
 	public void simpleWhileTest() throws Exception
 	{
-		testExecute("x=0; y=0; z=0; while(x<5) {while(y<5){y=y+1;z=z+1;}x=x+1;y=0;} print(z);" +
+		testExecute("x=0; y=0; z=0; q=-1; while(x<5) {while(y<5){y=y+1;z=z+1;}x=x+1;y=0;} print(z);" +
 			"", "25");
 	}
 

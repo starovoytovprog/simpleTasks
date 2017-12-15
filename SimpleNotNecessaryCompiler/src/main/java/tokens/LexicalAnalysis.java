@@ -31,13 +31,15 @@ public class LexicalAnalysis
 		Token bufToken = new Token();
 		String tokenWord = "";
 
-		for (char ch : programText.toCharArray())
+		for (int i = 0; i < programText.length(); i++)
 		{
+			char ch = programText.toCharArray()[i];
+
 			if (SYMBOLS.indexOf(ch) > -1)
 			{
 				if (!tokenWord.isEmpty())
 				{
-					if (tokenWord.matches("\\d+"))
+					if (tokenWord.matches("\\-?\\d*"))
 					{
 						bufToken.setType(DIGIT);
 						bufToken.setValue(tokenWord);
@@ -57,8 +59,15 @@ public class LexicalAnalysis
 					tokenWord = "";
 				}
 
-				list.put(getCharToken(ch));
-				continue;
+				if (ch == '-' && programText.toCharArray()[i + 1] >= 48 && programText.toCharArray()[i + 1] <= 57
+					&& (programText.toCharArray()[i - 1] < 48 || programText.toCharArray()[i - 1] > 57))
+				{
+				}
+				else
+				{
+					list.put(getCharToken(ch));
+					continue;
+				}
 			}
 
 			tokenWord += ch;

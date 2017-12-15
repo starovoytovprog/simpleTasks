@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import javax.swing.*;
+import javax.swing.border.MatteBorder;
 
 /**
  * Главное окно графического интерфейса
@@ -66,7 +67,9 @@ public class MainFrame extends JFrame implements ActionListener
 	private void initComponents()
 	{
 		mainPanel.setLayout(new BorderLayout());
+		mainPanel.setBorder(new MatteBorder(5, 5, 5, 5, Color.lightGray));
 
+		codeText.setTabSize(1);
 		mainPanel.add(codeText, BorderLayout.CENTER);
 
 		resultText.setEditable(false);
