@@ -63,6 +63,11 @@ public class LexicalAnalysis
 					&& list.getLast().getType() == SET)
 				{
 				}
+				else if (ch == '=' && list.getLast().getType() == SET)
+				{
+					list.getLast().setType(EQUALS);
+					continue;
+				}
 				else
 				{
 					list.put(getCharToken(ch));

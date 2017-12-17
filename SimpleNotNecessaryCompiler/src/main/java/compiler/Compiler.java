@@ -88,8 +88,6 @@ public class Compiler
 		}
 	}
 
-	//TODO: взять команды из VmCommands
-
 	/**
 	 * Преобразование ноды в машинный код
 	 *
@@ -177,9 +175,23 @@ public class Compiler
 				nodeToString(expressionNode.getDependentNode(0));
 				break;
 			}
+			case EQUALS:
+			{
+				nodeToString(expressionNode.getDependentNode(1));
+				nodeToString(expressionNode.getDependentNode(0));
+				break;
+			}
 		}
 
-		mashineCodeString += VmCommands.LT;
+		if (expressionNode.getType() != NodeType.EQUALS)
+		{
+			mashineCodeString += VmCommands.LT;
+		}
+		else
+		{
+			mashineCodeString += VmCommands.EQ;
+		}
+
 		mashineCodeString += COMMAND_LINE_DELIMITER;
 	}
 
