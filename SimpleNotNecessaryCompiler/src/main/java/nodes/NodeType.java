@@ -57,6 +57,10 @@ public enum NodeType
 	 */
 	LESS_THAN,
 	/**
+	 * Равно
+	 */
+	EQUALS,
+	/**
 	 * Цикл
 	 */
 	WHILE

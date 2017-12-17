@@ -101,6 +101,19 @@ public class FullCompileProcesTest
 	}
 
 	/**
+	 * Проверка логического равенства
+	 *
+	 * @throws Exception ошибка выполнения
+	 */
+	@Test
+	public void equalsTest() throws Exception
+	{
+		testExecute("x=-1; y=5; if(x==y)\n" +
+			"{print(x);} else {print(y);}" +
+			"", "5");
+	}
+
+	/**
 	 * Компилирует и исполняет исходный код, сравнивает результат с ожидаемым.
 	 *
 	 * @param sourceCode исходный код.

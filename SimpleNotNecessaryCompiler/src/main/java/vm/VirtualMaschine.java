@@ -118,6 +118,11 @@ public class VirtualMaschine
 				ltCommand();
 				break;
 			}
+			case EQ:
+			{
+				eqCommand();
+				break;
+			}
 			case JZ:
 			{
 				return jzCommand(commandString);
@@ -210,7 +215,7 @@ public class VirtualMaschine
 	}
 
 	/**
-	 * Команда сравнения значений в стеке
+	 * Команда сравнения значений в стеке меньше чем
 	 */
 	private void ltCommand()
 	{
@@ -218,6 +223,24 @@ public class VirtualMaschine
 		int value_2 = Integer.parseInt(programStack.pop());
 
 		if (value_1 < value_2)
+		{
+			programStack.push("1");
+		}
+		else
+		{
+			programStack.push("0");
+		}
+	}
+
+	/**
+	 * Команда сравнения значений в стеке равно
+	 */
+	private void eqCommand()
+	{
+		int value_1 = Integer.parseInt(programStack.pop());
+		int value_2 = Integer.parseInt(programStack.pop());
+
+		if (value_1 == value_2)
 		{
 			programStack.push("1");
 		}

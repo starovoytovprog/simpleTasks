@@ -264,6 +264,13 @@ public class Parser
 					expressionNode.addDependentNode(n);
 					break;
 				}
+				case EQUALS:
+				{
+					Node n = new Node();
+					n.setType(NodeType.EQUALS);
+					expressionNode.addDependentNode(n);
+					break;
+				}
 				case MINUS:
 				{
 					Node n = new Node();
@@ -304,11 +311,13 @@ public class Parser
 	 */
 	private Node rollUpExpression(Node expressionNode)
 	{
-		return rollUpLessThanExpression(
-			rollUpMoreThanExpression(
-				rollUpSumExpression(
-					rollUpMinusExpression(
-						expressionNode
+		return rollUpEqualsExpression(
+			rollUpLessThanExpression(
+				rollUpMoreThanExpression(
+					rollUpSumExpression(
+						rollUpMinusExpression(
+							expressionNode
+						)
 					)
 				)
 			)
@@ -354,6 +363,17 @@ public class Parser
 	private Node rollUpLessThanExpression(Node expressionNode)
 	{
 		return rollUpNodeTypeExpression(expressionNode, NodeType.LESS_THAN);
+	}
+
+	/**
+	 * Сворачивание выражения по типу равно
+	 *
+	 * @param expressionNode выражение для сворачивания
+	 * @return свёрнутое выражение
+	 */
+	private Node rollUpEqualsExpression(Node expressionNode)
+	{
+		return rollUpNodeTypeExpression(expressionNode, NodeType.EQUALS);
 	}
 
 	/**

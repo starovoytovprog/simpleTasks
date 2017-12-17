@@ -33,20 +33,9 @@ while (a1 < 10)
 						x1 = a1 + b1 + c1;
 						x2 = a2 + b2 + c2;
 
-						if (x1 > x2)
+						if (x1 == x2)
 						{
-							;
-						}
-						else
-						{
-							if (x1 < x2)
-							{
-								;
-							}
-							else
-							{
-								res = res + 1;
-							}
+							res = res + 1;
 						}
 
 						c2 = c2 + 1;
