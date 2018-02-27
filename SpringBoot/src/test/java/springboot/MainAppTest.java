@@ -17,21 +17,19 @@ import static org.junit.Assert.assertEquals;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class MainAppTest
-{
-	private static final String HELLO_WORLD_OUT = "Hello World SpringBoot!";
-	private static final String HELLO_WORLD_PATH = "/";
+public class MainAppTest {
+    private static final String HELLO_WORLD_OUT = "Hello World SpringBoot!";
+    private static final String HELLO_WORLD_PATH = "/";
 
-	@Autowired
-	private TestRestTemplate restTemplate;
+    @Autowired
+    private TestRestTemplate restTemplate;
 
-	/**
-	 * Тест страницы Hello World SpringBoot!
-	 */
-	@Test
-	public void helloWorldTest()
-	{
-		String body = this.restTemplate.getForObject(HELLO_WORLD_PATH, String.class);
-		assertEquals(HELLO_WORLD_OUT, body);
-	}
+    /**
+     * Тест страницы Hello World SpringBoot!
+     */
+    @Test
+    public void helloWorldTest() {
+        String body = this.restTemplate.getForObject(HELLO_WORLD_PATH, String.class);
+        assertEquals(HELLO_WORLD_OUT, body);
+    }
 }

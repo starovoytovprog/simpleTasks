@@ -10,16 +10,14 @@ import static org.junit.Assert.assertTrue;
  * @author Starovoytov
  * @since 05.12.2017
  */
-public class HelloWorldMessageProviderTest
-{
-	private static final String HELLO_WORLD_OUT = "Hello World!";
+public class HelloWorldMessageProviderTest {
+    private static final String HELLO_WORLD_OUT = "Hello World!";
 
-	/**
-	 * Проверяет возвращённое сообщение по эталону
-	 */
-	@Test
-	public void getMessageFromHelloWorldProviderTest()
-	{
-		assertTrue(new HelloWorldMessageProvider().getMessage().equals(HELLO_WORLD_OUT));
-	}
+    /**
+     * Проверяет возвращённое сообщение по эталону
+     */
+    @Test
+    public void getMessageFromHelloWorldProviderTest() {
+        assertTrue(new HelloWorldMessageProvider().getMessage().equals(HELLO_WORLD_OUT));
+    }
 }

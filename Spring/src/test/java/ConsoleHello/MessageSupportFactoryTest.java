@@ -13,30 +13,28 @@ import static org.junit.Assert.assertTrue;
  * @author Starovoytov
  * @since 05.12.2017
  */
-public class MessageSupportFactoryTest
-{
-	private static final String TEST_OUT_STRING = "Hello World!\r\n";
+public class MessageSupportFactoryTest {
+    private static final String TEST_OUT_STRING = "Hello World!\r\n";
 
-	/**
-	 * Тестирование вывода hello world с использованием фабрики
-	 */
-	@Test
-	public void messageFactoryTest()
-	{
-		MessageSupportFactory.getInstance();
-		MessageRenderer mr = MessageSupportFactory.getInstance().getRenderer();
-		MessageProvider mp = MessageSupportFactory.getInstance().getProvider();
-		mr.setMessageProvider(mp);
+    /**
+     * Тестирование вывода hello world с использованием фабрики
+     */
+    @Test
+    public void messageFactoryTest() {
+        MessageSupportFactory.getInstance();
+        MessageRenderer mr = MessageSupportFactory.getInstance().getRenderer();
+        MessageProvider mp = MessageSupportFactory.getInstance().getProvider();
+        mr.setMessageProvider(mp);
 
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		PrintStream ps = new PrintStream(baos);
-		PrintStream old = System.out;
-		System.setOut(ps);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        PrintStream old = System.out;
+        System.setOut(ps);
 
-		mr.render();
+        mr.render();
 
-		System.out.flush();
-		System.setOut(old);
-		assertTrue(baos.toString().equals(TEST_OUT_STRING));
-	}
+        System.out.flush();
+        System.setOut(old);
+        assertTrue(baos.toString().equals(TEST_OUT_STRING));
+    }
 }
