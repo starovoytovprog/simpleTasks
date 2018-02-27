@@ -10,15 +10,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 01.12.2017
  */
 @SpringBootApplication
-public class MainApp
-{
-	/**
-	 * Точка входа
-	 *
-	 * @param args можно переопределить параметры SpringBoot передав их в параметрах args, например: --server.port=8090
-	 */
-	public static void main(String[] args)
-	{
-		SpringApplication.run(MainApp.class, args);
-	}
+public class MainApp {
+    /**
+     * Точка входа
+     *
+     * @param args можно переопределить параметры SpringBoot передав их в параметрах args, например: --server.port=8090
+     */
+    public static void main(String[] args) {
+        SpringApplication.run(MainApp.class, args);
+    }
 }

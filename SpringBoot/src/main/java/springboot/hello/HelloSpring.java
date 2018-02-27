@@ -11,15 +11,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @since 11.12.2017
  */
 @Controller
-public class HelloSpring
-{
-	/**
-	 * @return Домашняя страница http://localhost
-	 */
-	@RequestMapping("/")
-	@ResponseBody
-	public String home()
-	{
-		return "Hello World SpringBoot!";
-	}
+public class HelloSpring {
+    /**
+     * @return Домашняя страница http://localhost
+     */
+    @RequestMapping("/")
+    @ResponseBody
+    public String home() {
+        return "Hello World SpringBoot!";
+    }
 }

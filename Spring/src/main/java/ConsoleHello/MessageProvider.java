@@ -6,12 +6,11 @@ package ConsoleHello;
  * @author Starovoytov
  * @since 05.12.2017
  */
-public interface MessageProvider
-{
-	/**
-	 * Получить сообщение провайдера
-	 *
-	 * @return сообщение провайдера
-	 */
-	String getMessage();
+public interface MessageProvider {
+    /**
+     * Получить сообщение провайдера
+     *
+     * @return сообщение провайдера
+     */
+    String getMessage();
 }
