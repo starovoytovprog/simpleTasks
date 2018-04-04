@@ -39,6 +39,6 @@ public class StandardOutMessageRendererTest {
         System.out.flush();
         System.setOut(old);
 
-        assertTrue(baos.toString().equals(TEST_STRING + "\r\n"));
+        assertTrue(baos.toString().equals(TEST_STRING + System.lineSeparator()));
     }
 }

@@ -64,7 +64,7 @@ public class MainFrame extends JFrame implements ActionListener {
             String line;
 
             while ((line = br.readLine()) != null) {
-                codeText.setText(codeText.getText() + line + "\n");
+                codeText.setText(codeText.getText() + line + System.lineSeparator());
             }
 
             br.close();

@@ -52,9 +52,9 @@ public class FullCompileProcesTest {
      */
     @Test
     public void simpleTwoStringTest() throws Exception {
-        testExecute("   print   (   1   +   1    - 2    )    ;     \n" +
+        testExecute("   print   (   1   +   1    - 2    )    ;     " + System.lineSeparator() +
                 "print(2);" +
-                "", "0\r\n2");
+                "", "0" + System.lineSeparator() + "2");
     }
 
     /**
@@ -64,8 +64,8 @@ public class FullCompileProcesTest {
      */
     @Test
     public void simpleVariableTest() throws Exception {
-        testExecute("x = 5 + 2; \n" +
-                "y = x - 1;\r\n" +
+        testExecute("x = 5 + 2; " + System.lineSeparator() +
+                "y = x - 1;" + System.lineSeparator() +
                 "print(x + y);" +
                 "", "13");
     }
@@ -77,7 +77,7 @@ public class FullCompileProcesTest {
      */
     @Test
     public void simpleIfTest() throws Exception {
-        testExecute("x=-1; y=5; if(x<y)\n" +
+        testExecute("x=-1; y=5; if(x<y)" + System.lineSeparator() +
                 "{print(x);} else {print(y);}" +
                 "", "-1");
     }
@@ -100,7 +100,7 @@ public class FullCompileProcesTest {
      */
     @Test
     public void equalsTest() throws Exception {
-        testExecute("x=-1; y=5; if(x==y)\n" +
+        testExecute("x=-1; y=5; if(x==y)" + System.lineSeparator() +
                 "{print(x);} else {print(y);}" +
                 "", "5");
     }
@@ -127,6 +127,6 @@ public class FullCompileProcesTest {
         System.out.flush();
         System.setOut(old);
 
-        assertEquals(baos.toString(), expectedResult + (expectedResult.isEmpty() ? "" : "\r\n"));
+        assertEquals(baos.toString(), expectedResult + (expectedResult.isEmpty() ? "" : System.lineSeparator()));
     }
 }
