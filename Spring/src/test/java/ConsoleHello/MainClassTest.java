@@ -14,7 +14,7 @@ import static org.junit.Assert.assertTrue;
  * @since 05.12.2017
  */
 public class MainClassTest {
-    private static final String HELLO_WORLD_OUT = "Hello World!\r\n";
+    private static final String HELLO_WORLD_OUT = "Hello World!" + System.lineSeparator();
 
     /**
      * Сравнивание вывода сообщения в консоль с эталонной строкой

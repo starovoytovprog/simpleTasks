@@ -7,5 +7,5 @@ package vm;
  * @since 12.12.2017
  */
 public class Constants {
-    public static final String COMMAND_LINE_DELIMITER = "\r\n";
+    public static final String COMMAND_LINE_DELIMITER = System.lineSeparator();
 }

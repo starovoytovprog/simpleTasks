@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
  * @since 05.12.2017
  */
 public class SpringDITest {
-    private static final String TEST_OUT_STRING = "Hello World!\r\n";
+    private static final String TEST_OUT_STRING = "Hello World!" + System.lineSeparator();
 
     /**
      * Тестирование вывода hello world с использованием связывания Spring

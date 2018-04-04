@@ -237,6 +237,6 @@ public class VirtualMaschineTest {
         virtualMaschine.run(mashineCode);
         System.out.flush();
         System.setOut(old);
-        assertEquals(baos.toString(), expectedResult + (expectedResult.isEmpty() ? "" : "\r\n"));
+        assertEquals(baos.toString(), expectedResult + (expectedResult.isEmpty() ? "" : System.lineSeparator()));
     }
 }
