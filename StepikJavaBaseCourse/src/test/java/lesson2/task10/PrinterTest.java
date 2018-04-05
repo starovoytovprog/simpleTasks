@@ -29,20 +29,20 @@ public class PrinterTest
 			"Лука Лукич: Господи боже! еще и с секретным предписаньем!",
 		};
 
-		String resultText = "Городничий:\n" +
-			"1) Я пригласил вас, господа, с тем, чтобы сообщить вам пренеприятное известие: к нам едет ревизор.\n" +
-			"4) Ревизор из Петербурга, инкогнито. И еще с секретным предписаньем.\n" +
-			"\n" +
-			"Аммос Федорович:\n" +
-			"2) Как ревизор?\n" +
-			"5) Вот те на!\n" +
-			"\n" +
-			"Артемий Филиппович:\n" +
-			"3) Как ревизор?\n" +
-			"6) Вот не было заботы, так подай!\n" +
-			"\n" +
-			"Лука Лукич:\n" +
-			"7) Господи боже! еще и с секретным предписаньем!\n";
+		String resultText = "Городничий:" + System.lineSeparator() +
+			"1) Я пригласил вас, господа, с тем, чтобы сообщить вам пренеприятное известие: к нам едет ревизор." + System.lineSeparator() +
+			"4) Ревизор из Петербурга, инкогнито. И еще с секретным предписаньем." + System.lineSeparator() +
+			"" + System.lineSeparator() +
+			"Аммос Федорович:" + System.lineSeparator() +
+			"2) Как ревизор?" + System.lineSeparator() +
+			"5) Вот те на!" + System.lineSeparator() +
+			"" + System.lineSeparator() +
+			"Артемий Филиппович:" + System.lineSeparator() +
+			"3) Как ревизор?" + System.lineSeparator() +
+			"6) Вот не было заботы, так подай!" + System.lineSeparator() +
+			"" + System.lineSeparator() +
+			"Лука Лукич:" + System.lineSeparator() +
+			"7) Господи боже! еще и с секретным предписаньем!" + System.lineSeparator();
 
 		Printer p = new Printer();
 		assertEquals(p.getResult(roles, textLines), resultText);

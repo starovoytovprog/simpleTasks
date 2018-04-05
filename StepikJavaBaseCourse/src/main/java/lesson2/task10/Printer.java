@@ -66,7 +66,7 @@ public class Printer
 
 		for (String role : roles)
 		{
-			resultMap.put(role, new StringBuilder(role + ":\n"));
+			resultMap.put(role, new StringBuilder(role + ":" + System.lineSeparator()));
 		}
 
 		for (int i = 0; i < textLines.length; i++)
@@ -74,7 +74,7 @@ public class Printer
 			StringBuilder currentString = new StringBuilder((i + 1) + ") ");
 			currentString.append(textLines[i].substring(textLines[i].indexOf(':') + 2));
 			String key = textLines[i].substring(0, textLines[i].indexOf(':'));
-			resultMap.replace(key, resultMap.get(key).append(currentString).append('\n'));
+			resultMap.replace(key, resultMap.get(key).append(currentString).append(System.lineSeparator()));
 		}
 
 		StringBuilder resultString = new StringBuilder();
@@ -83,7 +83,7 @@ public class Printer
 			resultString.append(resultMap.get(roles[i]));
 			if (i < roles.length - 1)
 			{
-				resultString.append('\n');
+				resultString.append(System.lineSeparator());
 			}
 		}
 
