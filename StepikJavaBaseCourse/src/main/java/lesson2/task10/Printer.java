@@ -87,7 +87,6 @@ public class Printer
 			}
 		}
 
-		System.out.println(resultString);
 		return resultString.toString();
 	}
 }
