@@ -8,3 +8,6 @@ Multithreading:
 
 SimpleNotNecessaryCompieler:
 Простейший компилятор.
+
+StepikJavaBaseCourse:
+Выполнение заданий во время прохождения курса "Java. Базовый курс" на stepic.org.
