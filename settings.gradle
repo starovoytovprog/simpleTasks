@@ -3,7 +3,5 @@ rootProject.name = 'SimpleTasks'
 
 include ':HelloWorld'
 include ':Multithreading'
-include ':SpringBoot'
-include ':Spring'
 include ':SimpleNotNecessaryCompiler'
 include ':StepikJavaBaseCourse'
