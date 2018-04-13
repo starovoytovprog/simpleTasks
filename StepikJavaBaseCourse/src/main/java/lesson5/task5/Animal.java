@@ -3,8 +3,6 @@ package lesson5.task5;
 import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -29,19 +27,19 @@ public class Animal implements Serializable
 	{
 		try
 		{
-			List<Animal> animals = new ArrayList<>();
 			ByteArrayInputStream bais = new ByteArrayInputStream(data);
 			try (ObjectInputStream ois = new ObjectInputStream(bais))
 			{
 				int count = ois.readInt();
+				Animal[] animals = new Animal[count];
 
 				for (int i = 0; i < count; i++)
 				{
-					animals.add((Animal) ois.readObject());
+					animals[i] = (Animal) ois.readObject();
 				}
-			}
 
-			return animals.toArray(new Animal[0]);
+				return animals;
+			}
 		}
 		catch (Throwable t)
 		{
