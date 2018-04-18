@@ -11,7 +11,6 @@ public class RobotConnectionErrorInClose implements RobotConnection
 	@Override
 	public void moveRobotTo(int x, int y)
 	{
-
 	}
 
 	@Override

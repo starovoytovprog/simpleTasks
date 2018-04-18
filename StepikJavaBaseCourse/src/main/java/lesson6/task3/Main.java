@@ -17,7 +17,7 @@ public class Main
 	{
 		Scanner s = new Scanner(System.in);
 		s.useLocale(Locale.ENGLISH);
-		s.useDelimiter(" |" + System.lineSeparator() + "");
+		s.useDelimiter(" |" + System.lineSeparator());
 		Queue<Integer> list = new ArrayDeque<>();
 		boolean isAdd = false;
 

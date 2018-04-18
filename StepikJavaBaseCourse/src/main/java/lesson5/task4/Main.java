@@ -21,7 +21,7 @@ public class Main
 		double result = 0;
 		Scanner s = new Scanner(System.in);
 		s.useLocale(Locale.ENGLISH);
-		s.useDelimiter(" |" + System.lineSeparator() + "");
+		s.useDelimiter(" |" + System.lineSeparator());
 
 		while (s.hasNext())
 		{

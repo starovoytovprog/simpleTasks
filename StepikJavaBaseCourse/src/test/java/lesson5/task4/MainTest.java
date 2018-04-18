@@ -1,10 +1,7 @@
 package lesson5.task4;
 
+import TestUtils.ConsoleHelper;
 import org.junit.Test;
-
-import java.io.*;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Тестирование lesson5.task4.Main {@link Main}
@@ -16,38 +13,11 @@ public class MainTest
 {
 	/**
 	 * Проверка результата выполнения метода
-	 * @throws IOException Исключения в InputStream/OutputStream
+	 * @throws Exception может бросить исключения
 	 */
 	@Test
-	public void testRun() throws IOException
+	public void testRun() throws Exception
 	{
-		testMain("1 2" + System.lineSeparator() + "3" + System.lineSeparator(), "6.000000");
-	}
-
-	private void testMain(String in, String etalon)
-	{
-		InputStream systemInputBuffer = System.in;
-		PrintStream systemOutputBuffer = System.out;
-
-		InputStream testStrim = new ByteArrayInputStream(in.getBytes());
-		System.setIn(testStrim);
-
-		ByteArrayOutputStream resultStream = new ByteArrayOutputStream();
-		PrintStream testPrint = new PrintStream(resultStream);
-		System.setOut(testPrint);
-
-		try
-		{
-			Main.main(null);
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-
-		System.setIn(systemInputBuffer);
-		System.setOut(systemOutputBuffer);
-
-		assertEquals(etalon, resultStream.toString());
+		ConsoleHelper.testMain("1 2" + System.lineSeparator() + "3" + System.lineSeparator(), "6.000000", Main.class);
 	}
 }
