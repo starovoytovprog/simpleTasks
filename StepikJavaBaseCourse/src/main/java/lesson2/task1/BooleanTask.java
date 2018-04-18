@@ -6,7 +6,7 @@ package lesson2.task1;
  * При записи сложных выражений рекомендуется использовать скобки, чтобы не запутаться в порядке применения операторов.
  * В качестве примера уже указано заведомо некорректное решение задачи. Исправьте его.
  * Совет тем, у кого не проходит какой-то из тестов. В данной задаче возможно всего 16 комбинаций значений входных параметров. Их можно выписать на бумажку, посчитать для них правильные ответы и сравнить с тем, что выдает ваше решение. Попробуйте самостоятельно проделать это, найти ошибку и исправить решение.
- *
+ * <p>
  * Sample Input 1: false false false false; Sample Output 1: false
  * Sample Input 2: true true true true; Sample Output 2: false
  * Sample Input 3: false false true true; Sample Output 3: true
@@ -14,15 +14,13 @@ package lesson2.task1;
  * @author Starovoytov
  * @since 02.04.2018
  */
-public class BooleanTask
-{
-	public static boolean booleanExpression(boolean a, boolean b, boolean c, boolean d)
-	{
-		return !a && !b && c && d
-			|| !a && b && !c && d
-			|| !a && b && c && !d
-			|| a && !b && !c && d
-			|| a && !b && c && !d
-			|| a && b && !c && !d;
-	}
+public class BooleanTask {
+    public static boolean booleanExpression(boolean a, boolean b, boolean c, boolean d) {
+        return !a && !b && c && d
+                || !a && b && !c && d
+                || !a && b && c && !d
+                || a && !b && !c && d
+                || a && !b && c && !d
+                || a && b && !c && !d;
+    }
 }

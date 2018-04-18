@@ -15,246 +15,196 @@ package lesson3.task1;
  * Direction, направление взгляда робота,  — это перечисление:
  * <code>
  * public enum Direction {
- *  UP,
- *  DOWN,
- *  LEFT,
- *  RIGHT
+ * UP,
+ * DOWN,
+ * LEFT,
+ * RIGHT
  * }
  * </code>
  *
  * @author Starovoytov
  * @since 05.04.2018
  */
-public class Robot
-{
-	public static final String TURN_LEFT = "turnLeft" + System.lineSeparator();
-	public static final String TURN_RIGHT = "turnRight" + System.lineSeparator();
-	public static final String STEP_FORWARD = "stepForvard" + System.lineSeparator();
+public class Robot {
+    public static final String TURN_LEFT = "turnLeft" + System.lineSeparator();
+    public static final String TURN_RIGHT = "turnRight" + System.lineSeparator();
+    public static final String STEP_FORWARD = "stepForvard" + System.lineSeparator();
 
-	private int x = 0;
-	private int y = 0;
-	private Direction currentDirection = Direction.UP;
+    private int x = 0;
+    private int y = 0;
+    private Direction currentDirection = Direction.UP;
 
-	private StringBuffer actions = new StringBuffer();
+    private StringBuffer actions = new StringBuffer();
 
-	public static String moveRobot(Robot robot, int toX, int toY)
-	{
-		if (toY > robot.getY())
-		{
-			goToY(robot, toY);
-			goToX(robot, toX);
-		}
-		else
-		{
-			goToX(robot, toX);
-			goToY(robot, toY);
-		}
+    public static String moveRobot(Robot robot, int toX, int toY) {
+        if (toY > robot.getY()) {
+            goToY(robot, toY);
+            goToX(robot, toX);
+        } else {
+            goToX(robot, toX);
+            goToY(robot, toY);
+        }
 
-		return robot.getActions();
-	}
+        return robot.getActions();
+    }
 
-	private static void goToY(Robot robot, int toY)
-	{
-		if (toY != robot.getY())
-		{
-			if (toY > robot.getY())
-			{
-				switch (robot.getDirection())
-				{
-					case RIGHT:
-					{
-						robot.turnLeft();
-						break;
-					}
-					case LEFT:
-					{
-						robot.turnRight();
-						break;
-					}
-					case DOWN:
-						robot.turnRight();
-						robot.turnRight();
-				}
-			}
-			else
-			{
-				switch (robot.getDirection())
-				{
-					case LEFT:
-					{
-						robot.turnLeft();
-						break;
-					}
-					case RIGHT:
-					{
-						robot.turnRight();
-						break;
-					}
-					case UP:
-						robot.turnRight();
-						robot.turnRight();
-				}
-			}
+    private static void goToY(Robot robot, int toY) {
+        if (toY != robot.getY()) {
+            if (toY > robot.getY()) {
+                switch (robot.getDirection()) {
+                    case RIGHT: {
+                        robot.turnLeft();
+                        break;
+                    }
+                    case LEFT: {
+                        robot.turnRight();
+                        break;
+                    }
+                    case DOWN:
+                        robot.turnRight();
+                        robot.turnRight();
+                }
+            } else {
+                switch (robot.getDirection()) {
+                    case LEFT: {
+                        robot.turnLeft();
+                        break;
+                    }
+                    case RIGHT: {
+                        robot.turnRight();
+                        break;
+                    }
+                    case UP:
+                        robot.turnRight();
+                        robot.turnRight();
+                }
+            }
 
-			while (toY != robot.getY())
-				robot.stepForward();
-		}
-	}
+            while (toY != robot.getY())
+                robot.stepForward();
+        }
+    }
 
-	private static void goToX(Robot robot, int toX)
-	{
-		if (toX != robot.getX())
-		{
-			if (toX > robot.getX())
-			{
-				switch (robot.getDirection())
-				{
-					case DOWN:
-					{
-						robot.turnLeft();
-						break;
-					}
-					case UP:
-					{
-						robot.turnRight();
-						break;
-					}
-					case LEFT:
-						robot.turnRight();
-						robot.turnRight();
-				}
-			}
-			else
-			{
-				switch (robot.getDirection())
-				{
-					case DOWN:
-					{
-						robot.turnRight();
-						break;
-					}
-					case UP:
-					{
-						robot.turnLeft();
-						break;
-					}
-					case RIGHT:
-						robot.turnRight();
-						robot.turnRight();
-				}
-			}
+    private static void goToX(Robot robot, int toX) {
+        if (toX != robot.getX()) {
+            if (toX > robot.getX()) {
+                switch (robot.getDirection()) {
+                    case DOWN: {
+                        robot.turnLeft();
+                        break;
+                    }
+                    case UP: {
+                        robot.turnRight();
+                        break;
+                    }
+                    case LEFT:
+                        robot.turnRight();
+                        robot.turnRight();
+                }
+            } else {
+                switch (robot.getDirection()) {
+                    case DOWN: {
+                        robot.turnRight();
+                        break;
+                    }
+                    case UP: {
+                        robot.turnLeft();
+                        break;
+                    }
+                    case RIGHT:
+                        robot.turnRight();
+                        robot.turnRight();
+                }
+            }
 
-			while (toX != robot.getX())
-				robot.stepForward();
-		}
-	}
+            while (toX != robot.getX())
+                robot.stepForward();
+        }
+    }
 
-	public String getActions()
-	{
-		return actions.toString();
-	}
+    public String getActions() {
+        return actions.toString();
+    }
 
-	public Direction getDirection()
-	{
-		return currentDirection;
-	}
+    public Direction getDirection() {
+        return currentDirection;
+    }
 
-	public int getX()
-	{
-		return x;
-	}
+    public int getX() {
+        return x;
+    }
 
-	public int getY()
-	{
-		return y;
-	}
+    public int getY() {
+        return y;
+    }
 
-	public void turnLeft()
-	{
-		actions.append(TURN_LEFT);
+    public void turnLeft() {
+        actions.append(TURN_LEFT);
 
-		switch (currentDirection)
-		{
-			case UP:
-			{
-				currentDirection = Direction.LEFT;
-				break;
-			}
-			case LEFT:
-			{
-				currentDirection = Direction.DOWN;
-				break;
-			}
-			case DOWN:
-			{
-				currentDirection = Direction.RIGHT;
-				break;
-			}
-			case RIGHT:
-			{
-				currentDirection = Direction.UP;
-			}
-		}
-	}
+        switch (currentDirection) {
+            case UP: {
+                currentDirection = Direction.LEFT;
+                break;
+            }
+            case LEFT: {
+                currentDirection = Direction.DOWN;
+                break;
+            }
+            case DOWN: {
+                currentDirection = Direction.RIGHT;
+                break;
+            }
+            case RIGHT: {
+                currentDirection = Direction.UP;
+            }
+        }
+    }
 
-	public void turnRight()
-	{
-		actions.append(TURN_RIGHT);
+    public void turnRight() {
+        actions.append(TURN_RIGHT);
 
-		switch (currentDirection)
-		{
-			case UP:
-			{
-				currentDirection = Direction.RIGHT;
-				break;
-			}
-			case LEFT:
-			{
-				currentDirection = Direction.UP;
-				break;
-			}
-			case DOWN:
-			{
-				currentDirection = Direction.LEFT;
-				break;
-			}
-			case RIGHT:
-			{
-				currentDirection = Direction.DOWN;
-			}
-		}
-	}
+        switch (currentDirection) {
+            case UP: {
+                currentDirection = Direction.RIGHT;
+                break;
+            }
+            case LEFT: {
+                currentDirection = Direction.UP;
+                break;
+            }
+            case DOWN: {
+                currentDirection = Direction.LEFT;
+                break;
+            }
+            case RIGHT: {
+                currentDirection = Direction.DOWN;
+            }
+        }
+    }
 
-	public void stepForward()
-	{
-		actions.append(STEP_FORWARD);
+    public void stepForward() {
+        actions.append(STEP_FORWARD);
 
-		switch (currentDirection)
-		{
-			case UP:
-			{
-				y++;
-				break;
-			}
-			case LEFT:
-			{
-				x--;
-				break;
-			}
-			case DOWN:
-			{
-				y--;
-				break;
-			}
-			case RIGHT:
-			{
-				x++;
-			}
-		}
-	}
+        switch (currentDirection) {
+            case UP: {
+                y++;
+                break;
+            }
+            case LEFT: {
+                x--;
+                break;
+            }
+            case DOWN: {
+                y--;
+                break;
+            }
+            case RIGHT: {
+                x++;
+            }
+        }
+    }
 
-	private enum Direction
-	{
-		UP, DOWN, LEFT, RIGHT
-	}
+    private enum Direction {
+        UP, DOWN, LEFT, RIGHT
+    }
 }

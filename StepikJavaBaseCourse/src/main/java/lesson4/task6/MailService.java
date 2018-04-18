@@ -6,7 +6,6 @@ package lesson4.task6;
  * @author Starovoytov
  * @since 11.04.2018
  */
-public interface MailService
-{
-	Sendable processMail(Sendable mail);
+public interface MailService {
+    Sendable processMail(Sendable mail);
 }

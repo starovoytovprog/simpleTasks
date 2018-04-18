@@ -12,11 +12,9 @@ import java.math.BigDecimal;
  * @author Starovoytov
  * @since 09.04.2018
  */
-public class CastError
-{
-	public static void getCastError()
-	{
-		BigDecimal bd = new BigDecimal(3.14);
-		Integer i = (Integer) (Object) bd;
-	}
+public class CastError {
+    public static void getCastError() {
+        BigDecimal bd = new BigDecimal(3.14);
+        Integer i = (Integer) (Object) bd;
+    }
 }

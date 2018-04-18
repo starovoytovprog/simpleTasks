@@ -10,15 +10,13 @@ import static org.junit.Assert.assertEquals;
  * @author Starovoytov
  * @since 03.04.2018
  */
-public class CastTest
-{
-	/**
-	 * Проверка результата выполнения метода
-	 */
-	@Test
-	public void testRun()
-	{
-		assertEquals(Cast.charExpression(32), '|');
-		assertEquals(Cast.charExpression(29), 'y');
-	}
+public class CastTest {
+    /**
+     * Проверка результата выполнения метода
+     */
+    @Test
+    public void testRun() {
+        assertEquals(Cast.charExpression(32), '|');
+        assertEquals(Cast.charExpression(29), 'y');
+    }
 }

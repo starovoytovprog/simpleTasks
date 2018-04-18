@@ -11,16 +11,14 @@ import static org.junit.Assert.assertTrue;
  * @author Starovoytov
  * @since 02.04.2018
  */
-public class BooleanTaskTest
-{
-	/**
-	 * Проверка результата выполнения метода
-	 */
-	@Test
-	public void testRun()
-	{
-		assertFalse(BooleanTask.booleanExpression(false, false, false, false));
-		assertFalse(BooleanTask.booleanExpression(true, true, true, true));
-		assertTrue(BooleanTask.booleanExpression(false, false, true, true));
-	}
+public class BooleanTaskTest {
+    /**
+     * Проверка результата выполнения метода
+     */
+    @Test
+    public void testRun() {
+        assertFalse(BooleanTask.booleanExpression(false, false, false, false));
+        assertFalse(BooleanTask.booleanExpression(true, true, true, true));
+        assertTrue(BooleanTask.booleanExpression(false, false, true, true));
+    }
 }

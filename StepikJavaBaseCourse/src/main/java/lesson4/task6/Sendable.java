@@ -7,9 +7,8 @@ package lesson4.task6;
  * @author Starovoytov
  * @since 11.04.2018
  */
-public interface Sendable
-{
-	String getFrom();
+public interface Sendable {
+    String getFrom();
 
-	String getTo();
+    String getTo();
 }

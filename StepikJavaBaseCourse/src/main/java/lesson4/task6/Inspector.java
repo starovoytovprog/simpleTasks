@@ -9,26 +9,21 @@ import static lesson4.task6.Constants.WEAPONS;
  * @author Starovoytov
  * @since 11.04.2018
  */
-public class Inspector implements MailService
-{
-	@Override
-	public Sendable processMail(Sendable mail)
-	{
-		if (mail instanceof MailPackage)
-		{
-			String content = ((MailPackage) mail).getContent().getContent();
+public class Inspector implements MailService {
+    @Override
+    public Sendable processMail(Sendable mail) {
+        if (mail instanceof MailPackage) {
+            String content = ((MailPackage) mail).getContent().getContent();
 
-			if (content.contains(BANNED_SUBSTANCE) || content.contains(WEAPONS))
-			{
-				throw new IllegalPackageException();
-			}
+            if (content.contains(BANNED_SUBSTANCE) || content.contains(WEAPONS)) {
+                throw new IllegalPackageException();
+            }
 
-			if (content.contains("stones"))
-			{
-				throw new StolenPackageException();
-			}
-		}
+            if (content.contains("stones")) {
+                throw new StolenPackageException();
+            }
+        }
 
-		return mail;
-	}
+        return mail;
+    }
 }

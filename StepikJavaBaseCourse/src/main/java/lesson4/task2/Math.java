@@ -6,17 +6,14 @@ package lesson4.task2;
  * @author Starovoytov
  * @since 09.04.2018
  */
-public class Math
-{
-	public static final String ERROR_MESSAGE = "Expected non-negative number, got ";
+public class Math {
+    public static final String ERROR_MESSAGE = "Expected non-negative number, got ";
 
-	public static double sqrt(double value) throws IllegalAccessException
-	{
-		if (value < 0)
-		{
-			throw new IllegalArgumentException(ERROR_MESSAGE + value);
-		}
+    public static double sqrt(double value) throws IllegalAccessException {
+        if (value < 0) {
+            throw new IllegalArgumentException(ERROR_MESSAGE + value);
+        }
 
-		return java.lang.Math.sqrt(value);
-	}
+        return java.lang.Math.sqrt(value);
+    }
 }

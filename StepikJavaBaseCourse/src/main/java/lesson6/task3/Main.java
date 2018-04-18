@@ -11,46 +11,35 @@ import java.util.*;
  * @author Starovoytov
  * @since 16.04.2018
  */
-public class Main
-{
-	public static void main(String[] args)
-	{
-		Scanner s = new Scanner(System.in);
-		s.useLocale(Locale.ENGLISH);
-		s.useDelimiter(" |" + System.lineSeparator());
-		Queue<Integer> list = new ArrayDeque<>();
-		boolean isAdd = false;
+public class Main {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        s.useLocale(Locale.ENGLISH);
+        s.useDelimiter(" |" + System.lineSeparator());
+        Queue<Integer> list = new ArrayDeque<>();
+        boolean isAdd = false;
 
-		while (s.hasNext())
-		{
-			try
-			{
-				if (isAdd)
-				{
-					list.add(Integer.parseInt(s.next()));
-				}
-				else
-				{
-					s.next();
-				}
+        while (s.hasNext()) {
+            try {
+                if (isAdd) {
+                    list.add(Integer.parseInt(s.next()));
+                } else {
+                    s.next();
+                }
 
-				isAdd = !isAdd;
-			}
-			catch (Exception ex)
-			{
-			}
-		}
+                isAdd = !isAdd;
+            } catch (Exception ex) {
+            }
+        }
 
-		Iterator iterator = ((ArrayDeque) list).descendingIterator();
+        Iterator iterator = ((ArrayDeque) list).descendingIterator();
 
-		while (iterator.hasNext())
-		{
-			System.out.print(iterator.next());
+        while (iterator.hasNext()) {
+            System.out.print(iterator.next());
 
-			if (iterator.hasNext())
-			{
-				System.out.print(" ");
-			}
-		}
-	}
+            if (iterator.hasNext()) {
+                System.out.print(" ");
+            }
+        }
+    }
 }

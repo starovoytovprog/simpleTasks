@@ -6,23 +6,19 @@ package lesson3.task5;
  * @author Starovoytov
  * @since 06.04.2018
  */
-public abstract class KeywordAnalyzer implements TextAnalyzer
-{
-	protected abstract String[] getKeywords();
+public abstract class KeywordAnalyzer implements TextAnalyzer {
+    protected abstract String[] getKeywords();
 
-	protected abstract Label getLabel();
+    protected abstract Label getLabel();
 
-	@Override
-	public Label processText(String text)
-	{
-		for (String keyWord : getKeywords())
-		{
-			if (text.contains(keyWord))
-			{
-				return getLabel();
-			}
-		}
+    @Override
+    public Label processText(String text) {
+        for (String keyWord : getKeywords()) {
+            if (text.contains(keyWord)) {
+                return getLabel();
+            }
+        }
 
-		return Label.OK;
-	}
+        return Label.OK;
+    }
 }

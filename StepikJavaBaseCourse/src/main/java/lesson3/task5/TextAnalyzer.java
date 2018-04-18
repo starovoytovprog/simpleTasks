@@ -6,7 +6,6 @@ package lesson3.task5;
  * @author Starovoytov
  * @since 06.04.2018
  */
-public interface TextAnalyzer
-{
-	Label processText(String text);
+public interface TextAnalyzer {
+    Label processText(String text);
 }

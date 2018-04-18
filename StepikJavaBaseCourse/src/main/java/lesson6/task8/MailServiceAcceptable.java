@@ -6,9 +6,8 @@ package lesson6.task8;
  * @author Starovoytov
  * @since 18.04.2018
  */
-public interface MailServiceAcceptable
-{
-	String getTo();
+public interface MailServiceAcceptable {
+    String getTo();
 
-	Object getContent();
+    Object getContent();
 }

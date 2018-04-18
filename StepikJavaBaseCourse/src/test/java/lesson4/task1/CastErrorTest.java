@@ -10,23 +10,18 @@ import static org.junit.Assert.assertEquals;
  * @author Starovoytov
  * @since 09.04.2018
  */
-public class CastErrorTest
-{
-	/**
-	 * Проверка результата выполнения метода
-	 */
-	@Test
-	public void testRun()
-	{
-		String classCastExceptionName = "java.lang.ClassCastException";
+public class CastErrorTest {
+    /**
+     * Проверка результата выполнения метода
+     */
+    @Test
+    public void testRun() {
+        String classCastExceptionName = "java.lang.ClassCastException";
 
-		try
-		{
-			CastError.getCastError();
-		}
-		catch (ClassCastException ex)
-		{
-			assertEquals(ex.getClass().getCanonicalName(), classCastExceptionName);
-		}
-	}
+        try {
+            CastError.getCastError();
+        } catch (ClassCastException ex) {
+            assertEquals(ex.getClass().getCanonicalName(), classCastExceptionName);
+        }
+    }
 }

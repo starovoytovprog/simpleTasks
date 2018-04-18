@@ -8,28 +8,24 @@ package lesson4.task3;
  * @author Starovoytov
  * @since 09.04.2018
  */
-public class StackAnalyzatot
-{
-	public static String getCallerClassAndMethodName()
-	{
-		Throwable t = new Exception();
+public class StackAnalyzatot {
+    public static String getCallerClassAndMethodName() {
+        Throwable t = new Exception();
 
-		if (t.getStackTrace().length < 3)
-		{
-			return null;
-		}
+        if (t.getStackTrace().length < 3) {
+            return null;
+        }
 
-		StackTraceElement element = t.getStackTrace()[2];
+        StackTraceElement element = t.getStackTrace()[2];
 
-		if (element != null)
-		{
-			StringBuilder sb = new StringBuilder();
-			sb.append(element.getClassName());
-			sb.append("#");
-			sb.append(element.getMethodName());
-			return sb.toString();
-		}
+        if (element != null) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(element.getClassName());
+            sb.append("#");
+            sb.append(element.getMethodName());
+            return sb.toString();
+        }
 
-		return null;
-	}
+        return null;
+    }
 }

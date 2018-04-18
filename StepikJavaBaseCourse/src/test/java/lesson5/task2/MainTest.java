@@ -13,32 +13,31 @@ import static org.junit.Assert.assertTrue;
  * @author Starovoytov
  * @since 12.04.2018
  */
-public class MainTest
-{
-	/**
-	 * Проверка результата выполнения метода
-	 * @throws IOException Исключения в InputStream/OutputStream
-	 */
-	@Test
-	public void testRun() throws IOException
-	{
-		InputStream systemInputBuffer = System.in;
-		PrintStream systemOutputBuffer = System.out;
+public class MainTest {
+    /**
+     * Проверка результата выполнения метода
+     *
+     * @throws IOException Исключения в InputStream/OutputStream
+     */
+    @Test
+    public void testRun() throws IOException {
+        InputStream systemInputBuffer = System.in;
+        PrintStream systemOutputBuffer = System.out;
 
-		byte[] byteArray = {65, 13, 10, 10, 13};
-		InputStream testStrim = new ByteArrayInputStream(byteArray);
-		System.setIn(testStrim);
+        byte[] byteArray = {65, 13, 10, 10, 13};
+        InputStream testStrim = new ByteArrayInputStream(byteArray);
+        System.setIn(testStrim);
 
-		ByteArrayOutputStream resultStream = new ByteArrayOutputStream();
-		PrintStream testPrint = new PrintStream(resultStream);
-		System.setOut(testPrint);
+        ByteArrayOutputStream resultStream = new ByteArrayOutputStream();
+        PrintStream testPrint = new PrintStream(resultStream);
+        System.setOut(testPrint);
 
-		Main.main(null);
+        Main.main(null);
 
-		System.setIn(systemInputBuffer);
-		System.setOut(systemOutputBuffer);
+        System.setIn(systemInputBuffer);
+        System.setOut(systemOutputBuffer);
 
-		byte[] etalon = {65, 10, 10, 13};
-		assertTrue(Arrays.equals(etalon, resultStream.toByteArray()));
-	}
+        byte[] etalon = {65, 10, 10, 13};
+        assertTrue(Arrays.equals(etalon, resultStream.toByteArray()));
+    }
 }

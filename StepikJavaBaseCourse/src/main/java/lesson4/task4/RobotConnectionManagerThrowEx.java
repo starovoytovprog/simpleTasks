@@ -6,11 +6,9 @@ package lesson4.task4;
  * @author Starovoytov
  * @since 09.04.2018
  */
-public class RobotConnectionManagerThrowEx implements RobotConnectionManager
-{
-	@Override
-	public RobotConnection getConnection() throws RobotConnectionException
-	{
-		throw new RobotConnectionException("Тестируем исключения");
-	}
+public class RobotConnectionManagerThrowEx implements RobotConnectionManager {
+    @Override
+    public RobotConnection getConnection() throws RobotConnectionException {
+        throw new RobotConnectionException("Тестируем исключения");
+    }
 }

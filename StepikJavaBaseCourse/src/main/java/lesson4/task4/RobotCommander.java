@@ -12,52 +12,41 @@ package lesson4.task4;
  * @author Starovoytov
  * @since 09.04.2018
  */
-public class RobotCommander
-{
-	private static int count;
-	private static int catch_count;
+public class RobotCommander {
+    private static int count;
+    private static int catch_count;
 
-	public static void moveRobot(RobotConnectionManager robotConnectionManager, int toX, int toY)
-	{
-		count = 0;
-		catch_count = 0;
-		boolean isMove = false;
+    public static void moveRobot(RobotConnectionManager robotConnectionManager, int toX, int toY) {
+        count = 0;
+        catch_count = 0;
+        boolean isMove = false;
 
-		int errorCount = 3;
-		for (int i = 0; i < errorCount; i++)
-		{
-			count++;
-			try (RobotConnection connection = robotConnectionManager.getConnection())
-			{
-				connection.moveRobotTo(toX, toY);
-				isMove = true;
-				return;
-			}
-			catch (RobotConnectionException ex)
-			{
-				if (isMove)
-				{
-					return;
-				}
+        int errorCount = 3;
+        for (int i = 0; i < errorCount; i++) {
+            count++;
+            try (RobotConnection connection = robotConnectionManager.getConnection()) {
+                connection.moveRobotTo(toX, toY);
+                isMove = true;
+                return;
+            } catch (RobotConnectionException ex) {
+                if (isMove) {
+                    return;
+                }
 
-				catch_count++;
-				if (i == errorCount - 1)
-					throw ex;
-			}
-			catch (Exception ex)
-			{
-				throw ex;
-			}
-		}
-	}
+                catch_count++;
+                if (i == errorCount - 1)
+                    throw ex;
+            } catch (Exception ex) {
+                throw ex;
+            }
+        }
+    }
 
-	public static int getCount()
-	{
-		return count;
-	}
+    public static int getCount() {
+        return count;
+    }
 
-	public static int getCatch_count()
-	{
-		return catch_count;
-	}
+    public static int getCatch_count() {
+        return catch_count;
+    }
 }

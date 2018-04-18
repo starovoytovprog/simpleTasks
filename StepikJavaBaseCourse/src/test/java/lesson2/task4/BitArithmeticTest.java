@@ -10,14 +10,12 @@ import static org.junit.Assert.assertEquals;
  * @author Starovoytov
  * @since 03.04.2018
  */
-public class BitArithmeticTest
-{
-	/**
-	 * Проверка результата выполнения метода
-	 */
-	@Test
-	public void testRun()
-	{
-		assertEquals(BitArithmetic.flipBit(0, 1), 1);
-	}
+public class BitArithmeticTest {
+    /**
+     * Проверка результата выполнения метода
+     */
+    @Test
+    public void testRun() {
+        assertEquals(BitArithmetic.flipBit(0, 1), 1);
+    }
 }

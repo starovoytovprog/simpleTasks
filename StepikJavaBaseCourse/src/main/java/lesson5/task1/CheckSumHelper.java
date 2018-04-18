@@ -15,17 +15,14 @@ import java.io.InputStream;
  * @author Starovoytov
  * @since 12.04.2018
  */
-public class CheckSumHelper
-{
-	public static int checkSumOfStream(InputStream inputStream) throws IOException
-	{
-		int checkSum = 0;
-		int buf;
-		while ((buf = inputStream.read()) != -1)
-		{
-			checkSum = Integer.rotateLeft(checkSum, 1) ^ buf;
-		}
+public class CheckSumHelper {
+    public static int checkSumOfStream(InputStream inputStream) throws IOException {
+        int checkSum = 0;
+        int buf;
+        while ((buf = inputStream.read()) != -1) {
+            checkSum = Integer.rotateLeft(checkSum, 1) ^ buf;
+        }
 
-		return checkSum;
-	}
+        return checkSum;
+    }
 }

@@ -6,36 +6,32 @@ package lesson4.task6;
  * @author Starovoytov
  * @since 11.04.2018
  */
-public class MailPackage extends AbstractSendable
-{
-	private final Package content;
+public class MailPackage extends AbstractSendable {
+    private final Package content;
 
-	public MailPackage(String from, String to, Package content)
-	{
-		super(from, to);
-		this.content = content;
-	}
+    public MailPackage(String from, String to, Package content) {
+        super(from, to);
+        this.content = content;
+    }
 
-	public Package getContent()
-	{
-		return content;
-	}
+    public Package getContent() {
+        return content;
+    }
 
-	@Override
-	public boolean equals(Object o)
-	{
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-		if (!super.equals(o))
-			return false;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        if (!super.equals(o))
+            return false;
 
-		MailPackage that = (MailPackage) o;
+        MailPackage that = (MailPackage) o;
 
-		if (!content.equals(that.content))
-			return false;
+        if (!content.equals(that.content))
+            return false;
 
-		return true;
-	}
+        return true;
+    }
 }

@@ -6,23 +6,18 @@ package lesson3.task5;
  * Вы хотите фильтровать комментарии по разным критериям, уметь легко добавлять новые фильтры и модифицировать старые.
  * Допустим, мы будем фильтровать спам, комментарии с негативным содержанием и слишком длинные комментарии. Спам будем фильтровать по наличию указанных ключевых слов в тексте. Негативное содержание будем определять по наличию одного из трех смайликов – :( =( :| Слишком длинные комментарии будем определять исходя из данного числа – максимальной длины комментария.
  *
- *
  * @author Starovoytov
  * @since 06.04.2018
  */
-public class Checker
-{
-	public Label checkLabels(TextAnalyzer[] analyzers, String text)
-	{
-		for (TextAnalyzer analyzer : analyzers)
-		{
-			Label result = analyzer.processText(text);
-			if (result != Label.OK)
-			{
-				return result;
-			}
-		}
+public class Checker {
+    public Label checkLabels(TextAnalyzer[] analyzers, String text) {
+        for (TextAnalyzer analyzer : analyzers) {
+            Label result = analyzer.processText(text);
+            if (result != Label.OK) {
+                return result;
+            }
+        }
 
-		return Label.OK;
-	}
+        return Label.OK;
+    }
 }

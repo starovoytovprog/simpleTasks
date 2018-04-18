@@ -9,15 +9,14 @@ import org.junit.Test;
  * @author Starovoytov
  * @since 12.04.2018
  */
-public class MainTest
-{
-	/**
-	 * Проверка результата выполнения метода
-	 * @throws Exception может бросить исключения
-	 */
-	@Test
-	public void testRun() throws Exception
-	{
-		ConsoleHelper.testMain("1 2" + System.lineSeparator() + "3" + System.lineSeparator(), "6.000000", Main.class);
-	}
+public class MainTest {
+    /**
+     * Проверка результата выполнения метода
+     *
+     * @throws Exception может бросить исключения
+     */
+    @Test
+    public void testRun() throws Exception {
+        ConsoleHelper.testMain("1 2" + System.lineSeparator() + "3" + System.lineSeparator(), "6.000000", Main.class);
+    }
 }

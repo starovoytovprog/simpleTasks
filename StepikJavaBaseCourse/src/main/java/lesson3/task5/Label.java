@@ -6,7 +6,6 @@ package lesson3.task5;
  * @author Starovoytov
  * @since 06.04.2018
  */
-public enum Label
-{
-	SPAM, NEGATIVE_TEXT, TOO_LONG, OK
+public enum Label {
+    SPAM, NEGATIVE_TEXT, TOO_LONG, OK
 }

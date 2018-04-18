@@ -10,20 +10,18 @@ import static org.junit.Assert.assertEquals;
  * @author Starovoytov
  * @since 06.04.2018
  */
-public class AsciiCharSequenceTest
-{
-	/**
-	 * Проверка результата выполнения метода
-	 */
-	@Test
-	public void testRun()
-	{
-		byte[] example = {72, 101, 108, 108, 111, 33};
-		CharSequence testSequens = new AsciiCharSequence(example);
+public class AsciiCharSequenceTest {
+    /**
+     * Проверка результата выполнения метода
+     */
+    @Test
+    public void testRun() {
+        byte[] example = {72, 101, 108, 108, 111, 33};
+        CharSequence testSequens = new AsciiCharSequence(example);
 
-		assertEquals(testSequens.length(), 6);
-		assertEquals(testSequens.charAt(1), 'e');
-		assertEquals(testSequens.toString(), "Hello!");
-		assertEquals(testSequens.subSequence(1, 5).toString(), "ello");
-	}
+        assertEquals(testSequens.length(), 6);
+        assertEquals(testSequens.charAt(1), 'e');
+        assertEquals(testSequens.toString(), "Hello!");
+        assertEquals(testSequens.subSequence(1, 5).toString(), "ello");
+    }
 }

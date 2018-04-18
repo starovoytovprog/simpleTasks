@@ -14,26 +14,20 @@ import java.util.Scanner;
  * @author Starovoytov
  * @since 12.04.2018
  */
-public class Main
-{
-	public static void main(String[] args) throws IOException
-	{
-		double result = 0;
-		Scanner s = new Scanner(System.in);
-		s.useLocale(Locale.ENGLISH);
-		s.useDelimiter(" |" + System.lineSeparator());
+public class Main {
+    public static void main(String[] args) throws IOException {
+        double result = 0;
+        Scanner s = new Scanner(System.in);
+        s.useLocale(Locale.ENGLISH);
+        s.useDelimiter(" |" + System.lineSeparator());
 
-		while (s.hasNext())
-		{
-			try
-			{
-				result += Double.parseDouble(s.next());
-			}
-			catch (Exception ex)
-			{
-			}
-		}
+        while (s.hasNext()) {
+            try {
+                result += Double.parseDouble(s.next());
+            } catch (Exception ex) {
+            }
+        }
 
-		System.out.format(Locale.ENGLISH, "%.6f", result);
-	}
+        System.out.format(Locale.ENGLISH, "%.6f", result);
+    }
 }

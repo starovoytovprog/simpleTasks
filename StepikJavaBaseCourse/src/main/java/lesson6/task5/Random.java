@@ -11,10 +11,8 @@ import java.util.stream.IntStream;
  * @author Starovoytov
  * @since 17.04.2018
  */
-public class Random
-{
-	public static IntStream pseudoRandomStream(int seed)
-	{
-		return IntStream.iterate(seed, t -> (t * t / 10) % 1000);
-	}
+public class Random {
+    public static IntStream pseudoRandomStream(int seed) {
+        return IntStream.iterate(seed, t -> (t * t / 10) % 1000);
+    }
 }

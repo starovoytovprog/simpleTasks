@@ -14,29 +14,27 @@ import java.util.stream.Stream;
  * @author Starovoytov
  * @since 18.04.2018
  */
-public class StreamHelper
-{
-	@SuppressWarnings("unchecked")
-	public static <T> void findMinMax(Stream<? extends T> stream,
-	                                  Comparator<? super T> order,
-	                                  BiConsumer<? super T, ? super T> minMaxConsumer)
-	{
-		Object[] o = new Object[2];
-		o[0] = null;
-		o[1] = null;
+public class StreamHelper {
+    @SuppressWarnings("unchecked")
+    public static <T> void findMinMax(Stream<? extends T> stream,
+                                      Comparator<? super T> order,
+                                      BiConsumer<? super T, ? super T> minMaxConsumer) {
+        Object[] o = new Object[2];
+        o[0] = null;
+        o[1] = null;
 
-		stream.forEach(x ->
-		{
-			if (o[0] == null)
-				o[0] = x;
-			if (o[1] == null)
-				o[1] = x;
-			if (order.compare((T) o[0], x) > 0)
-				o[0] = x;
-			if (order.compare((T) o[1], x) < 0)
-				o[1] = x;
-		});
+        stream.forEach(x ->
+        {
+            if (o[0] == null)
+                o[0] = x;
+            if (o[1] == null)
+                o[1] = x;
+            if (order.compare((T) o[0], x) > 0)
+                o[0] = x;
+            if (order.compare((T) o[1], x) < 0)
+                o[1] = x;
+        });
 
-		minMaxConsumer.accept((T) o[0], (T) o[1]);
-	}
+        minMaxConsumer.accept((T) o[0], (T) o[1]);
+    }
 }
