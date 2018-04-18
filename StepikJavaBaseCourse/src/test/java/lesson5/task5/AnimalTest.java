@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
  * Тестирование lesson5.task5.Animal {@link Animal}
  *
  * @author Starovoytov
- * @since 12.04.2018
+ * @since 13.04.2018
  */
 public class AnimalTest
 {
