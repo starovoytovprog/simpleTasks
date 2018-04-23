@@ -11,3 +11,6 @@ SimpleNotNecessaryCompieler:
 
 StepikJavaBaseCourse:
 Выполнение заданий во время прохождения курса "Java. Базовый курс" на stepic.org. Курс пройден на 100% (132 из 132)
+
+StepikJavaWebServicesPart1
+Выполнение заданий во время прохождения курса "Разработка веб сервиса на Java (часть 1)" на stepic.org.
