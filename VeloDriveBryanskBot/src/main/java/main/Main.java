@@ -1,6 +1,6 @@
 package main;
 
-import vk.Manager;
+import telegram.TelegramBot;
 
 /**
  * Точка входа в программу.
@@ -10,6 +10,7 @@ import vk.Manager;
  */
 public class Main {
     public static void main(String[] args) {
-        Manager.start();
+        TelegramBot.init();
+        //Manager.start();
     }
 }
