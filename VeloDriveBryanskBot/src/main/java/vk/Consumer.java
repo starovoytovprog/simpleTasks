@@ -31,6 +31,7 @@ public class Consumer {
      * @throws ClientException Исключения ВК АПИ
      * @throws ApiException Исключения ВК АПИ
      */
+    @SuppressWarnings("unchecked")
     public static List<String> getNewPostsLinks() throws ClientException, ApiException {
         Wall w = new Wall(VK_API_CLIENT);
         UserActor u = new UserActor(USER_ID, ACCESS_TOKEN);
