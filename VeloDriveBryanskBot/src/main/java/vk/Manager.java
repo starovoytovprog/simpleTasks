@@ -18,14 +18,12 @@ public class Manager {
     public static void start() {
 
         scanThread = new Thread(() -> {
-            while (true)
-            {
+            while (true) {
                 scan();
 
                 try {
                     Thread.currentThread().sleep(Constants.DELAY);
-                } catch (InterruptedException ex)
-                {
+                } catch (InterruptedException ex) {
                     return;
                 }
 
@@ -38,8 +36,7 @@ public class Manager {
     /**
      * Остановить поток-обработчик новостей.
      */
-    public static void stop()
-    {
+    public static void stop() {
         if (scanThread != null) {
             scanThread.interrupt();
         }
@@ -54,9 +51,7 @@ public class Manager {
 
             linkList.stream().forEach(link -> System.out.println(link));
 
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }

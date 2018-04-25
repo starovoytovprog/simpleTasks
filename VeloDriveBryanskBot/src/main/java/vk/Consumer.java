@@ -29,7 +29,7 @@ public class Consumer {
      *
      * @return Список ссылок на новости
      * @throws ClientException Исключения ВК АПИ
-     * @throws ApiException Исключения ВК АПИ
+     * @throws ApiException    Исключения ВК АПИ
      */
     @SuppressWarnings("unchecked")
     public static List<String> getNewPostsLinks() throws ClientException, ApiException {

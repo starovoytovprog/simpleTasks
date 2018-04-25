@@ -16,5 +16,15 @@ dependencies {
 
 jar {
 	baseName = 'VeloDriveBryanskBot'
-	manifest {}
+	manifest {
+		attributes "Main-Class": "main.Main"
+	}
+	from {
+		configurations.compile.collect {
+			it.isDirectory() ? it : zipTree(it)
+		}
+		configurations.runtime.collect {
+			it.isDirectory() ? it : zipTree(it)
+		}
+	}
 }
