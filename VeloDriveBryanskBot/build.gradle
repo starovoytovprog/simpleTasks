@@ -5,12 +5,18 @@ buildscript {
 		}
 	}
 
-
+	ext {
+		vkApiVersion = '0.5.12'
+		slf4jVersion = '1.7.22'
+		telegramSdkVersion = '3.6.1'
+	}
 }
 
 dependencies {
-	compile 'com.vk.api:sdk:0.5.12'
-	compile group: 'org.slf4j', name: 'slf4j-jdk14', version: '1.7.22'
+
+	compile(group: 'com.vk.api', name: 'sdk', version: vkApiVersion)
+	compile(group: 'org.slf4j', name: 'slf4j-jdk14', version: slf4jVersion)
+	compile(group: 'org.telegram', name: 'telegrambots', version: telegramSdkVersion)
 }
 
 

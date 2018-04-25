@@ -11,5 +11,5 @@ public class Constants {
     public static final int OWNER_ID = Integer.parseInt(System.getenv().get("VK_CONSTANT_OWNER_ID"));
     public static final int USER_ID = Integer.parseInt(System.getenv().get("VK_CONSTANT_USER_ID"));
     public static final String ACCESS_TOKEN = System.getenv().get("VK_CONSTANT_ACCESS_TOKEN");
-    public static final int DELAY = 1000;
+    public static final int DELAY = Integer.parseInt(System.getenv().get("VK_CONSTANT_DELAY"));
 }
