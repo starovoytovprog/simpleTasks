@@ -1,15 +1,14 @@
 package telegram;
 
-import org.apache.http.HttpHost;
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.TelegramBotsApi;
+import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 
-import static telegram.Constant.BOT_NAME;
-import static telegram.Constant.BOT_TOKEN;
+import static telegram.Constant.*;
 
 /**
  * Бот для отправки сообщений в группу.
@@ -34,8 +33,8 @@ public class TelegramBot extends TelegramLongPollingBot {
         ApiContextInitializer.init();
         TelegramBotsApi botsApi = new TelegramBotsApi();
         try {
-            //System.setProperty("https.protocols", "TLSv1.1,TLSv1.2");
             DefaultBotOptions options = new DefaultBotOptions();
+            //System.setProperty("https.protocols", "TLSv1.1,TLSv1.2");
             //HttpHost proxy = new HttpHost("75.151.213.85", 3366, "https");
             //options.setHttpProxy(proxy);
             botsApi.registerBot(new TelegramBot(options));
@@ -45,6 +44,14 @@ public class TelegramBot extends TelegramLongPollingBot {
     }
 
     public static void sendMessage(String message) {
+        try {
+            SendMessage sendMessageObject = new SendMessage();
+            sendMessageObject.setText(message);
+            sendMessageObject.setChatId(CHAT_ID);
+            currentBot.sendApiMethod(sendMessageObject);
+        } catch (Exception ex) {
+
+        }
         System.out.println(message);
     }
 
