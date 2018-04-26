@@ -1,5 +1,7 @@
 package vk;
 
+import telegram.TelegramBot;
+
 import java.util.List;
 
 /**
@@ -48,9 +50,7 @@ public class Manager {
     private static void scan() {
         try {
             List<String> linkList = Consumer.getNewPostsLinks();
-
-            linkList.stream().forEach(link -> System.out.println(link));
-
+            linkList.stream().forEach(link -> TelegramBot.sendMessage(link));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
