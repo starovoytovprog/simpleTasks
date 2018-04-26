@@ -5,6 +5,7 @@ import utils.PageGenerator;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,8 +30,10 @@ public class HelloWorldServlet extends BaseHttpServlet
 		response.setStatus(HttpServletResponse.SC_OK);
 	}
 
-	@Override
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected Map<String, Object> createPageVariablesMap(HttpServletRequest request)
 	{
+		Map<String, Object> pageVariables = new HashMap<>();
+		pageVariables.put("URL", request.getRequestURL().toString());
+		return pageVariables;
 	}
 }

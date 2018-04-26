@@ -25,10 +25,12 @@ public class MainServerContainer
 	public static void start() throws Exception
 	{
 		server.start();
+		System.out.println("Server started");
 	}
 
 	public static void stop() throws Exception
 	{
 		server.stop();
+		System.out.println("Server stoped");
 	}
 }

@@ -26,7 +26,7 @@ public class PageGenerator
 	{
 		cfg = new Configuration();
 		ClassLoader cl = this.getClass().getClassLoader();
-		cfg.setDirectoryForTemplateLoading(new File(cl.getResource(HTML_RESOURCE_DIR).getFile()));
+		cfg.setDirectoryForTemplateLoading(new File("D:\\ServerTest\\templates"));
 	}
 
 	public static PageGenerator instance() throws IOException

@@ -13,7 +13,17 @@ buildscript {
 
 jar {
 	baseName = 'StepikJavaWebServicesPart1'
-	manifest {}
+	manifest {
+		attributes "Main-Class": "lesson1.task2.Main"
+	}
+	from {
+		configurations.compile.collect {
+			it.isDirectory() ? it : zipTree(it)
+		}
+		configurations.runtime.collect {
+			it.isDirectory() ? it : zipTree(it)
+		}
+	}
 }
 
 dependencies {
