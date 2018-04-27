@@ -3,12 +3,13 @@ package lesson1.task1;
 import utils.BaseHttpServlet;
 import utils.PageGenerator;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import static utils.Constants.FILE_RESOURCE_SEPARATOR;
 
 /**
  * Пробный сервлет
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class HelloWorldServlet extends BaseHttpServlet
 {
-	private static final String HELLO_WORLD_PAGE = "lesson1" + File.separator + "helloWorldPage.html";
+	private static final String HELLO_WORLD_PAGE = "lesson1" + FILE_RESOURCE_SEPARATOR + "helloWorldPage.html";
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException

@@ -3,12 +3,13 @@ package lesson1.task2;
 import utils.BaseHttpServlet;
 import utils.PageGenerator;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import static utils.Constants.FILE_RESOURCE_SEPARATOR;
 
 /**
  * Написать сервлет, который будет обрабатывать запросы на /mirror
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class MirrorServlet extends BaseHttpServlet
 {
-	private static final String MIRROR_PAGE = "lesson1" + File.separator + "mirrorPage.html";
+	private static final String MIRROR_PAGE = "lesson1" + FILE_RESOURCE_SEPARATOR + "mirrorPage.html";
 	private static final String PARAMETET_NAME = "key";
 
 	@Override
