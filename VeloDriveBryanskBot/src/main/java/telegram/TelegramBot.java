@@ -1,5 +1,6 @@
 package telegram;
 
+import org.apache.http.HttpHost;
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.TelegramBotsApi;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
@@ -34,9 +35,12 @@ public class TelegramBot extends TelegramLongPollingBot {
         TelegramBotsApi botsApi = new TelegramBotsApi();
         try {
             DefaultBotOptions options = new DefaultBotOptions();
-            //System.setProperty("https.protocols", "TLSv1.1,TLSv1.2");
-            //HttpHost proxy = new HttpHost("75.151.213.85", 3366, "https");
-            //options.setHttpProxy(proxy);
+
+            if (PROXY_ADDRESS != null && !PROXY_ADDRESS.isEmpty() && PROXY_PORT > 0) {
+                HttpHost proxy = new HttpHost(PROXY_ADDRESS, PROXY_PORT);
+                options.setHttpProxy(proxy);
+            }
+
             botsApi.registerBot(new TelegramBot(options));
         } catch (TelegramApiException e) {
             e.printStackTrace();
