@@ -9,8 +9,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static utils.Constants.FILE_RESOURCE_SEPARATOR;
-
 /**
  * Пробный сервлет
  *

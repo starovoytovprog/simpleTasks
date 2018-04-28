@@ -10,5 +10,6 @@ import javax.servlet.http.HttpServlet;
  */
 public class BaseHttpServlet extends HttpServlet
 {
+	public static final String FILE_RESOURCE_SEPARATOR = "/";
 	protected static final String HTTP_CONTENT_TYPE = "text/html;charset=utf-8";
 }

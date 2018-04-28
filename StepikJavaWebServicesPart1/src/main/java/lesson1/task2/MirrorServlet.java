@@ -9,8 +9,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static utils.Constants.FILE_RESOURCE_SEPARATOR;
-
 /**
  * Написать сервлет, который будет обрабатывать запросы на /mirror
  * При получении GET запроса с параметром key=value сервлет должен вернуть в response строку содержащую value.
