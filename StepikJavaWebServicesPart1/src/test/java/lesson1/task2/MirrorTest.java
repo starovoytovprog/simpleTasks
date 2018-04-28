@@ -16,6 +16,7 @@ public class MirrorTest
 {
 	/**
 	 * Проверка результата выполнения метода
+	 *
 	 * @throws Exception исключения сервера
 	 */
 	@Test
