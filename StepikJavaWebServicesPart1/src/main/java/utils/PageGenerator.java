@@ -91,7 +91,7 @@ public class PageGenerator
 		@Override
 		public void closeTemplateSource(Object templateSource) throws IOException
 		{
-			//((File) templateSource).delete();
+			((File) templateSource).delete();
 		}
 	}
 }
