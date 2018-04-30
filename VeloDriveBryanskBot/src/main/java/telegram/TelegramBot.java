@@ -9,6 +9,7 @@ import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
+import vk.MessageConsumer;
 
 import static telegram.Constant.*;
 
@@ -18,7 +19,7 @@ import static telegram.Constant.*;
  * @author Starovoytov
  * @since 25.04.2018
  */
-public class TelegramBot extends TelegramLongPollingBot {
+public class TelegramBot extends TelegramLongPollingBot implements MessageConsumer {
 
     private static TelegramBot currentBot = null;
 
@@ -26,34 +27,32 @@ public class TelegramBot extends TelegramLongPollingBot {
         super(options);
     }
 
-    public static void init() {
+    /**
+     * Инициализировать бота
+     *
+     * @return инициализированный бот
+     */
+    public static TelegramBot init() {
 
-        if (currentBot != null) {
-            return;
+        if (currentBot == null) {
+            ApiContextInitializer.init();
+            TelegramBotsApi botsApi = new TelegramBotsApi();
+            try {
+                currentBot = new TelegramBot(getConfigureOptions());
+                botsApi.registerBot(currentBot);
+            } catch (TelegramApiException e) {
+                e.printStackTrace();
+            }
         }
 
-        ApiContextInitializer.init();
-        TelegramBotsApi botsApi = new TelegramBotsApi();
-        try {
-            currentBot = new TelegramBot(getConfigureOptions());
-            botsApi.registerBot(currentBot);
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
+        return currentBot;
     }
 
-    public static void sendMessage(String message) {
-        try {
-            SendMessage sendMessageObject = new SendMessage();
-            sendMessageObject.setText(message);
-            sendMessageObject.setChatId(CHAT_ID);
-            currentBot.sendApiMethod(sendMessageObject);
-        } catch (Exception ex) {
-
-        }
-        System.out.println(message);
-    }
-
+    /**
+     * Сформировать конфигкрацию бота
+     *
+     * @return конфигурация
+     */
     private static DefaultBotOptions getConfigureOptions() {
         DefaultBotOptions options = new DefaultBotOptions();
 
@@ -72,6 +71,23 @@ public class TelegramBot extends TelegramLongPollingBot {
         return options;
     }
 
+    /**
+     * Отправка сообщения в группу
+     *
+     * @param message
+     */
+    private void sendMessage(String message) {
+        try {
+            SendMessage sendMessageObject = new SendMessage();
+            sendMessageObject.setText(message);
+            sendMessageObject.setChatId(CHAT_ID);
+            currentBot.sendApiMethod(sendMessageObject);
+        } catch (Exception ex) {
+
+        }
+        System.out.println(message);
+    }
+
     @Override
     public void onUpdateReceived(Update update) {
         System.out.println(update.getMessage().getChatId());
@@ -85,5 +101,15 @@ public class TelegramBot extends TelegramLongPollingBot {
     @Override
     public String getBotToken() {
         return BOT_TOKEN;
+    }
+
+    /**
+     * Обработка ссылки на сообщение
+     *
+     * @param message ссылка на сообщение
+     */
+    @Override
+    public void messageProcess(String message) {
+        sendMessage("Новый пост в группе!\n" + message);
     }
 }

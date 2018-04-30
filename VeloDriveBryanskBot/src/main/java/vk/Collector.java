@@ -19,36 +19,17 @@ import static vk.Constants.*;
  * @author Starovoytov
  * @since 25.04.2018
  */
-public class Consumer {
+public class Collector {
 
     private static final VkApiClient VK_API_CLIENT = new VkApiClient(HttpTransportClient.getInstance());
-    private static int START_TIME = getCurrentTime();
+    private int startTime = getCurrentTime();
 
-    /**
-     * Получить список ссылок на новости, опубликованные после последней сборки.
-     *
-     * @return Список ссылок на новости
-     * @throws ClientException Исключения ВК АПИ
-     * @throws ApiException    Исключения ВК АПИ
-     */
-    @SuppressWarnings("unchecked")
-    public static List<String> getNewPostsLinks() throws ClientException, ApiException {
-        Wall w = new Wall(VK_API_CLIENT);
-        UserActor u = new UserActor(USER_ID, ACCESS_TOKEN);
+    public Collector() {
+        new Collector(getCurrentTime());
+    }
 
-        List<WallPostFull> posts = (w.get(u).ownerId(OWNER_ID).execute().getItems());
-        int newStartTime = getCurrentTime();
-
-        List<String> resultList = new ArrayList();
-
-        posts.stream()
-                .filter(post -> post.getDate() >= START_TIME)
-                .sorted((post1, post2) -> post1.getDate().compareTo(post2.getDate()))
-                .forEach(post -> resultList.add(getPostUrl(post)));
-
-        START_TIME = newStartTime;
-
-        return resultList;
+    public Collector(int startTime) {
+        this.startTime = startTime;
     }
 
     /**
@@ -68,6 +49,33 @@ public class Consumer {
      */
     private static int getCurrentTime() {
         return (int) (System.currentTimeMillis() / 1000);
+    }
+
+    /**
+     * Получить список ссылок на новости, опубликованные после последней сборки.
+     *
+     * @return Список ссылок на новости
+     * @throws ClientException Исключения ВК АПИ
+     * @throws ApiException    Исключения ВК АПИ
+     */
+    @SuppressWarnings("unchecked")
+    public List<String> getNewPostsLinks() throws ClientException, ApiException {
+        Wall w = new Wall(VK_API_CLIENT);
+        UserActor u = new UserActor(USER_ID, ACCESS_TOKEN);
+
+        List<WallPostFull> posts = (w.get(u).ownerId(OWNER_ID).execute().getItems());
+        int newStartTime = getCurrentTime();
+
+        List<String> resultList = new ArrayList();
+
+        posts.stream()
+                .filter(post -> post.getDate() >= startTime)
+                .sorted((post1, post2) -> post1.getDate().compareTo(post2.getDate()))
+                .forEach(post -> resultList.add(getPostUrl(post)));
+
+        startTime = newStartTime;
+
+        return resultList;
     }
 
 }

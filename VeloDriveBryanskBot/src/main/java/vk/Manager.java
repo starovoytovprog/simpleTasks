@@ -12,23 +12,19 @@ import java.util.List;
  */
 public class Manager {
 
+    private static final MessageConsumer CONSUMER = TelegramBot.init();
     private static Thread scanThread = null;
 
     /**
      * Запустить поток-обработчик новостей.
      */
     public static void start() {
+        Collector collector = new Collector();
 
         scanThread = new Thread(() -> {
             while (true) {
-                scan();
-
-                try {
-                    Thread.currentThread().sleep(Constants.DELAY);
-                } catch (InterruptedException ex) {
-                    return;
-                }
-
+                scan(collector);
+                delay();
             }
         });
 
@@ -47,11 +43,11 @@ public class Manager {
     /**
      * Обработка последних новостей
      */
-    private static void scan() {
+    private static void scan(Collector collector) {
         try {
-            List<String> linkList = Consumer.getNewPostsLinks();
+            List<String> linkList = collector.getNewPostsLinks();
             linkList.stream().forEach(link -> {
-                TelegramBot.sendMessage(link);
+                CONSUMER.messageProcess(link);
                 delay();
             });
         } catch (Exception ex) {
@@ -59,9 +55,12 @@ public class Manager {
         }
     }
 
+    /**
+     * Ожидание между выполнениями запросов к API
+     */
     private static void delay() {
         try {
-            Thread.currentThread().sleep(5000);
+            Thread.currentThread().sleep(Constants.DELAY);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
