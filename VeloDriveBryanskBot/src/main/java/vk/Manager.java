@@ -50,9 +50,20 @@ public class Manager {
     private static void scan() {
         try {
             List<String> linkList = Consumer.getNewPostsLinks();
-            linkList.stream().forEach(link -> TelegramBot.sendMessage(link));
+            linkList.stream().forEach(link -> {
+                TelegramBot.sendMessage(link);
+                delay();
+            });
         } catch (Exception ex) {
             ex.printStackTrace();
+        }
+    }
+
+    private static void delay() {
+        try {
+            Thread.currentThread().sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }

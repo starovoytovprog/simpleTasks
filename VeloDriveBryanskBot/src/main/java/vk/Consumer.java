@@ -22,7 +22,7 @@ import static vk.Constants.*;
 public class Consumer {
 
     private static final VkApiClient VK_API_CLIENT = new VkApiClient(HttpTransportClient.getInstance());
-    private static int START_TIME = 0;
+    private static int START_TIME = getCurrentTime();
 
     /**
      * Получить список ссылок на новости, опубликованные после последней сборки.
