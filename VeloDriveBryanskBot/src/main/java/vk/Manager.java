@@ -1,8 +1,14 @@
 package vk;
 
+import com.vk.api.sdk.exceptions.ApiException;
+import com.vk.api.sdk.exceptions.ApiTooManyException;
+import com.vk.api.sdk.exceptions.ClientException;
 import telegram.TelegramBot;
 
 import java.util.List;
+
+import static vk.Constants.DELAY;
+import static vk.Constants.DELAY_FOR_ERROR;
 
 /**
  * Управление сборкой новостей.
@@ -32,15 +38,6 @@ public class Manager {
     }
 
     /**
-     * Остановить поток-обработчик новостей.
-     */
-    public static void stop() {
-        if (scanThread != null) {
-            scanThread.interrupt();
-        }
-    }
-
-    /**
      * Обработка последних новостей
      */
     private static void scan(Collector collector) {
@@ -50,8 +47,11 @@ public class Manager {
                 CONSUMER.messageProcess(link);
                 delay();
             });
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (ApiTooManyException e) {
+            e.printStackTrace();
+            delayTime(DELAY_FOR_ERROR);
+        } catch (ClientException | ApiException e) {
+            e.printStackTrace();
         }
     }
 
@@ -59,8 +59,15 @@ public class Manager {
      * Ожидание между выполнениями запросов к API
      */
     private static void delay() {
+        delayTime(DELAY);
+    }
+
+    /**
+     * Ожидание указанного времени
+     */
+    private static void delayTime(long delay) {
         try {
-            Thread.currentThread().sleep(Constants.DELAY);
+            Thread.currentThread().sleep(delay);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

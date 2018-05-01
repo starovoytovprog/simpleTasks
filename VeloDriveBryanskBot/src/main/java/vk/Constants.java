@@ -12,4 +12,5 @@ public class Constants {
     public static final int USER_ID = Integer.parseInt(System.getenv().get("VK_CONSTANT_USER_ID"));
     public static final String ACCESS_TOKEN = System.getenv().get("VK_CONSTANT_ACCESS_TOKEN");
     public static final int DELAY = Integer.parseInt(System.getenv().get("VK_CONSTANT_DELAY"));
+    public static final int DELAY_FOR_ERROR = 360000;
 }

@@ -11,7 +11,7 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 import vk.MessageConsumer;
 
-import static telegram.Constant.*;
+import static telegram.Constants.*;
 
 /**
  * Бот для отправки сообщений в группу.
