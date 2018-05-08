@@ -1,5 +1,6 @@
 package utils;
 
+import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 
@@ -17,7 +18,7 @@ public class MainServerContainer
 	{
 	}
 
-	public static void setHandler(ServletContextHandler handler)
+	public static void setHandler(Handler handler)
 	{
 		server.setHandler(handler);
 	}
