@@ -6,6 +6,7 @@ import org.junit.Test;
 import utils.HttpRequestSender;
 import utils.MainServerContainer;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,12 +30,25 @@ public class SessionTest
 	{
 		String testValue = "{\"login\":\"admin\",\"pass\":\"admin\",\"email\":\"admin\"}";
 		String testAddress = "api/v1/sessions";
+		String error401 = "Server returned HTTP response code: 401 for URL:";
 		Map<String, String> parameters = new HashMap<>();
 		parameters.put("login", "admin");
 		parameters.put("pass", "admin");
 		Main.main(null);
 
+		try
+		{
+			HttpRequestSender.sendEmptyGetRequest(testAddress);
+		}
+		catch (IOException ex)
+		{
+			assertTrue(ex.getMessage().contains(error401));
+		}
+
 		String responce = HttpRequestSender.sendPostRequest(testAddress, parameters);
+		assertTrue(responce.contains(testValue));
+
+		responce = HttpRequestSender.sendEmptyGetRequest(testAddress);
 		assertTrue(responce.contains(testValue));
 
 		MainServerContainer.stop();

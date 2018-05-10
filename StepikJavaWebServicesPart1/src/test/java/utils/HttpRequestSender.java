@@ -1,8 +1,10 @@
 package utils;
 
 import java.io.*;
+import java.net.HttpCookie;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,9 +15,11 @@ import java.util.Map;
  */
 public class HttpRequestSender
 {
+	static final String COOKIES_HEADER = "Set-Cookie";
 	private static final String SERVER = "http://localhost:8080/";
 	private static final String REQUEST_METOD_GET = "GET";
 	private static final String REQUEST_METOD_POST = "POST";
+	static java.net.CookieManager msCookieManager = new java.net.CookieManager();
 
 	/**
 	 * Отправляет пустой get-запрос на адрес и получает результат
@@ -64,7 +68,25 @@ public class HttpRequestSender
 		URL url = new URL(SERVER + address);
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 		connection.setRequestMethod(requestMetod);
+
+		if (msCookieManager.getCookieStore().getCookies().size() > 0)
+		{
+			connection.setRequestProperty("Cookie", getStringFromCookie(msCookieManager.getCookieStore().getCookies()));
+		}
+
 		return connection;
+	}
+
+	private static String getStringFromCookie(List<HttpCookie> cookies)
+	{
+		String result = "";
+
+		for (HttpCookie cookie : cookies)
+		{
+			result += cookie.toString() + ";";
+		}
+
+		return result;
 	}
 
 	/**
@@ -77,11 +99,24 @@ public class HttpRequestSender
 	private static String getStringResponce(HttpURLConnection connection) throws IOException
 	{
 		connection.connect();
+
+		Map<String, List<String>> headerFields = connection.getHeaderFields();
+		List<String> cookiesHeader = headerFields.get(COOKIES_HEADER);
+
+		if (cookiesHeader != null)
+		{
+			for (String cookie : cookiesHeader)
+			{
+				msCookieManager.getCookieStore().add(null, HttpCookie.parse(cookie).get(0));
+			}
+		}
+
 		BufferedReader input = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
 		final StringBuilder sb = new StringBuilder();
 		input.lines().forEach(line -> sb.append(line));
 
+		connection.disconnect();
 		return sb.toString();
 	}
 
