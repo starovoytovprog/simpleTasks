@@ -1,10 +1,10 @@
 package lesson2.task1.servlets;
 
 import lesson2.task1.accounts.AccountService;
+import utils.BaseHttpServlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Starovoytov
  * @since 08.05.2018
  */
-public class UsersServlet extends HttpServlet
+public class UsersServlet extends BaseHttpServlet
 {
 	@SuppressWarnings({"FieldCanBeLocal", "UnusedDeclaration"}) //todo: remove after module 2 home work
 	private final AccountService accountService;

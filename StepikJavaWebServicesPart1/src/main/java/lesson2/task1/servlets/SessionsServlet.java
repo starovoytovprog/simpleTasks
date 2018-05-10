@@ -3,10 +3,10 @@ package lesson2.task1.servlets;
 import com.google.gson.Gson;
 import lesson2.task1.accounts.AccountService;
 import lesson2.task1.accounts.UserProfile;
+import utils.BaseHttpServlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Starovoytov
  * @since 08.05.2018
  */
-public class SessionsServlet extends HttpServlet
+public class SessionsServlet extends BaseHttpServlet
 {
 	private final AccountService accountService;
 
@@ -33,14 +33,14 @@ public class SessionsServlet extends HttpServlet
 		UserProfile profile = accountService.getUserBySessionId(sessionId);
 		if (profile == null)
 		{
-			response.setContentType("text/html;charset=utf-8");
+			response.setContentType(JSON_CONTENT_TYPE);
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 		}
 		else
 		{
 			Gson gson = new Gson();
 			String json = gson.toJson(profile);
-			response.setContentType("text/html;charset=utf-8");
+			response.setContentType(JSON_CONTENT_TYPE);
 			response.getWriter().println(json);
 			response.setStatus(HttpServletResponse.SC_OK);
 		}
@@ -55,7 +55,7 @@ public class SessionsServlet extends HttpServlet
 
 		if (login == null || pass == null)
 		{
-			response.setContentType("text/html;charset=utf-8");
+			response.setContentType(HTTP_CONTENT_TYPE);
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return;
 		}
@@ -63,7 +63,7 @@ public class SessionsServlet extends HttpServlet
 		UserProfile profile = accountService.getUserByLogin(login);
 		if (profile == null || !profile.getPass().equals(pass))
 		{
-			response.setContentType("text/html;charset=utf-8");
+			response.setContentType(HTTP_CONTENT_TYPE);
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			return;
 		}
@@ -71,7 +71,7 @@ public class SessionsServlet extends HttpServlet
 		accountService.addSession(request.getSession().getId(), profile);
 		Gson gson = new Gson();
 		String json = gson.toJson(profile);
-		response.setContentType("text/html;charset=utf-8");
+		response.setContentType(JSON_CONTENT_TYPE);
 		response.getWriter().println(json);
 		response.setStatus(HttpServletResponse.SC_OK);
 	}
@@ -84,13 +84,13 @@ public class SessionsServlet extends HttpServlet
 		UserProfile profile = accountService.getUserBySessionId(sessionId);
 		if (profile == null)
 		{
-			response.setContentType("text/html;charset=utf-8");
+			response.setContentType(HTTP_CONTENT_TYPE);
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 		}
 		else
 		{
 			accountService.deleteSession(sessionId);
-			response.setContentType("text/html;charset=utf-8");
+			response.setContentType(HTTP_CONTENT_TYPE);
 			response.getWriter().println("Goodbye!");
 			response.setStatus(HttpServletResponse.SC_OK);
 		}
