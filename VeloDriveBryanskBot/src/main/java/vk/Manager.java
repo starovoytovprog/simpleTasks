@@ -28,7 +28,6 @@ public class Manager {
      * @throws TelegramApiRequestException ошибка старта
      */
     public static void start() throws TelegramApiRequestException {
-
         CONSUMER = TelegramBot.init();
         Collector collector = new Collector();
 

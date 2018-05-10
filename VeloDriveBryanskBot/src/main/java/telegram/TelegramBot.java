@@ -36,7 +36,6 @@ public class TelegramBot extends TelegramLongPollingBot implements MessageConsum
      * @throws TelegramApiRequestException ошибка старта
      */
     public static TelegramBot init() throws TelegramApiRequestException {
-
         if (currentBot == null) {
             ApiContextInitializer.init();
             TelegramBotsApi botsApi = new TelegramBotsApi();
@@ -59,7 +58,6 @@ public class TelegramBot extends TelegramLongPollingBot implements MessageConsum
      */
     private static DefaultBotOptions getConfigureOptions() {
         DefaultBotOptions options = new DefaultBotOptions();
-
 
         if (PROXY_ADDRESS != null && !PROXY_ADDRESS.isEmpty() && PROXY_PORT > 0) {
             HttpHost proxy = new HttpHost(PROXY_ADDRESS, PROXY_PORT);
@@ -87,7 +85,7 @@ public class TelegramBot extends TelegramLongPollingBot implements MessageConsum
             sendMessageObject.setChatId(CHANNEL_ID);
             currentBot.sendApiMethod(sendMessageObject);
         } catch (Exception ex) {
-
+            ex.printStackTrace();
         }
     }
 

@@ -77,5 +77,4 @@ public class Collector {
 
         return resultList;
     }
-
 }
