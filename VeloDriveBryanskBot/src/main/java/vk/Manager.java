@@ -44,7 +44,7 @@ public class Manager {
         try {
             List<String> linkList = collector.getNewPostsLinks();
             linkList.stream().forEach(link -> {
-                CONSUMER.messageProcess(link);
+                CONSUMER.messageProcess(link, "Новый пост в группе!");
                 delay();
             });
         } catch (ApiTooManyException e) {

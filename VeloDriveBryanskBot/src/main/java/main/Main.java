@@ -1,5 +1,6 @@
 package main;
 
+import org.telegram.telegrambots.exceptions.TelegramApiRequestException;
 import telegram.TelegramBot;
 import vk.Manager;
 
@@ -11,7 +12,12 @@ import vk.Manager;
  */
 public class Main {
     public static void main(String[] args) {
-        TelegramBot.init();
+
+        try {
+            TelegramBot.init();
+        } catch (TelegramApiRequestException ex) {
+            System.exit(-1);
+        }
         Manager.start();
     }
 }

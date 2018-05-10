@@ -12,6 +12,7 @@ public interface MessageConsumer {
      * Обработка сообщений
      *
      * @param message ссылка на сообщение
+     * @param prefix  префикс сообщения
      */
-    void messageProcess(String message);
+    void messageProcess(String message, String prefix);
 }
