@@ -98,7 +98,7 @@ public class TelegramBot extends TelegramLongPollingBot implements MessageConsum
                 if (update.getMessage().getEntities() != null) {
                     if (!update.getMessage().getEntities().isEmpty()) {
                         for (MessageEntity entity : update.getMessage().getEntities()) {
-                            if (entity.getType().equals("hashtag") && entity.getText().equals("#" + HASH_TAG)) {
+                            if (entity.getType().equals("hashtag") && entity.getText().equals(HASH_TAG)) {
                                 messageProcess(update.getMessage().getText(), "Новая покатушка в чате!");
                                 return;
                             }

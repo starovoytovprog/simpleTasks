@@ -21,7 +21,7 @@ TELEGRAM_CONSTANT_BOT_TOKEN=""
 Имя телеграм-бота.
 TELEGRAM_CONSTANT_BOT_NAME=""
 
-id чата, в который необходимо транслировать сообщения из группы.
+id чата, из которой транслируются сообщения по хэш-тегу.
 TELEGRAM_CONSTANT_CHAT_ID=""
 
 Адрес прокси для доступа к telegram-api.
@@ -29,3 +29,9 @@ TELEGRAM_CONSTANT_PROXY_ADDRESS=""
 
 Порт прокси для доступа к telegram-api.
 TELEGRAM_CONSTANT_PROXY_PORT=""
+
+Хэш-тег для фильтрации сообщений в группе.
+TELEGRAM_CONSTANT_HASH_TAG=""
+
+id канала, в который транслируются сообщения.
+TELEGRAM_CONSTANT_CHANNEL_ID=""
