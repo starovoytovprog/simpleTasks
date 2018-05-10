@@ -11,3 +11,6 @@ SimpleNotNecessaryCompieler:
 
 StepikJavaBaseCourse:
 Выполнение заданий во время прохождения курса "Java. Базовый курс" на stepic.org. Курс пройден на 100% (132 из 132)
+
+VeloDriveBryanskBot
+Бот для группы "Велодрайв Брянск".
