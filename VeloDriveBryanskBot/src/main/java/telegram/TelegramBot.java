@@ -33,6 +33,7 @@ public class TelegramBot extends TelegramLongPollingBot implements MessageConsum
      * Инициализировать бота
      *
      * @return инициализированный бот
+     * @throws TelegramApiRequestException ошибка старта
      */
     public static TelegramBot init() throws TelegramApiRequestException {
 

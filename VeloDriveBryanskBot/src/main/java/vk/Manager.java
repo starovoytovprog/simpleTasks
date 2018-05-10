@@ -3,6 +3,7 @@ package vk;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ApiTooManyException;
 import com.vk.api.sdk.exceptions.ClientException;
+import org.telegram.telegrambots.exceptions.TelegramApiRequestException;
 import telegram.TelegramBot;
 
 import java.util.List;
@@ -18,13 +19,17 @@ import static vk.Constants.DELAY_FOR_ERROR;
  */
 public class Manager {
 
-    private static final MessageConsumer CONSUMER = TelegramBot.init();
+    private static MessageConsumer CONSUMER;
     private static Thread scanThread = null;
 
     /**
      * Запустить поток-обработчик новостей.
+     *
+     * @throws TelegramApiRequestException ошибка старта
      */
-    public static void start() {
+    public static void start() throws TelegramApiRequestException {
+
+        CONSUMER = TelegramBot.init();
         Collector collector = new Collector();
 
         scanThread = new Thread(() -> {
