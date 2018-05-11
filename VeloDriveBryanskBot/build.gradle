@@ -1,0 +1,36 @@
+buildscript {
+	repositories {
+		maven {
+			url 'http://repo1.maven.org/maven2'
+		}
+	}
+
+	ext {
+		vkApiVersion = '0.5.12'
+		slf4jVersion = '1.7.22'
+		telegramSdkVersion = '3.6.1'
+	}
+}
+
+dependencies {
+
+	compile(group: 'com.vk.api', name: 'sdk', version: vkApiVersion)
+	compile(group: 'org.slf4j', name: 'slf4j-jdk14', version: slf4jVersion)
+	compile(group: 'org.telegram', name: 'telegrambots', version: telegramSdkVersion)
+}
+
+
+jar {
+	baseName = 'VeloDriveBryanskBot'
+	manifest {
+		attributes "Main-Class": "main.Main"
+	}
+	from {
+		configurations.compile.collect {
+			it.isDirectory() ? it : zipTree(it)
+		}
+		configurations.runtime.collect {
+			it.isDirectory() ? it : zipTree(it)
+		}
+	}
+}
