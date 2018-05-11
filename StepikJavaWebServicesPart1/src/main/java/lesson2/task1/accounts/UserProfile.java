@@ -1,7 +1,7 @@
 package lesson2.task1.accounts;
 
 /**
- * Профиль пользователя
+ * Профиль пользователя. Источник - программа курса.
  *
  * @author Starovoytov
  * @since 08.05.2018

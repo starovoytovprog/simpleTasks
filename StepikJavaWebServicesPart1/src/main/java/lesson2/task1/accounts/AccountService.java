@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Сервис работы с аккаунтами
+ * Сервис работы с аккаунтами. Источник - программа курса.
  *
  * @author Starovoytov
  * @since 08.05.2018

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Сервлет обработки пользователей
+ * Сервлет обработки пользователей. Источник - программа курса.
  *
  * @author Starovoytov
  * @since 08.05.2018
