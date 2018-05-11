@@ -31,6 +31,7 @@ public class SessionTest
 		String testValue = "{\"login\":\"admin\",\"pass\":\"admin\",\"email\":\"admin\"}";
 		String testAddress = "api/v1/sessions";
 		String error401 = "Server returned HTTP response code: 401 for URL:";
+		String logout = "Goodbye!";
 		Map<String, String> parameters = new HashMap<>();
 		parameters.put("login", "admin");
 		parameters.put("pass", "admin");
@@ -50,6 +51,18 @@ public class SessionTest
 
 		responce = HttpRequestSender.sendEmptyGetRequest(testAddress);
 		assertTrue(responce.contains(testValue));
+
+		responce = HttpRequestSender.sendDeleteRequest(testAddress, null);
+		assertTrue(responce.contains(logout));
+
+		try
+		{
+			HttpRequestSender.sendEmptyGetRequest(testAddress);
+		}
+		catch (IOException ex)
+		{
+			assertTrue(ex.getMessage().contains(error401));
+		}
 
 		MainServerContainer.stop();
 	}

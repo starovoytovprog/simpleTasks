@@ -1,6 +1,7 @@
 package utils;
 
 import java.io.*;
+import java.net.CookieManager;
 import java.net.HttpCookie;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -19,7 +20,8 @@ public class HttpRequestSender
 	private static final String SERVER = "http://localhost:8080/";
 	private static final String REQUEST_METOD_GET = "GET";
 	private static final String REQUEST_METOD_POST = "POST";
-	static java.net.CookieManager msCookieManager = new java.net.CookieManager();
+	private static final String REQUEST_METOD_DELETE = "DELETE";
+	static CookieManager msCookieManager = new java.net.CookieManager();
 
 	/**
 	 * Отправляет пустой get-запрос на адрес и получает результат
@@ -30,12 +32,12 @@ public class HttpRequestSender
 	 */
 	public static String sendEmptyGetRequest(String address) throws Exception
 	{
-		HttpURLConnection connection = getConnection(address, REQUEST_METOD_GET);
-		return getStringResponce(connection);
+		//HttpURLConnection connection = getConnection(address, REQUEST_METOD_GET);
+		return sendRequestWithParameters(address, null, REQUEST_METOD_GET);
 	}
 
 	/**
-	 * Отправляет пустой get-запрос на адрес и получает результат
+	 * Отправляет post-запрос на адрес и получает результат
 	 *
 	 * @param address Адрес запрашиваемого документа
 	 * @param parameters Мапа параметров запроса
@@ -44,13 +46,34 @@ public class HttpRequestSender
 	 */
 	public static String sendPostRequest(String address, Map<String, String> parameters) throws Exception
 	{
-		HttpURLConnection connection = getConnection(address, REQUEST_METOD_POST);
-		connection.setDoOutput(true);
+		return sendRequestWithParameters(address, parameters, REQUEST_METOD_POST);
+	}
 
-		OutputStream outputStream = connection.getOutputStream();
-		BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
-		bufferedWriter.write(getParametersString(parameters));
-		bufferedWriter.close();
+	/**
+	 * Отправляет delete-запрос на адрес и получает результат
+	 *
+	 * @param address Адрес запрашиваемого документа
+	 * @param parameters Мапа параметров запроса
+	 * @return Контент страницы ответа
+	 * @throws Exception Ошибки запроса к серверу
+	 */
+	public static String sendDeleteRequest(String address, Map<String, String> parameters) throws Exception
+	{
+		return sendRequestWithParameters(address, parameters, REQUEST_METOD_DELETE);
+	}
+
+	private static String sendRequestWithParameters(String address, Map<String, String> parameters, String metod) throws IOException
+	{
+		HttpURLConnection connection = getConnection(address, metod);
+
+		if (parameters != null)
+		{
+			connection.setDoOutput(true);
+			OutputStream outputStream = connection.getOutputStream();
+			BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
+			bufferedWriter.write(getParametersString(parameters));
+			bufferedWriter.close();
+		}
 
 		return getStringResponce(connection);
 	}
