@@ -13,6 +13,7 @@ public interface MessageConsumer {
      *
      * @param message ссылка на сообщение
      * @param prefix  префикс сообщения
+     * @param inChat отправлять сообщение в чат
      */
-    void messageProcess(String message, String prefix);
+    void messageProcess(String message, String prefix, boolean inChat);
 }

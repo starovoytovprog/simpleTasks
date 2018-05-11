@@ -78,11 +78,11 @@ public class TelegramBot extends TelegramLongPollingBot implements MessageConsum
      *
      * @param message
      */
-    private void sendMessage(String message) {
+    private void sendMessage(String message, long groupId) {
         try {
             SendMessage sendMessageObject = new SendMessage();
             sendMessageObject.setText(message);
-            sendMessageObject.setChatId(CHANNEL_ID);
+            sendMessageObject.setChatId(groupId);
             currentBot.sendApiMethod(sendMessageObject);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -96,8 +96,8 @@ public class TelegramBot extends TelegramLongPollingBot implements MessageConsum
                 if (update.getMessage().getEntities() != null) {
                     if (!update.getMessage().getEntities().isEmpty()) {
                         for (MessageEntity entity : update.getMessage().getEntities()) {
-                            if (entity.getType().equals("hashtag") && entity.getText().equals(HASH_TAG)) {
-                                messageProcess(update.getMessage().getText(), "Новая покатушка в чате!");
+                            if (entity.getType().equals("hashtag") && entity.getText().equals("#" + HASH_TAG)) {
+                                messageProcess(update.getMessage().getText(), "Новая покатушка в чате!", false);
                                 return;
                             }
                         }
@@ -123,7 +123,16 @@ public class TelegramBot extends TelegramLongPollingBot implements MessageConsum
      * @param message ссылка на сообщение
      */
     @Override
-    public void messageProcess(String message, String prefix) {
-        sendMessage(prefix + "\n" + message);
+    public void messageProcess(String message, String prefix, boolean inChat) {
+        sendMessage(prefix + "\n" + message, CHANNEL_ID);
+
+        try {
+            Thread.currentThread().sleep(1000);
+        } catch (InterruptedException e) {}
+
+        if (inChat) {
+            sendMessage(prefix + "\n" + message, CHAT_ID);
+        }
+
     }
 }
