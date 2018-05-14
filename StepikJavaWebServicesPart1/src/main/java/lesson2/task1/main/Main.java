@@ -19,10 +19,8 @@ import utils.MainServerContainer;
  * @author Starovoytov
  * @since 08.05.2018
  */
-public class Main
-{
-	public static void main(String[] args) throws Exception
-	{
+public class Main {
+	public static void main(String[] args) throws Exception {
 		AccountService accountService = new AccountService();
 		accountService.addNewUser(new UserProfile("admin"));
 		accountService.addNewUser(new UserProfile("test"));

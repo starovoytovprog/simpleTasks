@@ -15,13 +15,11 @@ import javax.servlet.http.HttpServletResponse;
  * @author Starovoytov
  * @since 25.04.2018
  */
-public class HelloWorldServlet extends BaseHttpServlet
-{
+public class HelloWorldServlet extends BaseHttpServlet {
 	private static final String HELLO_WORLD_PAGE = "lesson1" + FILE_RESOURCE_SEPARATOR + "helloWorldPage.html";
 
 	@Override
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException
-	{
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Map<String, Object> pageVariables = createPageVariablesMap(request);
 
 		response.getWriter().println(PageGenerator.instance().getPage(HELLO_WORLD_PAGE, pageVariables));
@@ -29,8 +27,7 @@ public class HelloWorldServlet extends BaseHttpServlet
 		response.setStatus(HttpServletResponse.SC_OK);
 	}
 
-	protected Map<String, Object> createPageVariablesMap(HttpServletRequest request)
-	{
+	protected Map<String, Object> createPageVariablesMap(HttpServletRequest request) {
 		Map<String, Object> pageVariables = new HashMap<>();
 		pageVariables.put("URL", request.getRequestURL().toString());
 		return pageVariables;

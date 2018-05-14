@@ -18,16 +18,14 @@ import static org.junit.Assert.assertTrue;
  * @author Starovoytov
  * @since 10.05.2018
  */
-public class SessionTest
-{
+public class SessionTest {
 	/**
 	 * Проверка результата выполнения метода
 	 *
 	 * @throws Exception исключения сервера
 	 */
 	@Test
-	public void testRun() throws Exception
-	{
+	public void testRun() throws Exception {
 		String testValue = "{\"login\":\"admin\",\"pass\":\"admin\",\"email\":\"admin\"}";
 		String testAddress = "api/v1/sessions";
 		String error401 = "Server returned HTTP response code: 401 for URL:";
@@ -37,12 +35,10 @@ public class SessionTest
 		parameters.put("pass", "admin");
 		Main.main(null);
 
-		try
-		{
+		try {
 			HttpRequestSender.sendEmptyGetRequest(testAddress);
 		}
-		catch (IOException ex)
-		{
+		catch (IOException ex) {
 			assertTrue(ex.getMessage().contains(error401));
 		}
 
@@ -55,12 +51,10 @@ public class SessionTest
 		responce = HttpRequestSender.sendDeleteRequest(testAddress, null);
 		assertTrue(responce.contains(logout));
 
-		try
-		{
+		try {
 			HttpRequestSender.sendEmptyGetRequest(testAddress);
 		}
-		catch (IOException ex)
-		{
+		catch (IOException ex) {
 			assertTrue(ex.getMessage().contains(error401));
 		}
 

@@ -17,16 +17,14 @@ import static org.junit.Assert.assertTrue;
  * @author Starovoytov
  * @since 11.05.2018
  */
-public class SignInSignUpTest
-{
+public class SignInSignUpTest {
 	/**
 	 * Проверка результата выполнения метода
 	 *
 	 * @throws Exception исключения сервера
 	 */
 	@Test
-	public void testRun() throws Exception
-	{
+	public void testRun() throws Exception {
 		Main.main(null);
 
 		String signUpAddress = "signup";
@@ -36,12 +34,10 @@ public class SignInSignUpTest
 		parameters.put("login", "testlogin");
 		parameters.put("password", "testpassword");
 
-		try
-		{
+		try {
 			HttpRequestSender.sendPostRequest(signInAddress, parameters);
 		}
-		catch (Exception ex)
-		{
+		catch (Exception ex) {
 			assertTrue(ex.getMessage().contains(error401));
 		}
 

@@ -16,28 +16,22 @@ import javax.servlet.http.HttpServletResponse;
  * @author Starovoytov
  * @since 08.05.2018
  */
-public class SessionsServlet extends BaseHttpServlet
-{
+public class SessionsServlet extends BaseHttpServlet {
 	private final AccountService accountService;
 
-	public SessionsServlet(AccountService accountService)
-	{
+	public SessionsServlet(AccountService accountService) {
 		this.accountService = accountService;
 	}
 
 	//get logged user profile
-	public void doGet(HttpServletRequest request,
-	                  HttpServletResponse response) throws ServletException, IOException
-	{
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String sessionId = request.getSession().getId();
 		UserProfile profile = accountService.getUserBySessionId(sessionId);
-		if (profile == null)
-		{
+		if (profile == null) {
 			response.setContentType(JSON_CONTENT_TYPE);
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 		}
-		else
-		{
+		else {
 			Gson gson = new Gson();
 			String json = gson.toJson(profile);
 			response.setContentType(JSON_CONTENT_TYPE);
@@ -47,22 +41,18 @@ public class SessionsServlet extends BaseHttpServlet
 	}
 
 	//sign in
-	public void doPost(HttpServletRequest request,
-	                   HttpServletResponse response) throws ServletException, IOException
-	{
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String login = request.getParameter("login");
 		String pass = request.getParameter("pass");
 
-		if (login == null || pass == null)
-		{
+		if (login == null || pass == null) {
 			response.setContentType(HTTP_CONTENT_TYPE);
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return;
 		}
 
 		UserProfile profile = accountService.getUserByLogin(login);
-		if (profile == null || !profile.getPass().equals(pass))
-		{
+		if (profile == null || !profile.getPass().equals(pass)) {
 			response.setContentType(HTTP_CONTENT_TYPE);
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			return;
@@ -77,18 +67,14 @@ public class SessionsServlet extends BaseHttpServlet
 	}
 
 	//sign out
-	public void doDelete(HttpServletRequest request,
-	                     HttpServletResponse response) throws ServletException, IOException
-	{
+	public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String sessionId = request.getSession().getId();
 		UserProfile profile = accountService.getUserBySessionId(sessionId);
-		if (profile == null)
-		{
+		if (profile == null) {
 			response.setContentType(HTTP_CONTENT_TYPE);
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 		}
-		else
-		{
+		else {
 			accountService.deleteSession(sessionId);
 			response.setContentType(HTTP_CONTENT_TYPE);
 			response.getWriter().println("Goodbye!");

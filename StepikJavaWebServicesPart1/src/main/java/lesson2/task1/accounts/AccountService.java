@@ -9,39 +9,32 @@ import java.util.Map;
  * @author Starovoytov
  * @since 08.05.2018
  */
-public class AccountService
-{
+public class AccountService {
 	private final Map<String, UserProfile> loginToProfile;
 	private final Map<String, UserProfile> sessionIdToProfile;
 
-	public AccountService()
-	{
+	public AccountService() {
 		loginToProfile = new HashMap<>();
 		sessionIdToProfile = new HashMap<>();
 	}
 
-	public void addNewUser(UserProfile userProfile)
-	{
+	public void addNewUser(UserProfile userProfile) {
 		loginToProfile.put(userProfile.getLogin(), userProfile);
 	}
 
-	public UserProfile getUserByLogin(String login)
-	{
+	public UserProfile getUserByLogin(String login) {
 		return loginToProfile.get(login);
 	}
 
-	public UserProfile getUserBySessionId(String sessionId)
-	{
+	public UserProfile getUserBySessionId(String sessionId) {
 		return sessionIdToProfile.get(sessionId);
 	}
 
-	public void addSession(String sessionId, UserProfile userProfile)
-	{
+	public void addSession(String sessionId, UserProfile userProfile) {
 		sessionIdToProfile.put(sessionId, userProfile);
 	}
 
-	public void deleteSession(String sessionId)
-	{
+	public void deleteSession(String sessionId) {
 		sessionIdToProfile.remove(sessionId);
 	}
 }

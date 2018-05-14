@@ -12,16 +12,14 @@ import static org.junit.Assert.assertTrue;
  * @author Starovoytov
  * @since 25.04.2018
  */
-public class MirrorTest
-{
+public class MirrorTest {
 	/**
 	 * Проверка результата выполнения метода
 	 *
 	 * @throws Exception исключения сервера
 	 */
 	@Test
-	public void testRun() throws Exception
-	{
+	public void testRun() throws Exception {
 		String testValue = "testValue";
 		String testAddress = "mirror?key=" + testValue;
 		Main.main(null);

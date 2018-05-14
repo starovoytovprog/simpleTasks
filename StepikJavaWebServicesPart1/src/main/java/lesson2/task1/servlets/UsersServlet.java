@@ -14,41 +14,31 @@ import javax.servlet.http.HttpServletResponse;
  * @author Starovoytov
  * @since 08.05.2018
  */
-public class UsersServlet extends BaseHttpServlet
-{
+public class UsersServlet extends BaseHttpServlet {
 	@SuppressWarnings({"FieldCanBeLocal", "UnusedDeclaration"}) //todo: remove after module 2 home work
 	private final AccountService accountService;
 
-	public UsersServlet(AccountService accountService)
-	{
+	public UsersServlet(AccountService accountService) {
 		this.accountService = accountService;
 	}
 
 	//get public user profile
-	public void doGet(HttpServletRequest request,
-	                  HttpServletResponse response) throws ServletException, IOException
-	{
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//todo: module 2 home work
 	}
 
 	//sign up
-	public void doPost(HttpServletRequest request,
-	                   HttpServletResponse response) throws ServletException, IOException
-	{
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//todo: module 2 home work
 	}
 
 	//change profile
-	public void doPut(HttpServletRequest request,
-	                  HttpServletResponse response) throws ServletException, IOException
-	{
+	public void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//todo: module 2 home work
 	}
 
 	//unregister
-	public void doDelete(HttpServletRequest request,
-	                     HttpServletResponse response) throws ServletException, IOException
-	{
+	public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//todo: module 2 home work
 	}
 }

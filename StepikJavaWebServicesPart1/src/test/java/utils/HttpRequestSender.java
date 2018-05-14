@@ -14,8 +14,7 @@ import java.util.Map;
  * @author Starovoytov
  * @since 25.04.2018
  */
-public class HttpRequestSender
-{
+public class HttpRequestSender {
 	static final String COOKIES_HEADER = "Set-Cookie";
 	private static final String SERVER = "http://localhost:8080/";
 	private static final String REQUEST_METOD_GET = "GET";
@@ -30,8 +29,7 @@ public class HttpRequestSender
 	 * @return Контент страницы ответа
 	 * @throws Exception Ошибки запроса к серверу
 	 */
-	public static String sendEmptyGetRequest(String address) throws Exception
-	{
+	public static String sendEmptyGetRequest(String address) throws Exception {
 		//HttpURLConnection connection = getConnection(address, REQUEST_METOD_GET);
 		return sendRequestWithParameters(address, null, REQUEST_METOD_GET);
 	}
@@ -39,35 +37,31 @@ public class HttpRequestSender
 	/**
 	 * Отправляет post-запрос на адрес и получает результат
 	 *
-	 * @param address Адрес запрашиваемого документа
+	 * @param address    Адрес запрашиваемого документа
 	 * @param parameters Мапа параметров запроса
 	 * @return Контент страницы ответа
 	 * @throws Exception Ошибки запроса к серверу
 	 */
-	public static String sendPostRequest(String address, Map<String, String> parameters) throws Exception
-	{
+	public static String sendPostRequest(String address, Map<String, String> parameters) throws Exception {
 		return sendRequestWithParameters(address, parameters, REQUEST_METOD_POST);
 	}
 
 	/**
 	 * Отправляет delete-запрос на адрес и получает результат
 	 *
-	 * @param address Адрес запрашиваемого документа
+	 * @param address    Адрес запрашиваемого документа
 	 * @param parameters Мапа параметров запроса
 	 * @return Контент страницы ответа
 	 * @throws Exception Ошибки запроса к серверу
 	 */
-	public static String sendDeleteRequest(String address, Map<String, String> parameters) throws Exception
-	{
+	public static String sendDeleteRequest(String address, Map<String, String> parameters) throws Exception {
 		return sendRequestWithParameters(address, parameters, REQUEST_METOD_DELETE);
 	}
 
-	private static String sendRequestWithParameters(String address, Map<String, String> parameters, String metod) throws IOException
-	{
+	private static String sendRequestWithParameters(String address, Map<String, String> parameters, String metod) throws IOException {
 		HttpURLConnection connection = getConnection(address, metod);
 
-		if (parameters != null)
-		{
+		if (parameters != null) {
 			connection.setDoOutput(true);
 			OutputStream outputStream = connection.getOutputStream();
 			BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
@@ -81,31 +75,27 @@ public class HttpRequestSender
 	/**
 	 * Установка соединения
 	 *
-	 * @param address Адрес документа
+	 * @param address      Адрес документа
 	 * @param requestMetod Метод запроса
 	 * @return Коннектор
 	 * @throws IOException Ошибки подключения
 	 */
-	private static HttpURLConnection getConnection(String address, String requestMetod) throws IOException
-	{
+	private static HttpURLConnection getConnection(String address, String requestMetod) throws IOException {
 		URL url = new URL(SERVER + address);
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 		connection.setRequestMethod(requestMetod);
 
-		if (msCookieManager.getCookieStore().getCookies().size() > 0)
-		{
+		if (msCookieManager.getCookieStore().getCookies().size() > 0) {
 			connection.setRequestProperty("Cookie", getStringFromCookie(msCookieManager.getCookieStore().getCookies()));
 		}
 
 		return connection;
 	}
 
-	private static String getStringFromCookie(List<HttpCookie> cookies)
-	{
+	private static String getStringFromCookie(List<HttpCookie> cookies) {
 		String result = "";
 
-		for (HttpCookie cookie : cookies)
-		{
+		for (HttpCookie cookie : cookies) {
 			result += cookie.toString() + ";";
 		}
 
@@ -119,17 +109,14 @@ public class HttpRequestSender
 	 * @return Тело ответа в виде строки
 	 * @throws IOException Ошибки ввода-вывода
 	 */
-	private static String getStringResponce(HttpURLConnection connection) throws IOException
-	{
+	private static String getStringResponce(HttpURLConnection connection) throws IOException {
 		connection.connect();
 
 		Map<String, List<String>> headerFields = connection.getHeaderFields();
 		List<String> cookiesHeader = headerFields.get(COOKIES_HEADER);
 
-		if (cookiesHeader != null)
-		{
-			for (String cookie : cookiesHeader)
-			{
+		if (cookiesHeader != null) {
+			for (String cookie : cookiesHeader) {
 				msCookieManager.getCookieStore().add(null, HttpCookie.parse(cookie).get(0));
 			}
 		}
@@ -149,19 +136,15 @@ public class HttpRequestSender
 	 * @param parameters входные параметры
 	 * @return строка параметров
 	 */
-	private static String getParametersString(Map<String, String> parameters)
-	{
-		if (parameters == null || parameters.isEmpty())
-		{
+	private static String getParametersString(Map<String, String> parameters) {
+		if (parameters == null || parameters.isEmpty()) {
 			return "";
 		}
 
 		String result = "";
 
-		for (String key : parameters.keySet())
-		{
-			if (!result.isEmpty())
-			{
+		for (String key : parameters.keySet()) {
+			if (!result.isEmpty()) {
 				result += "&";
 			}
 

@@ -12,15 +12,14 @@ import static org.junit.Assert.assertTrue;
  * @author Starovoytov
  * @since 25.04.2018
  */
-public class HelloWorldTest
-{
+public class HelloWorldTest {
 	/**
 	 * Проверка результата выполнения метода
+	 *
 	 * @throws Exception исключения сервера
 	 */
 	@Test
-	public void testRun() throws Exception
-	{
+	public void testRun() throws Exception {
 		String testAddress = "testAddress";
 		String titleString = "<title>Hello world page</title>";
 		Main.main(null);

@@ -10,10 +10,8 @@ import utils.MainServerContainer;
  * @author Starovoytov
  * @since 25.04.2018
  */
-public class Main
-{
-	public static void main(String[] args) throws Exception
-	{
+public class Main {
+	public static void main(String[] args) throws Exception {
 		HelloWorldServlet helloWorldServlet = new HelloWorldServlet();
 
 		ServletContextHandler contextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);

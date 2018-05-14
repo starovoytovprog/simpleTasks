@@ -17,14 +17,12 @@ import javax.servlet.http.HttpServletResponse;
  * @author Starovoytov
  * @since 25.04.2018
  */
-public class MirrorServlet extends BaseHttpServlet
-{
+public class MirrorServlet extends BaseHttpServlet {
 	private static final String MIRROR_PAGE = "lesson1" + FILE_RESOURCE_SEPARATOR + "mirrorPage.html";
 	private static final String PARAMETET_NAME = "key";
 
 	@Override
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException
-	{
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Map<String, Object> pageVariables = createPageVariablesMap(request);
 
 		response.getWriter().println(PageGenerator.instance().getPage(MIRROR_PAGE, pageVariables));
@@ -32,16 +30,13 @@ public class MirrorServlet extends BaseHttpServlet
 		response.setStatus(HttpServletResponse.SC_OK);
 	}
 
-	protected Map<String, Object> createPageVariablesMap(HttpServletRequest request)
-	{
+	protected Map<String, Object> createPageVariablesMap(HttpServletRequest request) {
 		Map<String, Object> pageVariables = new HashMap<>();
 
-		if (request.getParameterMap().containsKey(PARAMETET_NAME))
-		{
+		if (request.getParameterMap().containsKey(PARAMETET_NAME)) {
 			pageVariables.put(PARAMETET_NAME, request.getParameter(PARAMETET_NAME));
 		}
-		else
-		{
+		else {
 			pageVariables.put(PARAMETET_NAME, "");
 		}
 

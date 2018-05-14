@@ -17,23 +17,19 @@ import javax.servlet.http.HttpServletResponse;
  * @author Starovoytov
  * @since 11.05.2018
  */
-public class SignUpServlet extends BaseHttpServlet
-{
+public class SignUpServlet extends BaseHttpServlet {
 	private final AccountService accountService;
 
-	public SignUpServlet(AccountService accountService)
-	{
+	public SignUpServlet(AccountService accountService) {
 		this.accountService = accountService;
 	}
 
 	@Override
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String login = request.getParameter("login");
 		String pass = request.getParameter("password");
 
-		if (login == null || pass == null)
-		{
+		if (login == null || pass == null) {
 			response.setContentType(HTTP_CONTENT_TYPE);
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return;
