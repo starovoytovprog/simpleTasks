@@ -11,11 +11,11 @@ import static org.junit.Assert.assertTrue;
  * @since 04.04.2018
  */
 public class IsPalindromeTest {
-    /**
-     * Проверка результата выполнения метода
-     */
-    @Test
-    public void testRun() {
-        assertTrue(IsPalindrome.isPalindrome("Madam, I'm Adam!"));
-    }
+	/**
+	 * Проверка результата выполнения метода
+	 */
+	@Test
+	public void testRun() {
+		assertTrue(IsPalindrome.isPalindrome("Madam, I'm Adam!"));
+	}
 }

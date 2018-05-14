@@ -53,32 +53,32 @@ import java.util.Map;
  * @since 04.04.2018
  */
 public class Printer {
-    public String getResult(String[] roles, String[] textLines) {
-        return printTextPerRole(roles, textLines);
-    }
+	public String getResult(String[] roles, String[] textLines) {
+		return printTextPerRole(roles, textLines);
+	}
 
-    private String printTextPerRole(String[] roles, String[] textLines) {
-        Map<String, StringBuilder> resultMap = new HashMap<>();
+	private String printTextPerRole(String[] roles, String[] textLines) {
+		Map<String, StringBuilder> resultMap = new HashMap<>();
 
-        for (String role : roles) {
-            resultMap.put(role, new StringBuilder(role + ":" + System.lineSeparator()));
-        }
+		for (String role : roles) {
+			resultMap.put(role, new StringBuilder(role + ":" + System.lineSeparator()));
+		}
 
-        for (int i = 0; i < textLines.length; i++) {
-            StringBuilder currentString = new StringBuilder((i + 1) + ") ");
-            currentString.append(textLines[i].substring(textLines[i].indexOf(':') + 2));
-            String key = textLines[i].substring(0, textLines[i].indexOf(':'));
-            resultMap.replace(key, resultMap.get(key).append(currentString).append(System.lineSeparator()));
-        }
+		for (int i = 0; i < textLines.length; i++) {
+			StringBuilder currentString = new StringBuilder((i + 1) + ") ");
+			currentString.append(textLines[i].substring(textLines[i].indexOf(':') + 2));
+			String key = textLines[i].substring(0, textLines[i].indexOf(':'));
+			resultMap.replace(key, resultMap.get(key).append(currentString).append(System.lineSeparator()));
+		}
 
-        StringBuilder resultString = new StringBuilder();
-        for (int i = 0; i < roles.length; i++) {
-            resultString.append(resultMap.get(roles[i]));
-            if (i < roles.length - 1) {
-                resultString.append(System.lineSeparator());
-            }
-        }
+		StringBuilder resultString = new StringBuilder();
+		for (int i = 0; i < roles.length; i++) {
+			resultString.append(resultMap.get(roles[i]));
+			if (i < roles.length - 1) {
+				resultString.append(System.lineSeparator());
+			}
+		}
 
-        return resultString.toString();
-    }
+		return resultString.toString();
+	}
 }

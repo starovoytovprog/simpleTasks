@@ -14,58 +14,58 @@ import static org.mockito.Mockito.*;
  * @since 01.12.2017
  */
 public class ConsumerPoolTes {
-    private static final int EMPTY = 0;
-    private ExecutableTask mockTask;
+	private static final int EMPTY = 0;
+	private ExecutableTask mockTask;
 
-    @Before
-    public void init() {
-        mockTask = mock(ExecutableTask.class);
-    }
+	@Before
+	public void init() {
+		mockTask = mock(ExecutableTask.class);
+	}
 
-    /**
-     * Тестирование обработчика задач в одном потоке
-     *
-     * @throws InterruptedException Получен сигнал прерывания
-     */
-    @Test
-    public void consumerPoolOneThreadTest() throws InterruptedException {
-        testConsumer(1, 10000);
-    }
+	/**
+	 * Тестирование обработчика задач в одном потоке
+	 *
+	 * @throws InterruptedException Получен сигнал прерывания
+	 */
+	@Test
+	public void consumerPoolOneThreadTest() throws InterruptedException {
+		testConsumer(1, 10000);
+	}
 
-    /**
-     * Тестирование обработчика задач в нескольких потоках
-     *
-     * @throws InterruptedException Получен сигнал прерывания
-     */
-    @Test
-    public void consumerPoolMultiThreadTest() throws InterruptedException {
-        testConsumer(10, 10000);
-    }
+	/**
+	 * Тестирование обработчика задач в нескольких потоках
+	 *
+	 * @throws InterruptedException Получен сигнал прерывания
+	 */
+	@Test
+	public void consumerPoolMultiThreadTest() throws InterruptedException {
+		testConsumer(10, 10000);
+	}
 
-    /**
-     * Тестирование обработчика
-     *
-     * @param threadCount Количество потоков-обработчиков
-     * @param queueSize   Размер очереди
-     * @throws InterruptedException Получен сигнал прерывания
-     */
-    private void testConsumer(int threadCount, int queueSize) throws InterruptedException {
-        MyBlockingQueue queue = new MyBlockingQueue();
-        ConsumerPool pool = new ConsumerPool(queue, threadCount);
+	/**
+	 * Тестирование обработчика
+	 *
+	 * @param threadCount Количество потоков-обработчиков
+	 * @param queueSize   Размер очереди
+	 * @throws InterruptedException Получен сигнал прерывания
+	 */
+	private void testConsumer(int threadCount, int queueSize) throws InterruptedException {
+		MyBlockingQueue queue = new MyBlockingQueue();
+		ConsumerPool pool = new ConsumerPool(queue, threadCount);
 
-        for (int i = 0; i < queueSize; i++) {
-            queue.put(mockTask);
-        }
+		for (int i = 0; i < queueSize; i++) {
+			queue.put(mockTask);
+		}
 
-        pool.start();
-        pool.stop();
-        pool.await();
-        assertEquals(EMPTY, queue.getSize());
-        verify(mockTask, times(queueSize)).execute();
-    }
+		pool.start();
+		pool.stop();
+		pool.await();
+		assertEquals(EMPTY, queue.getSize());
+		verify(mockTask, times(queueSize)).execute();
+	}
 
-    @After
-    public void validate() {
-        validateMockitoUsage();
-    }
+	@After
+	public void validate() {
+		validateMockitoUsage();
+	}
 }

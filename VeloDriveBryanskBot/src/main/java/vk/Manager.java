@@ -19,61 +19,64 @@ import static vk.Constants.DELAY_FOR_ERROR;
  */
 public class Manager {
 
-    private static MessageConsumer CONSUMER;
-    private static Thread scanThread = null;
+	private static MessageConsumer CONSUMER;
+	private static Thread scanThread = null;
 
-    /**
-     * Запустить поток-обработчик новостей.
-     *
-     * @throws TelegramApiRequestException ошибка старта
-     */
-    public static void start() throws TelegramApiRequestException {
-        CONSUMER = TelegramBot.init();
-        Collector collector = new Collector();
+	/**
+	 * Запустить поток-обработчик новостей.
+	 *
+	 * @throws TelegramApiRequestException ошибка старта
+	 */
+	public static void start() throws TelegramApiRequestException {
+		CONSUMER = TelegramBot.init();
+		Collector collector = new Collector();
 
-        scanThread = new Thread(() -> {
-            while (true) {
-                scan(collector);
-                delay();
-            }
-        });
+		scanThread = new Thread(() -> {
+			while (true) {
+				scan(collector);
+				delay();
+			}
+		});
 
-        scanThread.start();
-    }
+		scanThread.start();
+	}
 
-    /**
-     * Обработка последних новостей
-     */
-    private static void scan(Collector collector) {
-        try {
-            List<String> linkList = collector.getNewPostsLinks();
-            linkList.stream().forEach(link -> {
-                CONSUMER.messageProcess(link, "Новый пост в группе!");
-                delay();
-            });
-        } catch (ApiTooManyException e) {
-            e.printStackTrace();
-            delayTime(DELAY_FOR_ERROR);
-        } catch (ClientException | ApiException e) {
-            e.printStackTrace();
-        }
-    }
+	/**
+	 * Обработка последних новостей
+	 */
+	private static void scan(Collector collector) {
+		try {
+			List<String> linkList = collector.getNewPostsLinks();
+			linkList.stream().forEach(link -> {
+				CONSUMER.messageProcess(link, "Новый пост в группе!");
+				delay();
+			});
+		}
+		catch (ApiTooManyException e) {
+			e.printStackTrace();
+			delayTime(DELAY_FOR_ERROR);
+		}
+		catch (ClientException | ApiException e) {
+			e.printStackTrace();
+		}
+	}
 
-    /**
-     * Ожидание между выполнениями запросов к API
-     */
-    private static void delay() {
-        delayTime(DELAY);
-    }
+	/**
+	 * Ожидание между выполнениями запросов к API
+	 */
+	private static void delay() {
+		delayTime(DELAY);
+	}
 
-    /**
-     * Ожидание указанного времени
-     */
-    private static void delayTime(long delay) {
-        try {
-            Thread.currentThread().sleep(delay);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+	/**
+	 * Ожидание указанного времени
+	 */
+	private static void delayTime(long delay) {
+		try {
+			Thread.currentThread().sleep(delay);
+		}
+		catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 }

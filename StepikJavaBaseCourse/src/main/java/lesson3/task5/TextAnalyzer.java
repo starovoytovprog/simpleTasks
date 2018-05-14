@@ -7,5 +7,5 @@ package lesson3.task5;
  * @since 06.04.2018
  */
 public interface TextAnalyzer {
-    Label processText(String text);
+	Label processText(String text);
 }

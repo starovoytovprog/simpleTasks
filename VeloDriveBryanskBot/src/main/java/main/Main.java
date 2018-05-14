@@ -10,7 +10,7 @@ import vk.Manager;
  * @since 25.04.2018
  */
 public class Main {
-    public static void main(String[] args) throws TelegramApiRequestException {
-        Manager.start();
-    }
+	public static void main(String[] args) throws TelegramApiRequestException {
+		Manager.start();
+	}
 }

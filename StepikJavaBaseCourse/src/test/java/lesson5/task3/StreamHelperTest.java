@@ -15,14 +15,14 @@ import static org.junit.Assert.assertEquals;
  * @since 12.04.2018
  */
 public class StreamHelperTest {
-    /**
-     * Проверка результата выполнения метода
-     *
-     * @throws IOException Исключения в InputStream
-     */
-    @Test
-    public void testRun() throws IOException {
-        byte[] testArray = {48, 49, 50, 51};
-        assertEquals(StreamHelper.readAsString(new ByteInputStream(testArray, testArray.length), StandardCharsets.US_ASCII), "0123");
-    }
+	/**
+	 * Проверка результата выполнения метода
+	 *
+	 * @throws IOException Исключения в InputStream
+	 */
+	@Test
+	public void testRun() throws IOException {
+		byte[] testArray = {48, 49, 50, 51};
+		assertEquals(StreamHelper.readAsString(new ByteInputStream(testArray, testArray.length), StandardCharsets.US_ASCII), "0123");
+	}
 }

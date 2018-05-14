@@ -8,7 +8,7 @@ package lesson4.task6;
  * @since 11.04.2018
  */
 public interface Sendable {
-    String getFrom();
+	String getFrom();
 
-    String getTo();
+	String getTo();
 }

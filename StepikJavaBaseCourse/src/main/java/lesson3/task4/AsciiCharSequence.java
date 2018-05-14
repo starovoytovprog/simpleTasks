@@ -15,29 +15,29 @@ import java.util.Arrays;
  * @since 06.04.2018
  */
 public class AsciiCharSequence implements CharSequence {
-    private final byte[] bytes;
+	private final byte[] bytes;
 
-    public AsciiCharSequence(byte[] bytes) {
-        this.bytes = bytes;
-    }
+	public AsciiCharSequence(byte[] bytes) {
+		this.bytes = bytes;
+	}
 
-    @Override
-    public int length() {
-        return bytes.length;
-    }
+	@Override
+	public int length() {
+		return bytes.length;
+	}
 
-    @Override
-    public char charAt(int i) {
-        return (char) bytes[i];
-    }
+	@Override
+	public char charAt(int i) {
+		return (char) bytes[i];
+	}
 
-    @Override
-    public CharSequence subSequence(int i, int i1) {
-        return new AsciiCharSequence(Arrays.copyOfRange(bytes, i, i1));
-    }
+	@Override
+	public CharSequence subSequence(int i, int i1) {
+		return new AsciiCharSequence(Arrays.copyOfRange(bytes, i, i1));
+	}
 
-    @Override
-    public String toString() {
-        return new String(bytes);
-    }
+	@Override
+	public String toString() {
+		return new String(bytes);
+	}
 }

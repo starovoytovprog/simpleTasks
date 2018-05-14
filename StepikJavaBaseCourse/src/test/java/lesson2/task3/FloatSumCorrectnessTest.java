@@ -11,11 +11,11 @@ import static org.junit.Assert.assertTrue;
  * @since 03.04.2018
  */
 public class FloatSumCorrectnessTest {
-    /**
-     * Проверка результата выполнения метода
-     */
-    @Test
-    public void testRun() {
-        assertTrue(FloatSumCorrectness.doubleExpression(0.1, 0.2, 0.3));
-    }
+	/**
+	 * Проверка результата выполнения метода
+	 */
+	@Test
+	public void testRun() {
+		assertTrue(FloatSumCorrectness.doubleExpression(0.1, 0.2, 0.3));
+	}
 }

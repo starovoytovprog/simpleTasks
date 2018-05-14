@@ -10,14 +10,14 @@ package lesson3.task5;
  * @since 06.04.2018
  */
 public class Checker {
-    public Label checkLabels(TextAnalyzer[] analyzers, String text) {
-        for (TextAnalyzer analyzer : analyzers) {
-            Label result = analyzer.processText(text);
-            if (result != Label.OK) {
-                return result;
-            }
-        }
+	public Label checkLabels(TextAnalyzer[] analyzers, String text) {
+		for (TextAnalyzer analyzer : analyzers) {
+			Label result = analyzer.processText(text);
+			if (result != Label.OK) {
+				return result;
+			}
+		}
 
-        return Label.OK;
-    }
+		return Label.OK;
+	}
 }

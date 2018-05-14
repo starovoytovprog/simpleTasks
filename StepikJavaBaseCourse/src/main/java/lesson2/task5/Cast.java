@@ -10,9 +10,9 @@ package lesson2.task5;
  * @since 03.04.2018
  */
 public class Cast {
-    private static final char START_CHAR = '\\';
+	private static final char START_CHAR = '\\';
 
-    public static char charExpression(int a) {
-        return (char) (START_CHAR + a);
-    }
+	public static char charExpression(int a) {
+		return (char) (START_CHAR + a);
+	}
 }

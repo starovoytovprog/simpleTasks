@@ -11,12 +11,12 @@ import static org.junit.Assert.assertEquals;
  * @since 05.04.2018
  */
 public class RobotTest {
-    /**
-     * Проверка результата выполнения метода
-     */
-    @Test
-    public void testRun() {
-        StringBuffer actions = new StringBuffer().append(Robot.TURN_RIGHT).append(Robot.STEP_FORWARD).append(Robot.STEP_FORWARD).append(Robot.STEP_FORWARD);
-        assertEquals(actions.toString(), Robot.moveRobot(new Robot(), 3, 0));
-    }
+	/**
+	 * Проверка результата выполнения метода
+	 */
+	@Test
+	public void testRun() {
+		StringBuffer actions = new StringBuffer().append(Robot.TURN_RIGHT).append(Robot.STEP_FORWARD).append(Robot.STEP_FORWARD).append(Robot.STEP_FORWARD);
+		assertEquals(actions.toString(), Robot.moveRobot(new Robot(), 3, 0));
+	}
 }
