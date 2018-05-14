@@ -9,14 +9,14 @@ package lesson2.task7;
  * @since 04.04.2018
  */
 public class IsPalindrome {
-    /**
-     * Checks if given <code>text</code> is a palindrome.
-     *
-     * @param text any string
-     * @return <code>true</code> when <code>text</code> is a palindrome, <code>false</code> otherwise
-     */
-    public static boolean isPalindrome(String text) {
-        String letterOnly = text.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
-        return letterOnly.equals(new StringBuilder(letterOnly).reverse().toString());
-    }
+	/**
+	 * Checks if given <code>text</code> is a palindrome.
+	 *
+	 * @param text any string
+	 * @return <code>true</code> when <code>text</code> is a palindrome, <code>false</code> otherwise
+	 */
+	public static boolean isPalindrome(String text) {
+		String letterOnly = text.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+		return letterOnly.equals(new StringBuilder(letterOnly).reverse().toString());
+	}
 }

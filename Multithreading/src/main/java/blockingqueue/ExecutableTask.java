@@ -7,8 +7,8 @@ package blockingqueue;
  * @since 01.12.2017
  */
 public interface ExecutableTask {
-    /**
-     * Выполнить задачу
-     */
-    void execute();
+	/**
+	 * Выполнить задачу
+	 */
+	void execute();
 }

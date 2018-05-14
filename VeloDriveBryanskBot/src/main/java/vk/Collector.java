@@ -21,60 +21,57 @@ import static vk.Constants.*;
  */
 public class Collector {
 
-    private static final VkApiClient VK_API_CLIENT = new VkApiClient(HttpTransportClient.getInstance());
-    private int startTime = getCurrentTime();
+	private static final VkApiClient VK_API_CLIENT = new VkApiClient(HttpTransportClient.getInstance());
+	private int startTime = getCurrentTime();
 
-    public Collector() {
-        new Collector(getCurrentTime());
-    }
+	public Collector() {
+		new Collector(getCurrentTime());
+	}
 
-    public Collector(int startTime) {
-        this.startTime = startTime;
-    }
+	public Collector(int startTime) {
+		this.startTime = startTime;
+	}
 
-    /**
-     * Получить ссылку на пост
-     *
-     * @param post пост
-     * @return ссылка на пост
-     */
-    private static String getPostUrl(WallPostFull post) {
-        return POST_URL_PATTERN + OWNER_ID + "_" + post.getId();
-    }
+	/**
+	 * Получить ссылку на пост
+	 *
+	 * @param post пост
+	 * @return ссылка на пост
+	 */
+	private static String getPostUrl(WallPostFull post) {
+		return POST_URL_PATTERN + OWNER_ID + "_" + post.getId();
+	}
 
-    /**
-     * Получить текущее время
-     *
-     * @return текущее время
-     */
-    private static int getCurrentTime() {
-        return (int) (System.currentTimeMillis() / 1000);
-    }
+	/**
+	 * Получить текущее время
+	 *
+	 * @return текущее время
+	 */
+	private static int getCurrentTime() {
+		return (int) (System.currentTimeMillis()/1000);
+	}
 
-    /**
-     * Получить список ссылок на новости, опубликованные после последней сборки.
-     *
-     * @return Список ссылок на новости
-     * @throws ClientException Исключения ВК АПИ
-     * @throws ApiException    Исключения ВК АПИ
-     */
-    @SuppressWarnings("unchecked")
-    public List<String> getNewPostsLinks() throws ClientException, ApiException {
-        Wall w = new Wall(VK_API_CLIENT);
-        UserActor u = new UserActor(USER_ID, ACCESS_TOKEN);
+	/**
+	 * Получить список ссылок на новости, опубликованные после последней сборки.
+	 *
+	 * @return Список ссылок на новости
+	 * @throws ClientException Исключения ВК АПИ
+	 * @throws ApiException    Исключения ВК АПИ
+	 */
+	@SuppressWarnings("unchecked")
+	public List<String> getNewPostsLinks() throws ClientException, ApiException {
+		Wall w = new Wall(VK_API_CLIENT);
+		UserActor u = new UserActor(USER_ID, ACCESS_TOKEN);
 
-        List<WallPostFull> posts = (w.get(u).ownerId(OWNER_ID).execute().getItems());
-        int newStartTime = getCurrentTime();
+		List<WallPostFull> posts = (w.get(u).ownerId(OWNER_ID).execute().getItems());
+		int newStartTime = getCurrentTime();
 
-        List<String> resultList = new ArrayList();
+		List<String> resultList = new ArrayList();
 
-        posts.stream()
-                .filter(post -> post.getDate() >= startTime)
-                .sorted((post1, post2) -> post1.getDate().compareTo(post2.getDate()))
-                .forEach(post -> resultList.add(getPostUrl(post)));
+		posts.stream().filter(post -> post.getDate() >= startTime).sorted((post1, post2) -> post1.getDate().compareTo(post2.getDate())).forEach(post -> resultList.add(getPostUrl(post)));
 
-        startTime = newStartTime;
+		startTime = newStartTime;
 
-        return resultList;
-    }
+		return resultList;
+	}
 }

@@ -13,7 +13,7 @@ package lesson2.task2;
  * @since 02.04.2018
  */
 public class YearCount {
-    public static int leapYearCount(int year) {
-        return year / 4 - year / 100 + year / 400;
-    }
+	public static int leapYearCount(int year) {
+		return year/4 - year/100 + year/400;
+	}
 }

@@ -8,7 +8,7 @@ package lesson1.task1;
  * @since 02.04.2018
  */
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("It's alive! It's alive!");
-    }
+	public static void main(String[] args) {
+		System.out.println("It's alive! It's alive!");
+	}
 }

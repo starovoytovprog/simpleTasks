@@ -9,14 +9,14 @@ import static org.mockito.Mockito.mock;
  * @since 04.12.2017
  */
 public class MockTaskCreator implements ExecutableTaskCreator {
-    private ExecutableTask mockTask;
+	private ExecutableTask mockTask;
 
-    public MockTaskCreator() {
-        mockTask = mock(ExecutableTask.class);
-    }
+	public MockTaskCreator() {
+		mockTask = mock(ExecutableTask.class);
+	}
 
-    @Override
-    public ExecutableTask create() {
-        return mockTask;
-    }
+	@Override
+	public ExecutableTask create() {
+		return mockTask;
+	}
 }

@@ -15,12 +15,7 @@ package lesson2.task1;
  * @since 02.04.2018
  */
 public class BooleanTask {
-    public static boolean booleanExpression(boolean a, boolean b, boolean c, boolean d) {
-        return !a && !b && c && d
-                || !a && b && !c && d
-                || !a && b && c && !d
-                || a && !b && !c && d
-                || a && !b && c && !d
-                || a && b && !c && !d;
-    }
+	public static boolean booleanExpression(boolean a, boolean b, boolean c, boolean d) {
+		return !a && !b && c && d || !a && b && !c && d || !a && b && c && !d || a && !b && !c && d || a && !b && c && !d || a && b && !c && !d;
+	}
 }

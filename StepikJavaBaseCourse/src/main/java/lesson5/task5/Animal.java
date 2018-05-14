@@ -15,35 +15,36 @@ import java.util.Objects;
  * @since 13.04.2018
  */
 public class Animal implements Serializable {
-    private final String name;
+	private final String name;
 
-    public Animal(String name) {
-        this.name = name;
-    }
+	public Animal(String name) {
+		this.name = name;
+	}
 
-    public static Animal[] deserializeAnimalArray(byte[] data) {
-        try {
-            ByteArrayInputStream bais = new ByteArrayInputStream(data);
-            try (ObjectInputStream ois = new ObjectInputStream(bais)) {
-                int count = ois.readInt();
-                Animal[] animals = new Animal[count];
+	public static Animal[] deserializeAnimalArray(byte[] data) {
+		try {
+			ByteArrayInputStream bais = new ByteArrayInputStream(data);
+			try (ObjectInputStream ois = new ObjectInputStream(bais)) {
+				int count = ois.readInt();
+				Animal[] animals = new Animal[count];
 
-                for (int i = 0; i < count; i++) {
-                    animals[i] = (Animal) ois.readObject();
-                }
+				for (int i = 0; i < count; i++) {
+					animals[i] = (Animal) ois.readObject();
+				}
 
-                return animals;
-            }
-        } catch (Throwable t) {
-            throw new IllegalArgumentException(t);
-        }
-    }
+				return animals;
+			}
+		}
+		catch (Throwable t) {
+			throw new IllegalArgumentException(t);
+		}
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Animal) {
-            return Objects.equals(name, ((Animal) obj).name);
-        }
-        return false;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Animal) {
+			return Objects.equals(name, ((Animal) obj).name);
+		}
+		return false;
+	}
 }

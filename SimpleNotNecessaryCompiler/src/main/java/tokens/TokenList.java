@@ -10,84 +10,84 @@ import java.util.List;
  * @since 12.12.2017
  */
 public class TokenList {
-    private final List<Token> tokens;
-    private int i;
+	private final List<Token> tokens;
+	private int i;
 
-    /**
-     * Конструктор по умолчанию
-     */
-    public TokenList() {
-        tokens = new ArrayList<>();
-        i = 0;
-    }
+	/**
+	 * Конструктор по умолчанию
+	 */
+	public TokenList() {
+		tokens = new ArrayList<>();
+		i = 0;
+	}
 
-    /**
-     * Добавить токен в список
-     *
-     * @param printToken новый токен
-     */
-    public void put(Token printToken) {
-        tokens.add(printToken);
-    }
+	/**
+	 * Добавить токен в список
+	 *
+	 * @param printToken новый токен
+	 */
+	public void put(Token printToken) {
+		tokens.add(printToken);
+	}
 
-    /**
-     * Взять следующий токен из списка
-     *
-     * @return токен из списка
-     */
-    public Token pop() {
-        return tokens.get(i++);
-    }
+	/**
+	 * Взять следующий токен из списка
+	 *
+	 * @return токен из списка
+	 */
+	public Token pop() {
+		return tokens.get(i++);
+	}
 
-    /**
-     * Посмотреть последний значащий токен
-     *
-     * @return токен из списка
-     */
-    public Token getLast() {
-        for (int i = tokens.size() - 1; i >= 0; i--) {
-            if (tokens.get(i).getType() != TokenType.SPACE) {
-                return tokens.get(i);
-            }
-        }
+	/**
+	 * Посмотреть последний значащий токен
+	 *
+	 * @return токен из списка
+	 */
+	public Token getLast() {
+		for (int i = tokens.size() - 1; i >= 0; i--) {
+			if (tokens.get(i).getType() != TokenType.SPACE) {
+				return tokens.get(i);
+			}
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    /**
-     * Взять следующий токен не SPACE из списка
-     *
-     * @return токен из списка
-     */
-    public Token popNotSpace() {
-        for (; i < tokens.size(); i++) {
-            if (tokens.get(i).getType() != TokenType.SPACE) {
-                return tokens.get(i);
-            }
-        }
+	/**
+	 * Взять следующий токен не SPACE из списка
+	 *
+	 * @return токен из списка
+	 */
+	public Token popNotSpace() {
+		for (; i < tokens.size(); i++) {
+			if (tokens.get(i).getType() != TokenType.SPACE) {
+				return tokens.get(i);
+			}
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    /**
-     * Сравнение списка токенов
-     *
-     * @param list список, с которым сравнивается текущий
-     * @return true, если списки эквивалентны
-     */
-    @Override
-    public boolean equals(Object list) {
-        if (list instanceof TokenList) {
-            return tokens.containsAll(((TokenList) list).tokens) && tokens.size() == ((TokenList) list).tokens.size();
-        }
+	/**
+	 * Сравнение списка токенов
+	 *
+	 * @param list список, с которым сравнивается текущий
+	 * @return true, если списки эквивалентны
+	 */
+	@Override
+	public boolean equals(Object list) {
+		if (list instanceof TokenList) {
+			return tokens.containsAll(((TokenList) list).tokens) && tokens.size() == ((TokenList) list).tokens.size();
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    /**
-     * Вернуться на один шаг в списке
-     */
-    public void back() {
-        i--;
-    }
+	/**
+	 * Вернуться на один шаг в списке
+	 */
+	public void back() {
+		i--;
+	}
 }
