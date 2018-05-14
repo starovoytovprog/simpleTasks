@@ -3,7 +3,7 @@ package lesson2.task1;
 import lesson2.task1.main.Main;
 import lesson2.task1.servlets.SessionsServlet;
 import org.junit.Test;
-import utils.HttpRequestSender;
+import testUtils.HttpRequestSender;
 import utils.MainServerContainer;
 
 import java.io.IOException;

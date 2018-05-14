@@ -1,7 +1,7 @@
 package lesson1.task1;
 
 import org.junit.Test;
-import utils.HttpRequestSender;
+import testUtils.HttpRequestSender;
 import utils.MainServerContainer;
 
 import static org.junit.Assert.assertTrue;
