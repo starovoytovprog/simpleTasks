@@ -11,9 +11,9 @@ package lesson2.task3;
  * @since 03.04.2018
  */
 public class FloatSumCorrectness {
-    private static final double CORRECTNESS = 0.0001;
+	private static final double CORRECTNESS = 0.0001;
 
-    public static boolean doubleExpression(double a, double b, double c) {
-        return Math.abs(a + b - c) < CORRECTNESS;
-    }
+	public static boolean doubleExpression(double a, double b, double c) {
+		return Math.abs(a + b - c) < CORRECTNESS;
+	}
 }

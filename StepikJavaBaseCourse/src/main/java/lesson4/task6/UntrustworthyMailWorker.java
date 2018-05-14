@@ -7,24 +7,24 @@ package lesson4.task6;
  * @since 11.04.2018
  */
 public class UntrustworthyMailWorker implements MailService {
-    private final RealMailService realMailService;
-    private final MailService[] mailServices;
+	private final RealMailService realMailService;
+	private final MailService[] mailServices;
 
-    public UntrustworthyMailWorker(MailService[] mailServices) {
-        this.mailServices = mailServices;
-        realMailService = new RealMailService();
-    }
+	public UntrustworthyMailWorker(MailService[] mailServices) {
+		this.mailServices = mailServices;
+		realMailService = new RealMailService();
+	}
 
-    @Override
-    public Sendable processMail(Sendable mail) {
-        for (MailService mailService : mailServices) {
-            mail = mailService.processMail(mail);
-        }
+	@Override
+	public Sendable processMail(Sendable mail) {
+		for (MailService mailService : mailServices) {
+			mail = mailService.processMail(mail);
+		}
 
-        return getRealMailService().processMail(mail);
-    }
+		return getRealMailService().processMail(mail);
+	}
 
-    public RealMailService getRealMailService() {
-        return realMailService;
-    }
+	public RealMailService getRealMailService() {
+		return realMailService;
+	}
 }

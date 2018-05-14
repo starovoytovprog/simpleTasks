@@ -8,11 +8,11 @@ package vk;
  */
 public interface MessageConsumer {
 
-    /**
-     * Обработка сообщений
-     *
-     * @param message ссылка на сообщение
-     * @param prefix  префикс сообщения
-     */
-    void messageProcess(String message, String prefix);
+	/**
+	 * Обработка сообщений
+	 *
+	 * @param message ссылка на сообщение
+	 * @param prefix  префикс сообщения
+	 */
+	void messageProcess(String message, String prefix);
 }

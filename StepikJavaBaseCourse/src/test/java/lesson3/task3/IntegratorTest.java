@@ -11,12 +11,12 @@ import static org.junit.Assert.assertEquals;
  * @since 06.04.2018
  */
 public class IntegratorTest {
-    /**
-     * Проверка результата выполнения метода
-     */
-    @Test
-    public void testRun() {
-        assertEquals(Integrator.integrate(x -> 1, 0, 10), 10, 0.0001);
-        assertEquals(Integrator.integrate(x -> x + 2, 0, 10), 70, 0.0001);
-    }
+	/**
+	 * Проверка результата выполнения метода
+	 */
+	@Test
+	public void testRun() {
+		assertEquals(Integrator.integrate(x -> 1, 0, 10), 10, 0.0001);
+		assertEquals(Integrator.integrate(x -> x + 2, 0, 10), 70, 0.0001);
+	}
 }

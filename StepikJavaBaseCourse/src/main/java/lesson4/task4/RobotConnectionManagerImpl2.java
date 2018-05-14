@@ -7,8 +7,8 @@ package lesson4.task4;
  * @since 09.04.2018
  */
 public class RobotConnectionManagerImpl2 implements RobotConnectionManager {
-    @Override
-    public RobotConnection getConnection() throws RobotConnectionException {
-        return new RobotConnectionErrorInCloseAndMove();
-    }
+	@Override
+	public RobotConnection getConnection() throws RobotConnectionException {
+		return new RobotConnectionErrorInCloseAndMove();
+	}
 }

@@ -16,15 +16,15 @@ import java.nio.charset.Charset;
  * @since 12.04.2018
  */
 public class StreamHelper {
-    public static String readAsString(InputStream inputStream, Charset charset) throws IOException {
-        Reader r = new InputStreamReader(inputStream, charset);
-        StringBuilder res = new StringBuilder();
-        int intChar;
+	public static String readAsString(InputStream inputStream, Charset charset) throws IOException {
+		Reader r = new InputStreamReader(inputStream, charset);
+		StringBuilder res = new StringBuilder();
+		int intChar;
 
-        while ((intChar = r.read()) != -1) {
-            res.append((char) intChar);
-        }
+		while ((intChar = r.read()) != -1) {
+			res.append((char) intChar);
+		}
 
-        return res.toString();
-    }
+		return res.toString();
+	}
 }

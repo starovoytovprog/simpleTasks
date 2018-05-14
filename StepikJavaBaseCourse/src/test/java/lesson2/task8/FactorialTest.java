@@ -13,12 +13,12 @@ import static org.junit.Assert.assertEquals;
  * @since 04.04.2018
  */
 public class FactorialTest {
-    /**
-     * Проверка результата выполнения метода
-     */
-    @Test
-    public void testRun() {
-        assertEquals(Factorial.factorial(1), BigInteger.valueOf(1));
-        assertEquals(Factorial.factorial(3), BigInteger.valueOf(6));
-    }
+	/**
+	 * Проверка результата выполнения метода
+	 */
+	@Test
+	public void testRun() {
+		assertEquals(Factorial.factorial(1), BigInteger.valueOf(1));
+		assertEquals(Factorial.factorial(3), BigInteger.valueOf(6));
+	}
 }
