@@ -9,6 +9,7 @@ buildscript {
 		jettyVersion = '9.3.0.M1'
 		freeMarkerVersion = '2.3.20'
 		gsonVersion = '2.3.1'
+		sqLiteVersion = '3.21.0.1'
 	}
 }
 
@@ -32,4 +33,5 @@ dependencies {
 	compile(group: 'org.eclipse.jetty', name: 'jetty-webapp', version: jettyVersion)
 	compile(group: 'org.freemarker', name: 'freemarker', version: freeMarkerVersion)
 	compile(group: 'com.google.code.gson', name: 'gson', version: gsonVersion)
+	compile(group: 'org.xerial', name: 'sqlite-jdbc', version: sqLiteVersion)
 }
