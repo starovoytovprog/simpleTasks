@@ -92,7 +92,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 	/**
 	 * Отправка сообщения
 	 *
-	 * @param message
+	 * @param message Сообщение для отправки
 	 */
 	public void sendMessage(Message message) {
 		sendMessage(message.getMessageString(), message.getChatId());
