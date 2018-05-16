@@ -14,17 +14,17 @@ import java.math.BigInteger;
  * @since 04.04.2018
  */
 public class Factorial {
-    /**
-     * Calculates factorial of given <code>value</code>.
-     *
-     * @param value positive number
-     * @return factorial of <code>value</code>
-     */
-    public static BigInteger factorial(int value) {
-        BigInteger result = BigInteger.ONE;
-        for (int i = 2; i <= value; i++) {
-            result = result.multiply(BigInteger.valueOf(i));
-        }
-        return result;
-    }
+	/**
+	 * Calculates factorial of given <code>value</code>.
+	 *
+	 * @param value positive number
+	 * @return factorial of <code>value</code>
+	 */
+	public static BigInteger factorial(int value) {
+		BigInteger result = BigInteger.ONE;
+		for (int i = 2; i <= value; i++) {
+			result = result.multiply(BigInteger.valueOf(i));
+		}
+		return result;
+	}
 }

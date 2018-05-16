@@ -14,25 +14,25 @@ import static org.junit.Assert.assertEquals;
  * @since 16.04.2018
  */
 public class SymmetricDifferenceTest {
-    /**
-     * Проверка результата выполнения метода
-     */
-    @Test
-    public void testRun() {
-        Set<Integer> set1 = new HashSet<>();
-        set1.add(1);
-        set1.add(2);
-        set1.add(3);
+	/**
+	 * Проверка результата выполнения метода
+	 */
+	@Test
+	public void testRun() {
+		Set<Integer> set1 = new HashSet<>();
+		set1.add(1);
+		set1.add(2);
+		set1.add(3);
 
-        Set<Integer> set2 = new HashSet<>();
-        set2.add(0);
-        set2.add(1);
-        set2.add(2);
+		Set<Integer> set2 = new HashSet<>();
+		set2.add(0);
+		set2.add(1);
+		set2.add(2);
 
-        Set<Integer> set3 = new HashSet<>();
-        set3.add(3);
-        set3.add(0);
+		Set<Integer> set3 = new HashSet<>();
+		set3.add(3);
+		set3.add(0);
 
-        assertEquals(set3, SymmetricDifference.symmetricDifference(set1, set2));
-    }
+		assertEquals(set3, SymmetricDifference.symmetricDifference(set1, set2));
+	}
 }

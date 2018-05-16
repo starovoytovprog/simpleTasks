@@ -7,15 +7,15 @@ package lesson4.task6;
  * @since 11.04.2018
  */
 public class StolenPackageException extends RuntimeException {
-    public StolenPackageException() {
-        super();
-    }
+	public StolenPackageException() {
+		super();
+	}
 
-    public StolenPackageException(String errorMessage) {
-        super(errorMessage);
-    }
+	public StolenPackageException(String errorMessage) {
+		super(errorMessage);
+	}
 
-    public StolenPackageException(String errorMessage, Throwable err) {
-        super(errorMessage, err);
-    }
+	public StolenPackageException(String errorMessage, Throwable err) {
+		super(errorMessage, err);
+	}
 }

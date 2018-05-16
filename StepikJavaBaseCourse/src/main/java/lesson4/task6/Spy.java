@@ -14,24 +14,23 @@ import static lesson4.task6.Constants.AUSTIN_POWERS;
  * @since 11.04.2018
  */
 public class Spy implements MailService {
-    private final Logger LOGGER;
+	private final Logger LOGGER;
 
-    public Spy(Logger logger) {
-        this.LOGGER = logger;
-    }
+	public Spy(Logger logger) {
+		this.LOGGER = logger;
+	}
 
-    @Override
-    public Sendable processMail(Sendable mail) {
-        if (mail instanceof MailMessage) {
-            if (mail.getFrom().equalsIgnoreCase(AUSTIN_POWERS) || (mail.getTo()).equalsIgnoreCase(AUSTIN_POWERS)) {
-                LOGGER.log(Level.WARNING, "Detected target mail correspondence: from " +
-                        mail.getFrom() + " to " + mail.getTo() +
-                        " \"" + ((MailMessage) mail).getMessage() + "\"");
-            } else {
-                LOGGER.log(Level.INFO, "Usual correspondence: from " + mail.getFrom() + " to " + mail.getTo());
-            }
-        }
+	@Override
+	public Sendable processMail(Sendable mail) {
+		if (mail instanceof MailMessage) {
+			if (mail.getFrom().equalsIgnoreCase(AUSTIN_POWERS) || (mail.getTo()).equalsIgnoreCase(AUSTIN_POWERS)) {
+				LOGGER.log(Level.WARNING, "Detected target mail correspondence: from " + mail.getFrom() + " to " + mail.getTo() + " \"" + ((MailMessage) mail).getMessage() + "\"");
+			}
+			else {
+				LOGGER.log(Level.INFO, "Usual correspondence: from " + mail.getFrom() + " to " + mail.getTo());
+			}
+		}
 
-        return mail;
-    }
+		return mail;
+	}
 }

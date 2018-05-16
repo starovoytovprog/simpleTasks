@@ -7,7 +7,7 @@ package lesson6.task8;
  * @since 18.04.2018
  */
 public interface MailServiceAcceptable {
-    String getTo();
+	String getTo();
 
-    Object getContent();
+	Object getContent();
 }

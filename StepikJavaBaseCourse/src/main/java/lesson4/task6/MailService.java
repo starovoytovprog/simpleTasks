@@ -7,5 +7,5 @@ package lesson4.task6;
  * @since 11.04.2018
  */
 public interface MailService {
-    Sendable processMail(Sendable mail);
+	Sendable processMail(Sendable mail);
 }

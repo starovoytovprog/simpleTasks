@@ -13,17 +13,17 @@ import java.util.function.DoubleUnaryOperator;
  * @since 06.04.2018
  */
 public class Integrator {
-    public static double integrate(DoubleUnaryOperator f, double a, double b) {
-        final int n = 1000000; // количество шагов
-        final double step = (b - a) / n; // размер шага
-        double result = 0;
+	public static double integrate(DoubleUnaryOperator f, double a, double b) {
+		final int n = 1000000; // количество шагов
+		final double step = (b - a)/n; // размер шага
+		double result = 0;
 
-        for (int i = 0; i < n; i++) {
-            result += f.applyAsDouble(a + step * (i + 0.5));
-        }
+		for (int i = 0; i < n; i++) {
+			result += f.applyAsDouble(a + step*(i + 0.5));
+		}
 
-        result *= step;
+		result *= step;
 
-        return result;
-    }
+		return result;
+	}
 }

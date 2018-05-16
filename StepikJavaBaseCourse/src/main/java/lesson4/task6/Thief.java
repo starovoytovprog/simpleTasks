@@ -7,27 +7,26 @@ package lesson4.task6;
  * @since 11.04.2018
  */
 public class Thief implements MailService {
-    private final int minCost;
-    private int stolenValue;
+	private final int minCost;
+	private int stolenValue;
 
-    public Thief(int minCost) {
-        this.minCost = minCost;
-    }
+	public Thief(int minCost) {
+		this.minCost = minCost;
+	}
 
-    public int getStolenValue() {
-        return stolenValue;
-    }
+	public int getStolenValue() {
+		return stolenValue;
+	}
 
-    @Override
-    public Sendable processMail(Sendable mail) {
-        if (mail instanceof MailPackage) {
-            if (((MailPackage) mail).getContent().getPrice() >= minCost) {
-                stolenValue += ((MailPackage) mail).getContent().getPrice();
-                mail = new MailPackage(mail.getFrom(), mail.getTo(), new Package("stones instead of " +
-                        ((MailPackage) mail).getContent().getContent(), 0));
-            }
-        }
+	@Override
+	public Sendable processMail(Sendable mail) {
+		if (mail instanceof MailPackage) {
+			if (((MailPackage) mail).getContent().getPrice() >= minCost) {
+				stolenValue += ((MailPackage) mail).getContent().getPrice();
+				mail = new MailPackage(mail.getFrom(), mail.getTo(), new Package("stones instead of " + ((MailPackage) mail).getContent().getContent(), 0));
+			}
+		}
 
-        return mail;
-    }
+		return mail;
+	}
 }

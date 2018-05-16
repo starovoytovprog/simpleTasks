@@ -11,13 +11,13 @@ import static org.junit.Assert.assertEquals;
  * @since 02.04.2018
  */
 public class YearCountTest {
-    /**
-     * Проверка результата выполнения метода
-     */
-    @Test
-    public void testRun() {
-        assertEquals(YearCount.leapYearCount(1), 0);
-        assertEquals(YearCount.leapYearCount(4), 1);
-        assertEquals(YearCount.leapYearCount(100), 24);
-    }
+	/**
+	 * Проверка результата выполнения метода
+	 */
+	@Test
+	public void testRun() {
+		assertEquals(YearCount.leapYearCount(1), 0);
+		assertEquals(YearCount.leapYearCount(4), 1);
+		assertEquals(YearCount.leapYearCount(100), 24);
+	}
 }

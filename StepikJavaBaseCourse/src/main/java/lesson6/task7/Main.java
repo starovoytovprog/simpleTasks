@@ -20,32 +20,29 @@ import java.util.Map;
  * @since 18.04.2018
  */
 public class Main {
-    public static void main(String[] args) {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        Map<String, Integer> wordsCount = new HashMap<>();
+	public static void main(String[] args) {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		Map<String, Integer> wordsCount = new HashMap<>();
 
-        br.lines().flatMap(line -> Arrays.stream(line.toLowerCase().replaceAll("[^a-zа-я0-9]", " ").trim().split(" ")))
-                .forEach(word ->
-                {
-                    if (!word.isEmpty()) {
-                        if (!wordsCount.containsKey(word)) {
-                            wordsCount.put(word, new Integer("1"));
-                        } else {
-                            wordsCount.put(word, wordsCount.get(word) + 1);
-                        }
-                    }
-                });
+		br.lines().flatMap(line -> Arrays.stream(line.toLowerCase().replaceAll("[^a-zа-я0-9]", " ").trim().split(" "))).forEach(word -> {
+			if (!word.isEmpty()) {
+				if (!wordsCount.containsKey(word)) {
+					wordsCount.put(word, new Integer("1"));
+				}
+				else {
+					wordsCount.put(word, wordsCount.get(word) + 1);
+				}
+			}
+		});
 
-        wordsCount.keySet().stream().sorted((s1, s2) ->
-                {
-                    int res = Integer.compare(wordsCount.get(s2), wordsCount.get(s1));
+		wordsCount.keySet().stream().sorted((s1, s2) -> {
+			int res = Integer.compare(wordsCount.get(s2), wordsCount.get(s1));
 
-                    if (res == 0) {
-                        res = s1.compareTo(s2);
-                    }
+			if (res == 0) {
+				res = s1.compareTo(s2);
+			}
 
-                    return res;
-                }
-        ).limit(10).forEach(word -> System.out.println(word));
-    }
+			return res;
+		}).limit(10).forEach(word -> System.out.println(word));
+	}
 }

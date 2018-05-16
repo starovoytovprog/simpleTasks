@@ -16,22 +16,22 @@ import java.io.IOException;
  * @since 12.04.2018
  */
 public class Main {
-    public static void main(String[] args) throws IOException {
-        int buf;
-        int buf2 = System.in.read();
+	public static void main(String[] args) throws IOException {
+		int buf;
+		int buf2 = System.in.read();
 
-        while ((buf = System.in.read()) != -1 && buf2 != -1) {
-            if (buf2 != 13 || buf != 10) {
-                System.out.print((char) buf2);
-            }
+		while ((buf = System.in.read()) != -1 && buf2 != -1) {
+			if (buf2 != 13 || buf != 10) {
+				System.out.print((char) buf2);
+			}
 
-            buf2 = buf;
-        }
+			buf2 = buf;
+		}
 
-        if (buf2 != -1) {
-            System.out.print((char) buf2);
-        }
+		if (buf2 != -1) {
+			System.out.print((char) buf2);
+		}
 
-        System.out.flush();
-    }
+		System.out.flush();
+	}
 }
