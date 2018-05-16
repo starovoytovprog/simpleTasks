@@ -3,8 +3,9 @@ package vk;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ApiTooManyException;
 import com.vk.api.sdk.exceptions.ClientException;
+import message.MessageConsumer;
+import message.MessageManager;
 import org.telegram.telegrambots.exceptions.TelegramApiRequestException;
-import telegram.TelegramBot;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class Manager {
 	 * @throws TelegramApiRequestException ошибка старта
 	 */
 	public static void start() throws TelegramApiRequestException {
-		CONSUMER = TelegramBot.init();
+		CONSUMER = MessageManager.getInstance();
 		Collector collector = new Collector();
 
 		scanThread = new Thread(() -> {
@@ -48,7 +49,7 @@ public class Manager {
 		try {
 			List<String> linkList = collector.getNewPostsLinks();
 			linkList.stream().forEach(link -> {
-				CONSUMER.messageProcess(link, "Новый пост в группе!");
+				CONSUMER.messageProcess("Новый пост в группе!\n" + link, true);
 				delay();
 			});
 		}

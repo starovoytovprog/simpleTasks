@@ -1,5 +1,7 @@
 package telegram;
 
+import message.Message;
+import message.MessageManager;
 import org.apache.http.HttpHost;
 import org.apache.http.client.config.RequestConfig;
 import org.telegram.telegrambots.ApiContextInitializer;
@@ -11,7 +13,6 @@ import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 import org.telegram.telegrambots.exceptions.TelegramApiRequestException;
-import vk.MessageConsumer;
 
 import static telegram.Constants.*;
 
@@ -21,7 +22,7 @@ import static telegram.Constants.*;
  * @author Starovoytov
  * @since 25.04.2018
  */
-public class TelegramBot extends TelegramLongPollingBot implements MessageConsumer {
+public class TelegramBot extends TelegramLongPollingBot {
 
 	private static TelegramBot currentBot = null;
 
@@ -76,16 +77,25 @@ public class TelegramBot extends TelegramLongPollingBot implements MessageConsum
 	 *
 	 * @param message
 	 */
-	private void sendMessage(String message) {
+	private void sendMessage(String message, long groupId) {
 		try {
 			SendMessage sendMessageObject = new SendMessage();
 			sendMessageObject.setText(message);
-			sendMessageObject.setChatId(CHANNEL_ID);
+			sendMessageObject.setChatId(groupId);
 			currentBot.sendApiMethod(sendMessageObject);
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
 		}
+	}
+
+	/**
+	 * Отправка сообщения
+	 *
+	 * @param message Сообщение для отправки
+	 */
+	public void sendMessage(Message message) {
+		sendMessage(message.getMessageString(), message.getChatId());
 	}
 
 	@Override
@@ -95,8 +105,8 @@ public class TelegramBot extends TelegramLongPollingBot implements MessageConsum
 				if (update.getMessage().getEntities() != null) {
 					if (!update.getMessage().getEntities().isEmpty()) {
 						for (MessageEntity entity : update.getMessage().getEntities()) {
-							if (entity.getType().equals("hashtag") && entity.getText().equals(HASH_TAG)) {
-								messageProcess(update.getMessage().getText(), "Новая покатушка в чате!");
+							if (entity.getType().equals("hashtag") && entity.getText().equals("#" + HASH_TAG)) {
+								MessageManager.getInstance().messageProcess("Новая покатушка в чате!\n" + update.getMessage().getText(), false);
 								return;
 							}
 						}
@@ -114,15 +124,5 @@ public class TelegramBot extends TelegramLongPollingBot implements MessageConsum
 	@Override
 	public String getBotToken() {
 		return BOT_TOKEN;
-	}
-
-	/**
-	 * Обработка ссылки на сообщение
-	 *
-	 * @param message ссылка на сообщение
-	 */
-	@Override
-	public void messageProcess(String message, String prefix) {
-		sendMessage(prefix + "\n" + message);
 	}
 }
