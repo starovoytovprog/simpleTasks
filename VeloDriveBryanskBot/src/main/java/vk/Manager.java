@@ -3,11 +3,14 @@ package vk;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ApiTooManyException;
 import com.vk.api.sdk.exceptions.ClientException;
+import com.vk.api.sdk.httpclient.HttpTransportClient;
 import message.MessageConsumer;
 import message.MessageManager;
 import org.telegram.telegrambots.exceptions.TelegramApiRequestException;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
 
 import static vk.Constants.DELAY;
 import static vk.Constants.DELAY_FOR_ERROR;
@@ -33,6 +36,8 @@ public class Manager {
 		Collector collector = new Collector();
 
 		scanThread = new Thread(() -> {
+			LogManager.getLogManager().getLogger(HttpTransportClient.class.getName()).setLevel(Level.OFF);
+
 			while (true) {
 				scan(collector);
 				delay();
