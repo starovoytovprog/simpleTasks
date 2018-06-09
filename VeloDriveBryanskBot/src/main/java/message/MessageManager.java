@@ -58,6 +58,20 @@ public class MessageManager implements MessageConsumer {
 	}
 
 	/**
+	 * Принять сообщение для отправки
+	 *
+	 * @param message ссылка на сообщение
+	 * @param chatId  чат
+	 */
+	public void messageProcess(String message, long chatId) {
+		System.out.println("resieve message for send");
+		try {
+			MESSAGES.put(new Message(message, chatId));
+		}
+		catch (InterruptedException e) {}
+	}
+
+	/**
 	 * Класс для отправки сообщений в отдельном потоке
 	 */
 	private static class MessageSender extends Thread {

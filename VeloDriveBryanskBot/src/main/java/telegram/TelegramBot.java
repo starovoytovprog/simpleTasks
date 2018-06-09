@@ -43,6 +43,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 			try {
 				currentBot = new TelegramBot(getConfigureOptions());
 				botsApi.registerBot(currentBot);
+				System.out.println("telegram bot started");
 			}
 			catch (TelegramApiException e) {
 				e.printStackTrace();
@@ -64,7 +65,9 @@ public class TelegramBot extends TelegramLongPollingBot {
 		if (PROXY_ADDRESS != null && !PROXY_ADDRESS.isEmpty() && PROXY_PORT > 0) {
 			HttpHost proxy = new HttpHost(PROXY_ADDRESS, PROXY_PORT);
 
-			RequestConfig conf = RequestConfig.custom().setProxy(proxy).setAuthenticationEnabled(false).build();
+			RequestConfig conf = RequestConfig.custom().setProxy(proxy).setAuthenticationEnabled(false)
+				.setConnectTimeout(TELEGRAM_CONNECTION_TIMEOUT).setConnectionRequestTimeout(TELEGRAM_CONNECTION_TIMEOUT)
+				.build();
 
 			options.setRequestConfig(conf);
 		}
@@ -85,6 +88,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 			currentBot.sendApiMethod(sendMessageObject);
 		}
 		catch (Exception ex) {
+			MessageManager.getInstance().messageProcess(message, groupId);
 			ex.printStackTrace();
 		}
 	}
@@ -95,24 +99,32 @@ public class TelegramBot extends TelegramLongPollingBot {
 	 * @param message Сообщение для отправки
 	 */
 	public void sendMessage(Message message) {
-		sendMessage(message.getMessageString(), message.getChatId());
+		if (message.getMessageString() != null) {
+			sendMessage(message.getMessageString(), message.getChatId());
+		}
 	}
 
 	@Override
 	public void onUpdateReceived(Update update) {
-		if (update.getMessage() != null) {
-			if (update.getMessage().getChatId() == CHAT_ID) {
-				if (update.getMessage().getEntities() != null) {
-					if (!update.getMessage().getEntities().isEmpty()) {
-						for (MessageEntity entity : update.getMessage().getEntities()) {
-							if (entity.getType().equals("hashtag") && entity.getText().equals("#" + HASH_TAG)) {
-								MessageManager.getInstance().messageProcess("Новая покатушка в чате!\n" + update.getMessage().getText(), false);
-								return;
+		try {
+			MessageManager.getInstance().messageProcess(update.getMessage().getText(), 338668136L);
+			if (update.getMessage() != null) {
+				if (update.getMessage().getChatId() == CHAT_ID) {
+					if (update.getMessage().getEntities() != null) {
+						if (!update.getMessage().getEntities().isEmpty()) {
+							for (MessageEntity entity : update.getMessage().getEntities()) {
+								if (entity.getType().equals("hashtag") && entity.getText().equals("#" + HASH_TAG)) {
+									MessageManager.getInstance().messageProcess("Новая покатушка в чате!\n" + update.getMessage().getText(), false);
+									return;
+								}
 							}
 						}
 					}
 				}
 			}
+		}
+		catch (Exception ex) {
+			ex.printStackTrace();
 		}
 	}
 

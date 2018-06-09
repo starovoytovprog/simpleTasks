@@ -17,4 +17,5 @@ public class Constants {
 	public static final int PROXY_PORT = Integer.parseInt(System.getenv().get("TELEGRAM_CONSTANT_PROXY_PORT"));
 
 	public static final long TELEGRAM_SEND_DELAY = 1000L;
+	public static final int TELEGRAM_CONNECTION_TIMEOUT = 60000;
 }

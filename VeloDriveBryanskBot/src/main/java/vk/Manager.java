@@ -7,6 +7,7 @@ import com.vk.api.sdk.httpclient.HttpTransportClient;
 import message.MessageConsumer;
 import message.MessageManager;
 import org.telegram.telegrambots.exceptions.TelegramApiRequestException;
+import org.telegram.telegrambots.logging.BotLogger;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -37,6 +38,7 @@ public class Manager {
 
 		scanThread = new Thread(() -> {
 			LogManager.getLogManager().getLogger(HttpTransportClient.class.getName()).setLevel(Level.OFF);
+			LogManager.getLogManager().getLogger("Telegram Bots Api").setLevel(Level.OFF);
 
 			while (true) {
 				scan(collector);
