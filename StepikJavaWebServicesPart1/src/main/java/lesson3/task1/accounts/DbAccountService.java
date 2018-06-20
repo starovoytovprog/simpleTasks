@@ -24,6 +24,11 @@ public class DbAccountService extends AccountService {
 	private ServiceRegistry serviceRegistry;
 	private Configuration configuration = new Configuration();
 
+	/**
+	 * Конструктор по умолчанию
+	 *
+	 * @throws SQLException исключение, если не удалось подключиться к БД
+	 */
 	public DbAccountService() throws SQLException {
 		super();
 
@@ -51,6 +56,11 @@ public class DbAccountService extends AccountService {
 		serviceRegistry = builder.build();
 	}
 
+	/**
+	 * Добавить профиль в хранилище
+	 *
+	 * @param userProfile новый профиль
+	 */
 	public void addNewUser(UserProfile userProfile) {
 		try (SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry)) {
 			try (Session session = sessionFactory.openSession()) {
@@ -60,6 +70,12 @@ public class DbAccountService extends AccountService {
 		}
 	}
 
+	/**
+	 * Получить профиль из хранилища по логину
+	 *
+	 * @param login логин
+	 * @return профиль
+	 */
 	public UserProfile getUserByLogin(String login) {
 		try (SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry)) {
 			try (Session session = sessionFactory.openSession()) {

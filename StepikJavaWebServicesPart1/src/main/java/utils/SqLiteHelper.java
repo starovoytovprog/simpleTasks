@@ -15,6 +15,13 @@ public class SqLiteHelper {
 
 	private static String TEMP_DIR = System.getProperty("user.home") + File.separator + ".stepicJavaWebServices1Temp" + File.separator + "sqlite" + File.separator;
 
+	/**
+	 * Создание БД
+	 *
+	 * @param name имя создаваемой БД
+	 * @return url созданной БД
+	 * @throws SQLException исключения при создании
+	 */
 	public static String createDB(String name) throws SQLException {
 		File destFolder = new File(TEMP_DIR);
 		if (!destFolder.exists()) {
@@ -35,6 +42,11 @@ public class SqLiteHelper {
 		return url;
 	}
 
+	/**
+	 * Удаление БД
+	 *
+	 * @param name имя удаляемой БД
+	 */
 	public static void deleteDB(String name) {
 		File dbFile = new File(TEMP_DIR + name);
 		if (dbFile.exists()) {
@@ -42,10 +54,22 @@ public class SqLiteHelper {
 		}
 	}
 
+	/**
+	 * Получить файл БД по имени
+	 *
+	 * @param dbName имя БД
+	 * @return файл БД
+	 */
 	public static File getDbFileFromName(String dbName) {
 		return new File(TEMP_DIR + dbName);
 	}
 
+	/**
+	 * Получить url БД по имени
+	 *
+	 * @param dbName имя БД
+	 * @return url БД
+	 */
 	public static String getUrlFromName(String dbName) {
 		return "jdbc:sqlite:" + TEMP_DIR + dbName;
 	}
