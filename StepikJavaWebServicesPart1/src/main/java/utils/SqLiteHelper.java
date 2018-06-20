@@ -20,7 +20,7 @@ public class SqLiteHelper {
 		if (!destFolder.exists()) {
 			destFolder.mkdirs();
 		}
-		String url = "jdbc:sqlite:" + TEMP_DIR + name;
+		String url = getUrlFromName(name);
 
 		if (new File(TEMP_DIR + name).exists()) {
 			return url;
@@ -40,5 +40,13 @@ public class SqLiteHelper {
 		if (dbFile.exists()) {
 			dbFile.delete();
 		}
+	}
+
+	public static File getDbFileFromName(String dbName) {
+		return new File(TEMP_DIR + dbName);
+	}
+
+	public static String getUrlFromName(String dbName) {
+		return "jdbc:sqlite:" + TEMP_DIR + dbName;
 	}
 }

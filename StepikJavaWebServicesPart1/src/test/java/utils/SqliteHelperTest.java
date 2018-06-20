@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
  * @since 25.04.2018
  */
 public class SqliteHelperTest {
-	private static final String TEST_DB_NAME = "db_fot_unit_test.sqlite";
+	private static final String TEST_DB_NAME = "db_for_unit_test.sqlite";
 	private File dbFile;
 	private String dbUrl;
 
@@ -34,7 +34,7 @@ public class SqliteHelperTest {
 	 */
 	@Before
 	public void createDataBase() throws SQLException {
-		dbFile = new File(System.getProperty("user.home") + File.separator + ".stepicJavaWebServices1Temp" + File.separator + "sqlite" + File.separator + TEST_DB_NAME);
+		dbFile = SqLiteHelper.getDbFileFromName(TEST_DB_NAME);
 		assertFalse(dbFile.exists());
 		dbUrl = SqLiteHelper.createDB(TEST_DB_NAME);
 	}

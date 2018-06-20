@@ -16,9 +16,9 @@ buildscript {
 }
 
 jar {
-	baseName = 'StepikJavaWebServicesPart1'
+	baseName = 'server'
 	manifest {
-		attributes "Main-Class": "lesson2.task1.main.Main"
+		attributes "Main-Class": "lesson3.task1.main.Main"
 	}
 	from {
 		configurations.compile.collect {
