@@ -18,7 +18,7 @@ buildscript {
 jar {
 	baseName = 'server'
 	manifest {
-		attributes "Main-Class": "lesson3.task1.main.Main"
+		attributes "Main-Class": "lesson4.task1.main.Main"
 	}
 	from {
 		configurations.compile.collect {
@@ -38,4 +38,5 @@ dependencies {
 	compile(group: 'org.xerial', name: 'sqlite-jdbc', version: sqLiteVersion)
 	compile(group: 'org.hibernate', name: 'hibernate-core', version: hibernateVersion)
 	compile(group: 'com.zsoltfabok', name: 'sqlite-dialect', version: sqLiteDialectVersion)
+	compile(group: 'org.eclipse.jetty.websocket', name: 'websocket-server', version: jettyVersion)
 }
