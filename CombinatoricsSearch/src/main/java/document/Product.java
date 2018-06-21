@@ -79,4 +79,9 @@ public class Product {
 
 		return count*price;
 	}
+
+	@Override
+	public String toString() {
+		return "count = " + count + ": price = " + price;
+	}
 }

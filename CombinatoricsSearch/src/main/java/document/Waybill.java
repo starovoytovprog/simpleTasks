@@ -118,4 +118,18 @@ public class Waybill {
 	public int getProductCount() {
 		return products.size();
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder("[" + System.lineSeparator());
+
+		for (Product product : products) {
+			sb.append("    ");
+			sb.append(product);
+			sb.append(System.lineSeparator());
+		}
+
+		sb.append(']');
+		return sb.toString();
+	}
 }

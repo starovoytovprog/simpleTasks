@@ -32,4 +32,22 @@ public class StringLoader {
 
 		return waybill;
 	}
+
+	/**
+	 * Загрузить накладную из строки сумм
+	 *
+	 * @param source строка
+	 * @return накладная
+	 */
+	public static Waybill loadSumOnly(String source) {
+		Waybill waybill = new Waybill();
+
+		Arrays.stream(source.split(SEPARATOR)).forEach(line -> {
+			if (line.length() > 0) {
+				waybill.add(new Product(1, Integer.parseInt(line)));
+			}
+		});
+
+		return waybill;
+	}
 }
