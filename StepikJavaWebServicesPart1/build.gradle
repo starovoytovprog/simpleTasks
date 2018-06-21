@@ -1,0 +1,42 @@
+buildscript {
+	repositories {
+		maven {
+			url 'http://repo1.maven.org/maven2'
+		}
+	}
+
+	ext {
+		jettyVersion = '9.3.0.M1'
+		freeMarkerVersion = '2.3.20'
+		gsonVersion = '2.3.1'
+		sqLiteVersion = '3.21.0.1'
+		hibernateVersion = '4.3.8.Final'
+		sqLiteDialectVersion = '1.0'
+	}
+}
+
+jar {
+	baseName = 'server'
+	manifest {
+		attributes "Main-Class": "lesson4.task1.main.Main"
+	}
+	from {
+		configurations.compile.collect {
+			it.isDirectory() ? it : zipTree(it)
+		}
+		configurations.runtime.collect {
+			it.isDirectory() ? it : zipTree(it)
+		}
+	}
+}
+
+dependencies {
+	compile(group: 'org.eclipse.jetty', name: 'jetty-server', version: jettyVersion)
+	compile(group: 'org.eclipse.jetty', name: 'jetty-webapp', version: jettyVersion)
+	compile(group: 'org.freemarker', name: 'freemarker', version: freeMarkerVersion)
+	compile(group: 'com.google.code.gson', name: 'gson', version: gsonVersion)
+	compile(group: 'org.xerial', name: 'sqlite-jdbc', version: sqLiteVersion)
+	compile(group: 'org.hibernate', name: 'hibernate-core', version: hibernateVersion)
+	compile(group: 'com.zsoltfabok', name: 'sqlite-dialect', version: sqLiteDialectVersion)
+	compile(group: 'org.eclipse.jetty.websocket', name: 'websocket-server', version: jettyVersion)
+}

@@ -14,3 +14,6 @@ StepikJavaBaseCourse:
 
 VeloDriveBryanskBot
 Бот для группы "Велодрайв Брянск".
+
+StepikJavaWebServicesPart1
+Выполнение заданий во время прохождения курса "Разработка веб сервиса на Java (часть 1)" на stepic.org.
