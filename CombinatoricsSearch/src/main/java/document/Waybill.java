@@ -9,6 +9,7 @@ import java.util.List;
  * @author Starovoytov
  * @since 21.06.2018
  */
+@SuppressWarnings("unchecked")
 public class Waybill {
 	private final List<Product> products;
 
