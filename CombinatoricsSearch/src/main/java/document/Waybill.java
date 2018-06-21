@@ -133,4 +133,40 @@ public class Waybill {
 		sb.append(']');
 		return sb.toString();
 	}
+
+	/**
+	 * Получить модифицированную накладную
+	 *
+	 * @param modParameter коэффициент модификации
+	 * @return модифицированная накладная
+	 */
+	public Waybill getSimpleModified(int modParameter) {
+
+		Waybill waybill = new Waybill();
+
+		int allCount = 0;
+
+		for (Product product : products) {
+			allCount += product.getCount();
+			allCount--;
+		}
+
+		if (allCount < modParameter) return waybill;
+
+		for (Product product : products) {
+			if (modParameter == 0) {
+				waybill.add(product);
+			}
+			else if (modParameter >= product.getCount()) {
+				modParameter -= product.getCount() - 1;
+				waybill.add(new Product(1, product.getPrice()));
+			}
+			else {
+				waybill.add(new Product(product.getCount() - modParameter, product.getPrice()));
+				modParameter = 0;
+			}
+		}
+
+		return waybill;
+	}
 }

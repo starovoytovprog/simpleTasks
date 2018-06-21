@@ -58,6 +58,15 @@ public class Product {
 	}
 
 	/**
+	 * Получить цену товара
+	 *
+	 * @return цена товара
+	 */
+	public int getPrice() {
+		return price;
+	}
+
+	/**
 	 * Получить количество товара
 	 *
 	 * @return количество товара

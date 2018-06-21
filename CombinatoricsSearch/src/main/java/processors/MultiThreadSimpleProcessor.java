@@ -13,15 +13,28 @@ import java.util.ArrayList;
 public class MultiThreadSimpleProcessor {
 
 	private final static int THREAD_COUNT = 5;
-
-	private final Waybill waybill;
 	private final int sum;
-
+	private Waybill waybill;
 	private Waybill result = new Waybill();
 
+	/**
+	 * Конструктор
+	 *
+	 * @param waybill накладная
+	 * @param sum     искомая сумма
+	 */
 	public MultiThreadSimpleProcessor(Waybill waybill, int sum) {
 		this.waybill = waybill;
 		this.sum = sum;
+	}
+
+	/**
+	 * Установить накладную
+	 *
+	 * @param waybill накладная
+	 */
+	public void setWaybill(Waybill waybill) {
+		this.waybill = waybill;
 	}
 
 	/**
