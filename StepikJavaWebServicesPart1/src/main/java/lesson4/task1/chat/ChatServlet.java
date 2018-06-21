@@ -16,6 +16,11 @@ public class ChatServlet extends WebSocketServlet {
 
 	private final static int LOGOUT_TIME = 10*60*1000;
 
+	/**
+	 * Конфигурирование сервлета
+	 *
+	 * @param factory фабрика
+	 */
 	@Override
 	public void configure(WebSocketServletFactory factory) {
 		factory.getPolicy().setIdleTimeout(LOGOUT_TIME);

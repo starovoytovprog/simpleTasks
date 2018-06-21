@@ -19,11 +19,21 @@ public class ChatWebSocket {
 
 	private Session session;
 
+	/**
+	 * Открытие сокета
+	 *
+	 * @param session сессия
+	 */
 	@OnWebSocketConnect
 	public void onOpen(Session session) {
 		this.session = session;
 	}
 
+	/**
+	 * Обработка входящего сообщения
+	 *
+	 * @param data входящее сообщение
+	 */
 	@OnWebSocketMessage
 	public void onMessage(String data) {
 		try {
