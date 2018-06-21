@@ -1,8 +1,8 @@
 package lesson5.task3;
 
-import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
@@ -23,6 +23,6 @@ public class StreamHelperTest {
 	@Test
 	public void testRun() throws IOException {
 		byte[] testArray = {48, 49, 50, 51};
-		assertEquals(StreamHelper.readAsString(new ByteInputStream(testArray, testArray.length), StandardCharsets.US_ASCII), "0123");
+		assertEquals(StreamHelper.readAsString(new ByteArrayInputStream(testArray), StandardCharsets.US_ASCII), "0123");
 	}
 }
