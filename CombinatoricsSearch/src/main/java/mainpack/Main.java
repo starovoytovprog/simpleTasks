@@ -4,9 +4,13 @@ package mainpack;
  * Запуск приложения
  *
  * @author Starovoytov
- * @since 29.11.2017
+ * @since 21.06.2018
  */
 public class Main {
+	static int[] sum = {280, 290, 180, 455, 215, 119, 86, 84, 1440, 873, 237, 165, 34};
+	static int[] count = {3, 20, 100, 10, 20, 20, 20, 20, 5, 5, 10, 27, 1};
+	static int res = 12454;
+
 	/**
 	 * Вывод "Hello World!" в консоль
 	 *
@@ -37,12 +41,6 @@ public class Main {
 		System.out.println(getAllSumm(arr, res));
 	}
 
-	static int[] sum = {280,290,180,455,215,119,86,84,1440,873,237,165,34};
-	static int[] count = {3, 20, 100,10,20,20,20,20,5,5,10,27,1};
-
-	static int res = 12454;
-
-
 	private static String getAllSumm(int[] arr_t, int sum) {
 		int[] arr = new int[arr_t.length];
 
@@ -65,7 +63,7 @@ public class Main {
 		String sum = "[";
 
 		for (int i = 0; i < arr.length; i++) {
-			if (maskCount % 2 == 1) {
+			if (maskCount%2 == 1) {
 				sum += arr[i] + "/" + i + ",";
 			}
 
@@ -73,9 +71,8 @@ public class Main {
 				return sum + "]";
 			}
 
-			maskCount = maskCount >> 1;
+			maskCount = maskCount>>1;
 		}
-
 
 		sum += "]";
 		return sum;
@@ -86,7 +83,7 @@ public class Main {
 		int sum = 0;
 
 		for (int i = 0; i < arr.length; i++) {
-			if (maskCount % 2 == 1) {
+			if (maskCount%2 == 1) {
 				sum += arr[i];
 			}
 
@@ -94,7 +91,7 @@ public class Main {
 				return -1;
 			}
 
-			maskCount = maskCount >> 1;
+			maskCount = maskCount>>1;
 
 			if (maskCount == 0) {
 				return sum;
