@@ -91,8 +91,8 @@ public class Waybill {
 	/**
 	 * Сформировать накладную по маске
 	 *
-	 * @param mask
-	 * @return
+	 * @param mask маска
+	 * @return результирующая накладная
 	 */
 	public Waybill getWaybillWithMask(int mask) {
 		Waybill waybill = new Waybill();
