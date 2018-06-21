@@ -50,4 +50,47 @@ public class WaybillTest {
 
 		return waybill;
 	}
+
+	/**
+	 * Проверка формирования модифицированной накладной
+	 */
+	@Test
+	public void getModifiedWaybill() {
+		Waybill waybill = new Waybill();
+		waybill.add(new Product(10, 1));
+		waybill.add(new Product(10, 1));
+		waybill.add(new Product(10, 1));
+		waybill.add(new Product(10, 1));
+
+		Waybill testWaybill = new Waybill();
+		testWaybill.add(new Product(5, 1));
+		testWaybill.add(new Product(10, 1));
+		testWaybill.add(new Product(10, 1));
+		testWaybill.add(new Product(10, 1));
+		assertEquals(testWaybill, waybill.getSimpleModified(5));
+
+		testWaybill = new Waybill();
+		testWaybill.add(new Product(1, 1));
+		testWaybill.add(new Product(9, 1));
+		testWaybill.add(new Product(10, 1));
+		testWaybill.add(new Product(10, 1));
+		assertEquals(testWaybill, waybill.getSimpleModified(10));
+
+		testWaybill = new Waybill();
+		testWaybill.add(new Product(1, 1));
+		testWaybill.add(new Product(4, 1));
+		testWaybill.add(new Product(10, 1));
+		testWaybill.add(new Product(10, 1));
+		assertEquals(testWaybill, waybill.getSimpleModified(15));
+
+		testWaybill = new Waybill();
+		testWaybill.add(new Product(1, 1));
+		testWaybill.add(new Product(1, 1));
+		testWaybill.add(new Product(1, 1));
+		testWaybill.add(new Product(1, 1));
+		assertEquals(testWaybill, waybill.getSimpleModified(36));
+
+		testWaybill = new Waybill();
+		assertEquals(testWaybill, waybill.getSimpleModified(45));
+	}
 }
