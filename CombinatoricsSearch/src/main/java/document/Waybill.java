@@ -70,4 +70,52 @@ public class Waybill {
 	public void add(Product product) {
 		products.add(product);
 	}
+
+	/**
+	 * Получить сумму с ограничением
+	 *
+	 * @param max ограничение
+	 * @return сумма
+	 */
+	public int getSumWithMax(int max) {
+		int sum = 0;
+
+		for (Product product : products) {
+			sum += product.getSum();
+			if (sum > max) break;
+		}
+
+		return sum;
+	}
+
+	/**
+	 * Сформировать накладную по маске
+	 *
+	 * @param mask
+	 * @return
+	 */
+	public Waybill getWaybillWithMask(int mask) {
+		Waybill waybill = new Waybill();
+
+		for (int i = 0; i < products.size(); i++) {
+			if (mask%2 == 1) {
+				waybill.add(products.get(i));
+			}
+
+			mask = mask>>1;
+
+			if (mask == 0) break;
+		}
+
+		return waybill;
+	}
+
+	/**
+	 * Получить количество товаров
+	 *
+	 * @return количество товаров
+	 */
+	public int getProductCount() {
+		return products.size();
+	}
 }

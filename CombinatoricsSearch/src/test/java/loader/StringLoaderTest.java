@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
  * Тестирование StringLoader {@link StringLoader}
  *
  * @author Starovoytov
- * @since 29.11.2017
+ * @since 21.06.2018
  */
 public class StringLoaderTest {
 	/**

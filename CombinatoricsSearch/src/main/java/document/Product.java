@@ -56,4 +56,27 @@ public class Product {
 	public int getSum() {
 		return count*price;
 	}
+
+	/**
+	 * Получить количество товара
+	 *
+	 * @return количество товара
+	 */
+	public int getCount() {
+		return count;
+	}
+
+	/**
+	 * Получить сумму определённого количества
+	 *
+	 * @param count количество
+	 * @return сумма
+	 */
+	public int getSumWithCount(int count) {
+		if (count > this.count || count <= 0) {
+			throw new IllegalArgumentException("Incorrect parameter count: " + count);
+		}
+
+		return count*price;
+	}
 }
