@@ -1,4 +1,4 @@
-package mainpack;
+package document;
 
 /**
  * Товар - элемент накладной

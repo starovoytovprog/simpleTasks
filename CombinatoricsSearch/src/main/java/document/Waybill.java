@@ -1,4 +1,4 @@
-package mainpack;
+package document;
 
 import java.util.ArrayList;
 import java.util.List;
