@@ -1,0 +1,21 @@
+buildscript {
+	repositories {
+		maven {
+			url 'http://repo1.maven.org/maven2'
+		}
+	}
+}
+
+jar {
+	baseName = 'server'
+	manifest {
+	}
+	from {
+		configurations.compile.collect {
+			it.isDirectory() ? it : zipTree(it)
+		}
+		configurations.runtime.collect {
+			it.isDirectory() ? it : zipTree(it)
+		}
+	}
+}
