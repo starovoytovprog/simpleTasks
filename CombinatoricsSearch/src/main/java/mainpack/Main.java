@@ -1,5 +1,7 @@
 package mainpack;
 
+import interfaces.desctop.MainFrame;
+
 /**
  * Запуск приложения
  *
@@ -9,6 +11,6 @@ package mainpack;
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println("Интерфейс пока не организован");
+		new MainFrame().setVisible(true);
 	}
 }
