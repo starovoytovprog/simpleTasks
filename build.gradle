@@ -36,6 +36,7 @@ subprojects {
 
 	task fullRebuild() {
 		dependsOn(clean)
+		dependsOn(test)
 		dependsOn(jar)
 		dependsOn(javadoc)
 	}
