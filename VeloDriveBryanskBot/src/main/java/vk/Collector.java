@@ -20,8 +20,6 @@ import static vk.Constants.*;
  * @since 25.04.2018
  */
 public class Collector {
-
-	private static final VkApiClient VK_API_CLIENT = new VkApiClient(HttpTransportClient.getInstance());
 	private int startTime = getCurrentTime();
 
 	public Collector() {
@@ -60,7 +58,7 @@ public class Collector {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<String> getNewPostsLinks() throws ClientException, ApiException {
-		Wall w = new Wall(VK_API_CLIENT);
+		Wall w = new Wall(new VkApiClient(HttpTransportClient.getInstance()));
 		UserActor u = new UserActor(USER_ID, ACCESS_TOKEN);
 
 		List<WallPostFull> posts = (w.get(u).ownerId(OWNER_ID).execute().getItems());

@@ -19,14 +19,14 @@ public class MessageManager implements MessageConsumer {
 	private static final BlockingQueue<Message> MESSAGES = new LinkedBlockingQueue<>();
 
 	static {
+		Thread messageSender = null;
 		try {
-			Thread messageSender = new MessageSender();
-			messageSender.start();
+			messageSender = new MessageSender();
 		}
 		catch (TelegramApiRequestException e) {
-			e.printStackTrace();
 			System.exit(-1);
 		}
+		messageSender.start();
 	}
 
 	private MessageManager() {}
@@ -68,23 +68,25 @@ public class MessageManager implements MessageConsumer {
 		try {
 			MESSAGES.put(new Message(message, chatId));
 		}
-		catch (InterruptedException e) {}
+		catch (InterruptedException e) {
+			System.out.println("error resieve message for send " + e.getMessage());
+		}
 	}
 
 	/**
 	 * Класс для отправки сообщений в отдельном потоке
 	 */
 	private static class MessageSender extends Thread {
-		private final TelegramBot bot = TelegramBot.init();
-
-		private MessageSender() throws TelegramApiRequestException {}
+		private MessageSender() throws TelegramApiRequestException {
+			TelegramBot.init();
+		}
 
 		@Override
 		public void run() {
 			while (true) {
 				try {
 					Thread.currentThread().sleep(Constants.TELEGRAM_SEND_DELAY);
-					bot.sendMessage(MESSAGES.take());
+					TelegramBot.sendMessageInBot(MESSAGES.take());
 				}
 				catch (InterruptedException e) {}
 			}

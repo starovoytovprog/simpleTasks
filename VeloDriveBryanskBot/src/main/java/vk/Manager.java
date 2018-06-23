@@ -3,15 +3,11 @@ package vk;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ApiTooManyException;
 import com.vk.api.sdk.exceptions.ClientException;
-import com.vk.api.sdk.httpclient.HttpTransportClient;
 import message.MessageConsumer;
 import message.MessageManager;
 import org.telegram.telegrambots.exceptions.TelegramApiRequestException;
-import org.telegram.telegrambots.logging.BotLogger;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
 
 import static vk.Constants.DELAY;
 import static vk.Constants.DELAY_FOR_ERROR;
@@ -37,9 +33,6 @@ public class Manager {
 		Collector collector = new Collector();
 
 		scanThread = new Thread(() -> {
-			LogManager.getLogManager().getLogger(HttpTransportClient.class.getName()).setLevel(Level.OFF);
-			LogManager.getLogManager().getLogger("Telegram Bots Api").setLevel(Level.OFF);
-
 			while (true) {
 				scan(collector);
 				delay();
@@ -56,6 +49,7 @@ public class Manager {
 		try {
 			List<String> linkList = collector.getNewPostsLinks();
 			linkList.stream().forEach(link -> {
+				System.out.println("New post in group!");
 				CONSUMER.messageProcess("Новый пост в группе!\n" + link, true);
 				delay();
 			});
@@ -65,6 +59,9 @@ public class Manager {
 			delayTime(DELAY_FOR_ERROR);
 		}
 		catch (ClientException | ApiException e) {
+			e.printStackTrace();
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
