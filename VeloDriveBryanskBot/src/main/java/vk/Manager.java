@@ -49,6 +49,7 @@ public class Manager {
 		try {
 			List<String> linkList = collector.getNewPostsLinks();
 			linkList.stream().forEach(link -> {
+				System.out.println("New post in group!");
 				CONSUMER.messageProcess("Новый пост в группе!\n" + link, true);
 				delay();
 			});
@@ -58,6 +59,9 @@ public class Manager {
 			delayTime(DELAY_FOR_ERROR);
 		}
 		catch (ClientException | ApiException e) {
+			e.printStackTrace();
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
