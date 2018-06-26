@@ -11,6 +11,7 @@ import static org.junit.Assert.assertTrue;
  * @author Starovoytov
  * @since 16.04.2018
  */
+@SuppressWarnings("unchecked")
 public class PairTest {
 	/**
 	 * Проверка результата выполнения метода

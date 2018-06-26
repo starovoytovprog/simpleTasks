@@ -13,6 +13,7 @@ import static org.junit.Assert.assertEquals;
  * @author Starovoytov
  * @since 18.04.2018
  */
+@SuppressWarnings("unchecked")
 public class ConsoleHelper {
 	public static void testMain(String in, String etalon, Class mainClass) throws Exception {
 		InputStream systemInputBuffer = System.in;
