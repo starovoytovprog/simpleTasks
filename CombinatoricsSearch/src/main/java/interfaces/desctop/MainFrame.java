@@ -19,6 +19,9 @@ import static interfaces.desctop.Constants.*;
  * @since 22.06.2018
  */
 public class MainFrame extends JFrame implements ActionListener {
+	private final static String R = "\r";
+	private final static String N = "\n";
+	private final static String EMPTY = "";
 	private final JPanel mainPanel = new JPanel();
 	private final JTextArea waybillText = new JTextArea();
 	private final JTextField summField = new JTextField();
@@ -107,6 +110,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	 * @return накладная
 	 */
 	private Waybill getWaybillContent() {
+		waybillText.setText(waybillText.getText().replaceAll(R, EMPTY).replaceAll(N, System.lineSeparator()));
 		if (waybillText.getText().contains(System.lineSeparator())) {
 			return StringLoader.load(waybillText.getText());
 		}

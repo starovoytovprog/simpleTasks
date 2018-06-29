@@ -35,3 +35,18 @@ TELEGRAM_CONSTANT_HASH_TAG=""
 
 id канала, в который транслируются сообщения.
 TELEGRAM_CONSTANT_CHANNEL_ID=""
+
+Интервал между отправлениями сообщений в телеграм.
+TELEGRAM_CONSTANT_TELEGRAM_SEND_DELAY
+
+Таймаут подключения к api телеграма.
+TELEGRAM_CONSTANT_TELEGRAM_CONNECTION_TIMEOUT
+
+id владельца бота.
+TELEGRAM_CONSTANT_OWNER_ID
+
+Интервал между переподключениями (для прокси).
+TELEGRAM_CONSTANT_RECONNECT_TIMER
+
+Время ожидания между переподключениями (для прокси).
+TELEGRAM_CONSTANT_RECONNECT_DELIMITER
