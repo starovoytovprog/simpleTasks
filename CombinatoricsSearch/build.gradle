@@ -4,6 +4,10 @@ buildscript {
 			url 'http://repo1.maven.org/maven2'
 		}
 	}
+
+	ext {
+		jettyVersion = '9.3.0.M1'
+	}
 }
 
 jar {
@@ -11,4 +15,17 @@ jar {
 	manifest {
 		attributes "Main-Class": "mainpack.Main"
 	}
+	from {
+		configurations.compile.collect {
+			it.isDirectory() ? it : zipTree(it)
+		}
+		configurations.runtime.collect {
+			it.isDirectory() ? it : zipTree(it)
+		}
+	}
+}
+
+dependencies {
+	compile(group: 'org.eclipse.jetty', name: 'jetty-server', version: jettyVersion)
+	compile(group: 'org.eclipse.jetty', name: 'jetty-webapp', version: jettyVersion)
 }

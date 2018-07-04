@@ -134,6 +134,19 @@ public class Waybill {
 		return sb.toString();
 	}
 
+	public String toLine() {
+		StringBuilder sb = new StringBuilder("[");
+
+		for (Product product : products) {
+			sb.append("[");
+			sb.append(product);
+			sb.append("]");
+		}
+
+		sb.append(']');
+		return sb.toString();
+	}
+
 	/**
 	 * Получить модифицированную накладную
 	 *

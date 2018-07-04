@@ -19,9 +19,6 @@ import static interfaces.desctop.Constants.*;
  * @since 22.06.2018
  */
 public class MainFrame extends JFrame implements ActionListener {
-	private final static String R = "\r";
-	private final static String N = "\n";
-	private final static String EMPTY = "";
 	private final JPanel mainPanel = new JPanel();
 	private final JTextArea waybillText = new JTextArea();
 	private final JTextField summField = new JTextField();
@@ -100,21 +97,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	 * @throws Exception ошибка обработки
 	 */
 	private void execCode() throws Exception {
-		Waybill waybill = getWaybillContent();
+		Waybill waybill = StringLoader.loadFromBadString(waybillText.getText());
 		resultText.setText(FinalProcessor.find(waybill, Integer.parseInt(summField.getText())).toString());
-	}
-
-	/**
-	 * Формирование накладной из строки текстового поля
-	 *
-	 * @return накладная
-	 */
-	private Waybill getWaybillContent() {
-		waybillText.setText(waybillText.getText().replaceAll(R, EMPTY).replaceAll(N, System.lineSeparator()));
-		if (waybillText.getText().contains(System.lineSeparator())) {
-			return StringLoader.load(waybillText.getText());
-		}
-
-		return StringLoader.loadSumOnly(waybillText.getText());
 	}
 }

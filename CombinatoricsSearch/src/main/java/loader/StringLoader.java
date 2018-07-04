@@ -13,7 +13,25 @@ import java.util.Arrays;
  */
 public class StringLoader {
 
+	private final static String R = "\r";
+	private final static String N = "\n";
+	private final static String EMPTY = "";
 	private static final String SEPARATOR = ";";
+
+	/**
+	 * Загрузить накладную из неизвестной строки
+	 *
+	 * @param source строка
+	 * @return накладная
+	 */
+	public static Waybill loadFromBadString(String source) {
+		source = source.replaceAll(R, EMPTY).replaceAll(N, System.lineSeparator());
+		if (source.contains(System.lineSeparator())) {
+			return load(source);
+		}
+
+		return loadSumOnly(source);
+	}
 
 	/**
 	 * Загрузить накладную из строки
