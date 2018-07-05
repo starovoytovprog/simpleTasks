@@ -1,10 +1,11 @@
 System.properties['file.encoding'] = 'UTF-8'
 rootProject.name = 'SimpleTasks'
 
+include ':CombinatoricsSearch'
 include ':HelloWorld'
 include ':Multithreading'
 include ':SimpleNotNecessaryCompiler'
 include ':StepikJavaBaseCourse'
-include ':VeloDriveBryanskBot'
 include ':StepikJavaWebServicesPart1'
-include ':CombinatoricsSearch'
+include ':StepikJavaWebServicesPart2'
+include ':VeloDriveBryanskBot'
