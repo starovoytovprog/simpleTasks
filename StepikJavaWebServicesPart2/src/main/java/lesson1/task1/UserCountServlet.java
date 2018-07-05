@@ -12,9 +12,20 @@ import javax.servlet.http.HttpServletResponse;
  * @since 05.07.2018
  */
 public class UserCountServlet extends HttpServlet {
+	private final SettingsMBean settingsMBean;
+
+	/**
+	 * Конструктор
+	 *
+	 * @param setting Настройки в виде м-бина
+	 */
+	public UserCountServlet(SettingsMBean setting) {
+		settingsMBean = setting;
+	}
+
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.getWriter().println("10");
+		response.getWriter().println(settingsMBean.getMaxCount());
 		response.setContentType("http");
 		response.setStatus(HttpServletResponse.SC_OK);
 	}
