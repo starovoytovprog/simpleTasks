@@ -1,5 +1,7 @@
 package interfaces.web;
 
+import document.Waybill;
+import loader.StringLoader;
 import org.junit.Test;
 
 import java.io.*;
@@ -106,7 +108,6 @@ public class MainServerTest {
 		testData.put("data", "1;2;3;4;5;6;7;8;9");
 		testData.put("sum", "10");
 		String result = "";
-		String etalon = "[[count = 1: price = 1][count = 1: price = 2][count = 1: price = 3][count = 1: price = 4]]";
 
 		try {
 			result = sendPostRequest(ADDRESS, testData);
@@ -117,6 +118,18 @@ public class MainServerTest {
 
 		server.stop();
 
-		assertEquals(etalon, result);
+		assertEquals(10, getSumFromResponce(result));
+	}
+
+	private int getSumFromResponce(String responce) {
+		responce = responce
+		.replaceAll("]]", "")
+		.replaceAll("\\[", "")
+		.replaceAll("]", System.lineSeparator())
+		.replaceAll(": ", ";")
+		.replaceAll("count = ", "")
+		.replaceAll("price = ", "");
+
+		return StringLoader.load(responce).getSum();
 	}
 }
