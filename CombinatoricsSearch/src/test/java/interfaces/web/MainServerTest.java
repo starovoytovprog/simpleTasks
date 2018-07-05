@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
  * @since 04.07.2018
  */
 public class MainServerTest {
-	private static final int TEST_PORT = 991;
+	private static final int TEST_PORT = 6794;
 	private static final String SERVER = "http://localhost:" + TEST_PORT + "/";
 
 	/**
