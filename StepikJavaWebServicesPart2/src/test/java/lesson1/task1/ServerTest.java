@@ -1,8 +1,9 @@
 package lesson1.task1;
 
+import Utils.MainServerContainer;
+import org.junit.Ignore;
 import org.junit.Test;
 import testUtils.HttpRequestSender;
-import utils.MainServerContainer;
 
 import static org.junit.Assert.assertTrue;
 
@@ -12,6 +13,7 @@ import static org.junit.Assert.assertTrue;
  * @author Starovoytov
  * @since 05.07.2018
  */
+@Ignore
 public class ServerTest {
 	/**
 	 * Проверка результата выполнения метода

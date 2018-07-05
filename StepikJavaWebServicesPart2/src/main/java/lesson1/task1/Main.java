@@ -1,8 +1,8 @@
 package lesson1.task1;
 
+import Utils.MainServerContainer;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-import utils.MainServerContainer;
 
 /**
  * Запуск сервлета, возвращающего разрешённое количество пользователей

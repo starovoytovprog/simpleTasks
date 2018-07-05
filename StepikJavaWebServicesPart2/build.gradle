@@ -4,6 +4,10 @@ buildscript {
 			url 'http://repo1.maven.org/maven2'
 		}
 	}
+
+	ext {
+		jettyVersion = '9.3.0.M1'
+	}
 }
 
 jar {
@@ -22,5 +26,6 @@ jar {
 }
 
 dependencies {
-	compile(project(':StepikJavaWebServicesPart1'))
+	compile(group: 'org.eclipse.jetty', name: 'jetty-server', version: jettyVersion)
+	compile(group: 'org.eclipse.jetty', name: 'jetty-webapp', version: jettyVersion)
 }

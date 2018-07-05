@@ -1,8 +1,7 @@
 package lesson1.task1;
 
-import utils.BaseHttpServlet;
-
 import java.io.IOException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,11 +11,11 @@ import javax.servlet.http.HttpServletResponse;
  * @author Starovoytov
  * @since 05.07.2018
  */
-public class UserCountServlet extends BaseHttpServlet {
+public class UserCountServlet extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.getWriter().println("10");
-		response.setContentType(HTTP_CONTENT_TYPE);
+		response.setContentType("http");
 		response.setStatus(HttpServletResponse.SC_OK);
 	}
 }
