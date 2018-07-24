@@ -7,10 +7,11 @@ import message.MessageConsumer;
 import message.MessageManager;
 import org.telegram.telegrambots.exceptions.TelegramApiRequestException;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import static vk.Constants.DELAY;
-import static vk.Constants.DELAY_FOR_ERROR;
+import static vk.Constants.*;
 
 /**
  * Управление сборкой новостей.
@@ -20,8 +21,14 @@ import static vk.Constants.DELAY_FOR_ERROR;
  */
 public class Manager {
 
+	private static final List<Integer> OWNERS = new ArrayList<>();
 	private static MessageConsumer CONSUMER;
 	private static Thread scanThread = null;
+	private static int CURRENT = 0;
+
+	static {
+		Arrays.stream(OWNER_ID.split(OWNER_DELIMITER)).forEach(id -> OWNERS.add(Integer.parseInt(id)));
+	}
 
 	/**
 	 * Запустить поток-обработчик новостей.
@@ -47,7 +54,7 @@ public class Manager {
 	 */
 	private static void scan(Collector collector) {
 		try {
-			List<String> linkList = collector.getNewPostsLinks();
+			List<String> linkList = collector.getNewPostsLinks(getOwnerId());
 			linkList.stream().forEach(link -> {
 				System.out.println("New post in group!");
 				CONSUMER.messageProcess("Новый пост в группе!\n" + link, true);
@@ -64,6 +71,16 @@ public class Manager {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Получить следующий id из списка
+	 *
+	 * @return
+	 */
+	private static int getOwnerId() {
+		CURRENT = (CURRENT + 1)%OWNERS.size();
+		return CURRENT;
 	}
 
 	/**
