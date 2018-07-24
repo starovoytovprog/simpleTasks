@@ -37,7 +37,7 @@ public class Collector {
 	 * @return ссылка на пост
 	 */
 	private static String getPostUrl(WallPostFull post) {
-		return POST_URL_PATTERN + OWNER_ID + "_" + post.getId();
+		return POST_URL_PATTERN + post.getOwnerId() + "_" + post.getId();
 	}
 
 	/**
@@ -52,16 +52,17 @@ public class Collector {
 	/**
 	 * Получить список ссылок на новости, опубликованные после последней сборки.
 	 *
+	 * @param ownerId id просматриваемой группы
 	 * @return Список ссылок на новости
 	 * @throws ClientException Исключения ВК АПИ
 	 * @throws ApiException    Исключения ВК АПИ
 	 */
 	@SuppressWarnings("unchecked")
-	public List<String> getNewPostsLinks() throws ClientException, ApiException {
+	public List<String> getNewPostsLinks(int ownerId) throws ClientException, ApiException {
 		Wall w = new Wall(new VkApiClient(HttpTransportClient.getInstance()));
 		UserActor u = new UserActor(USER_ID, ACCESS_TOKEN);
 
-		List<WallPostFull> posts = (w.get(u).ownerId(OWNER_ID).execute().getItems());
+		List<WallPostFull> posts = (w.get(u).ownerId(ownerId).execute().getItems());
 		int newStartTime = getCurrentTime();
 
 		List<String> resultList = new ArrayList();

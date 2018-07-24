@@ -8,7 +8,8 @@ package vk;
  */
 public class Constants {
 	public static final String POST_URL_PATTERN = "https://vk.com/wall";
-	public static final int OWNER_ID = Integer.parseInt(System.getenv().get("VK_CONSTANT_OWNER_ID"));
+	public static final String OWNER_ID = System.getenv().get("VK_CONSTANT_OWNER_ID");
+	public static final String OWNER_DELIMITER = "|";
 	public static final int USER_ID = Integer.parseInt(System.getenv().get("VK_CONSTANT_USER_ID"));
 	public static final String ACCESS_TOKEN = System.getenv().get("VK_CONSTANT_ACCESS_TOKEN");
 	public static final int DELAY = Integer.parseInt(System.getenv().get("VK_CONSTANT_DELAY"));
