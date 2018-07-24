@@ -49,8 +49,9 @@ public class MessageManager implements MessageConsumer {
 	@Override
 	public void messageProcess(String message, boolean inChat) {
 		try {
-			MESSAGES.put(new Message(message, Constants.CHANNEL_ID));
-			if (inChat) {
+			if (Constants.CHANNEL_ID != 0)
+				MESSAGES.put(new Message(message, Constants.CHANNEL_ID));
+			if (inChat && Constants.CHAT_ID != 0) {
 				MESSAGES.put(new Message(message, Constants.CHAT_ID));
 			}
 		}
