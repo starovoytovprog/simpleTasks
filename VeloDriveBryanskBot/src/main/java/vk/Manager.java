@@ -80,7 +80,7 @@ public class Manager {
 	 */
 	private static int getOwnerId() {
 		CURRENT = (CURRENT + 1)%OWNERS.size();
-		return CURRENT;
+		return OWNERS.get(CURRENT);
 	}
 
 	/**
