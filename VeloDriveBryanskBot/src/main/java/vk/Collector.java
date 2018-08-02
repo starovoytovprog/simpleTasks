@@ -9,7 +9,9 @@ import com.vk.api.sdk.httpclient.HttpTransportClient;
 import com.vk.api.sdk.objects.wall.WallPostFull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static vk.Constants.*;
 
@@ -21,6 +23,7 @@ import static vk.Constants.*;
  */
 public class Collector {
 	private int startTime = getCurrentTime();
+	private Map<Integer, Integer> timeMap = new HashMap<>();
 
 	public Collector() {
 		new Collector(getCurrentTime());
@@ -59,18 +62,15 @@ public class Collector {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<String> getNewPostsLinks(int ownerId) throws ClientException, ApiException {
+		final Integer actualCurrentTime = timeMap.get(ownerId) == null ? startTime : timeMap.get(ownerId);
 		Wall w = new Wall(new VkApiClient(HttpTransportClient.getInstance()));
 		UserActor u = new UserActor(USER_ID, ACCESS_TOKEN);
 
 		List<WallPostFull> posts = (w.get(u).ownerId(ownerId).execute().getItems());
-		int newStartTime = getCurrentTime();
-
+		timeMap.put(ownerId, getCurrentTime());
 		List<String> resultList = new ArrayList();
-
-		posts.stream().filter(post -> post.getDate() >= startTime).sorted((post1, post2) -> post1.getDate().compareTo(post2.getDate())).forEach(post -> resultList.add(getPostUrl(post)));
-
-		startTime = newStartTime;
-
+		posts.stream().filter(post -> post.getDate() >= actualCurrentTime).sorted((post1, post2) -> post1.getDate().compareTo(post2.getDate())).forEach(post -> resultList.add(getPostUrl(post)));
+		
 		return resultList;
 	}
 }
