@@ -2,6 +2,7 @@ System.properties['file.encoding'] = 'UTF-8'
 rootProject.name = 'SimpleTasks'
 
 include ':CombinatoricsSearch'
+include ':FileRandomizer'
 include ':HelloWorld'
 include ':Multithreading'
 include ':SimpleNotNecessaryCompiler'
