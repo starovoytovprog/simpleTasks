@@ -21,6 +21,7 @@ public class Randomizer {
 	 *
 	 * @param source      директория с копируемыми файлами
 	 * @param destination директория назначения
+	 * @throws IOException исключения ввода-вывода при обращении к файлам
 	 */
 	public static void CopyAll(String source, String destination) throws IOException {
 		clearDestinationPath(destination);

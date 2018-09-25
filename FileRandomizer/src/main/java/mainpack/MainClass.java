@@ -15,7 +15,8 @@ public class MainClass {
 	/**
 	 * Запуск утилиты
 	 *
-	 * @param args Не используется
+	 * @param args Передаются пути источника и назначения
+	 * @throws IOException исключения ввода-вывода при обращении к файлам
 	 */
 	public static void main(String[] args) throws IOException {
 		System.out.println("Randomizer started!");
