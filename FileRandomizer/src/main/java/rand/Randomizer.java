@@ -30,6 +30,7 @@ public class Randomizer {
 
 		for (File file : files) {
 			Files.copy(file.toPath(), new File(destination + "\\" + file.getName()).toPath(), StandardCopyOption.REPLACE_EXISTING);
+			System.out.println("Copied file:  " + file);
 		}
 	}
 
@@ -50,6 +51,7 @@ public class Randomizer {
 		@Override
 		public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
 			Files.delete(file);
+			System.out.println("Delete file: " + file);
 			return FileVisitResult.CONTINUE;
 		}
 	}
