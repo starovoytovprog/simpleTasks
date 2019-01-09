@@ -3,7 +3,7 @@ buildscript {
 		mavenCentral()
 	}
 }
-
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 
 class Version {
@@ -16,7 +16,9 @@ class Version {
 }
 
 def Version getRevision() {
-	return new Version ( longV: 'long', shortV: 'short')
+	DateFormat df = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+	String shortBuf = df.format(new Date());
+	return new Version ( longV: 'long', shortV: shortBuf)
 }
 
 ext {
