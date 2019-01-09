@@ -1,0 +1,13 @@
+ext {
+	jUnitVersion = '4.12'
+	mockitoVersion = '1.10.19'
+	jettyVersion = '9.3.0.M1'
+	freeMarkerVersion = '2.3.20'
+	gsonVersion = '2.3.1'
+	sqLiteVersion = '3.21.0.1'
+	hibernateVersion = '4.3.8.Final'
+	sqLiteDialectVersion = '1.0'
+	vkApiVersion = '0.5.12'
+	slf4jVersion = '1.7.22'
+	telegramSdkVersion = '3.6.1'
+}
