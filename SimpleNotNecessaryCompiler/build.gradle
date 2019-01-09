@@ -10,5 +10,7 @@ jar {
 	baseName = 'SimpleNotNecessaryCompiler'
 	manifest {
 		attributes "Main-Class": "gui.MainClass"
+		attributes "Implementation-Version": revision
+		attributes "Implementation-Title": baseName
 	}
 }

@@ -10,5 +10,7 @@ jar {
 	baseName = 'HelloWorld'
 	manifest {
 		attributes "Main-Class": "mainpack.HelloWorldMain"
+		attributes "Implementation-Version": revision
+		attributes "Implementation-Title": baseName
 	}
 }

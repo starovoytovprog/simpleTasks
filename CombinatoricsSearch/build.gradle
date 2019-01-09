@@ -4,16 +4,14 @@ buildscript {
 			url 'http://repo1.maven.org/maven2'
 		}
 	}
-
-	ext {
-		jettyVersion = '9.3.0.M1'
-	}
 }
 
 jar {
 	baseName = 'CombinatoricsSearch'
 	manifest {
 		attributes "Main-Class": "mainpack.Main"
+		attributes "Implementation-Version": revision
+		attributes "Implementation-Title": baseName
 	}
 	from {
 		configurations.compile.collect {

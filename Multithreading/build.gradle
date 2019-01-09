@@ -8,4 +8,8 @@ buildscript {
 
 jar {
 	baseName = 'Multithreading'
+	manifest {
+		attributes "Implementation-Version": revision
+		attributes "Implementation-Title": baseName
+	}
 }
