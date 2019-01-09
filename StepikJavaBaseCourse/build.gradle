@@ -8,5 +8,8 @@ buildscript {
 
 jar {
 	baseName = 'StepikJavaBaseCourse'
-	manifest {}
+	manifest {
+		attributes "Implementation-Version": revision
+		attributes "Implementation-Title": baseName
+	}
 }

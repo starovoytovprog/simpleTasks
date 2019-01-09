@@ -1,0 +1,24 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+}
+
+import java.text.SimpleDateFormat
+
+class Version {
+	String longV
+	String shortV
+
+	def String toString() {
+		longV
+	}
+}
+
+def Version getRevision() {
+	return new Version ( longV: 'long', shortV: 'short')
+}
+
+ext {
+	revision = getRevision()
+}

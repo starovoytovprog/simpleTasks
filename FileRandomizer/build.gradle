@@ -10,5 +10,7 @@ jar {
 	baseName = 'FileRandomizer'
 	manifest {
 		attributes "Main-Class": "mainpack.MainClass"
+		attributes "Implementation-Version": revision
+		attributes "Implementation-Title": baseName
 	}
 }

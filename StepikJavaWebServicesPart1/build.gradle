@@ -10,6 +10,8 @@ jar {
 	baseName = 'server'
 	manifest {
 		attributes "Main-Class": "lesson4.task1.main.Main"
+		attributes "Implementation-Version": revision
+		attributes "Implementation-Title": baseName
 	}
 	from {
 		configurations.compile.collect {

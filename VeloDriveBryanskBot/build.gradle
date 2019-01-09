@@ -18,6 +18,8 @@ jar {
 	baseName = 'VeloDriveBryanskBot'
 	manifest {
 		attributes "Main-Class": "main.Main"
+		attributes "Implementation-Version": revision
+		attributes "Implementation-Title": baseName
 	}
 	from {
 		configurations.compile.collect {

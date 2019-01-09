@@ -1,5 +1,6 @@
 apply plugin: "idea"
 apply from: 'libVersion.gradle'
+apply from: 'version.gradle'
 
 subprojects {
 	apply plugin: 'java'
@@ -7,9 +8,12 @@ subprojects {
 	compileJava.options.encoding = 'UTF-8'
 	compileTestJava.options.encoding = 'UTF-8'
 
+	version revision.shortV
+
 	javadoc {
 		options.encoding = 'UTF-8'
 		options.author = true
+		options.addStringOption("charset", "UTF-8")
 		classpath += sourceSets.test.compileClasspath
 		source += sourceSets.test.allJava
 	}
@@ -31,11 +35,10 @@ subprojects {
 	}
 
 	task fullRebuild() {
+		group = "build"
 		dependsOn(clean)
 		dependsOn(test)
 		dependsOn(jar)
 		dependsOn(javadoc)
 	}
-
-	fullRebuild.group = 'build';
 }
