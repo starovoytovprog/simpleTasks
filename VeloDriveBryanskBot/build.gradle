@@ -21,6 +21,7 @@ jar {
 		attributes "Implementation-Version": revision
 		attributes "Implementation-Title": baseName
 	}
+
 	from {
 		configurations.compile.collect {
 			it.isDirectory() ? it : zipTree(it)
@@ -29,4 +30,6 @@ jar {
 			it.isDirectory() ? it : zipTree(it)
 		}
 	}
+
+	exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
 }
