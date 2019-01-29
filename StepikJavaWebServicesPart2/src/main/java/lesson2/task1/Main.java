@@ -1,20 +1,32 @@
 package lesson2.task1;
 
 import Utils.MainServerContainer;
+import lesson1.task1.Settings;
+import lesson1.task1.SettingsMBean;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+
+import java.lang.management.ManagementFactory;
+import javax.management.MBeanServer;
+import javax.management.ObjectName;
 
 /**
  * Запуск сервлета ресурсной системы
  *
  * @author Starovoytov
- * @since 05.07.2018
+ * @since 29.01.2019
  */
 public class Main {
 	public static final String PATH = "resources";
 
 	public static void main(String[] args) throws Exception {
-		ResourceServlet servlet = new ResourceServlet();
+
+		ResourceServerMBean resourceServer = new ResourceServer();
+		MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
+		ObjectName objectName = new ObjectName("Admin:type=ResourceServerController");
+		mBeanServer.registerMBean(resourceServer, objectName);
+
+		ResourceServlet servlet = new ResourceServlet(resourceServer);
 		ServletContextHandler contextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
 		contextHandler.addServlet(new ServletHolder(servlet), "/" + PATH);
 
