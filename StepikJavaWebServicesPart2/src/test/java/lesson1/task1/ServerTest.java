@@ -25,9 +25,9 @@ public class ServerTest {
 		String testAddress = Main.PATH;
 		String titleString = "10";
 		Main.main(null);
-		String responce = HttpRequestSender.sendEmptyGetRequest(testAddress);
+		String response = HttpRequestSender.sendEmptyGetRequest(testAddress);
 		MainServerContainer.stop();
 
-		assertTrue(responce.contains(titleString));
+		assertTrue(response.contains(titleString));
 	}
 }
