@@ -18,4 +18,9 @@ public class ResourceServer implements ResourceServerMBean {
 	public int getAge() {
 		return testResource.getAge();
 	}
+
+	@Override
+	public void loadData(String path) {
+		
+	}
 }

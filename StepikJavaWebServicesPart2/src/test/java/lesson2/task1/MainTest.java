@@ -4,7 +4,7 @@ import Utils.MainServerContainer;
 import org.junit.Test;
 import testUtils.HttpRequestSender;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Тест ресурсного сервлета
@@ -15,7 +15,7 @@ public class MainTest {
 		String testAddress = Main.PATH;
 		String titleString = "hello";
 		Main.main(null);
-		String response = HttpRequestSender.sendEmptyGetRequest(testAddress);
+		String response = HttpRequestSender.sendEmptyPostRequest(testAddress);
 		MainServerContainer.stop();
 
 		assertTrue(response.contains(titleString));

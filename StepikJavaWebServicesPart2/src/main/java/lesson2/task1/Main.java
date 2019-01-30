@@ -1,8 +1,6 @@
 package lesson2.task1;
 
 import Utils.MainServerContainer;
-import lesson1.task1.Settings;
-import lesson1.task1.SettingsMBean;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 

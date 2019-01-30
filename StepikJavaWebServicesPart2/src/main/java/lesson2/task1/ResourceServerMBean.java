@@ -8,5 +8,8 @@ package lesson2.task1;
  */
 public interface ResourceServerMBean {
 	String getName();
+
 	int getAge();
+
+	void loadData(String path);
 }
