@@ -1,5 +1,12 @@
 package lesson2.task1;
 
+import org.xml.sax.SAXException;
+
+import java.io.IOException;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
 /**
  * Ресурсный сервер
  *
@@ -20,7 +27,11 @@ public class ResourceServer implements ResourceServerMBean {
 	}
 
 	@Override
-	public void loadData(String path) {
-		
+	public void loadData(String path) throws ParserConfigurationException, SAXException, IOException {
+		SAXParserFactory factory = SAXParserFactory.newInstance();
+		SAXParser saxParser = factory.newSAXParser();
+		MySaxHandler defaultHandler = new MySaxHandler();
+		saxParser.parse(path, defaultHandler);
+		testResource = defaultHandler.getResource();
 	}
 }

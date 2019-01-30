@@ -23,7 +23,12 @@ public class ResourceServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String path = request.getParameter("path");
 		if (path != null) {
-			resourceServer.loadData(request.getParameter("path"));
+			try {
+				resourceServer.loadData(request.getParameter("path"));
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		response.getWriter().println("hello");
