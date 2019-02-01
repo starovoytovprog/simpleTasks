@@ -31,7 +31,7 @@ public class ResourceServlet extends HttpServlet {
 			}
 		}
 
-		response.getWriter().println("hello");
+		response.getWriter().println("name:" + resourceServer.getName() + "; age: " + resourceServer.getAge());
 		response.setContentType("http");
 		response.setStatus(HttpServletResponse.SC_OK);
 	}
