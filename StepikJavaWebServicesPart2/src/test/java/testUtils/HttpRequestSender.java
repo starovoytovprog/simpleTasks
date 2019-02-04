@@ -30,8 +30,18 @@ public class HttpRequestSender {
 	 * @throws Exception Ошибки запроса к серверу
 	 */
 	public static String sendEmptyGetRequest(String address) throws Exception {
-		//HttpURLConnection connection = getConnection(address, REQUEST_METOD_GET);
 		return sendRequestWithParameters(address, null, REQUEST_METOD_GET);
+	}
+
+	/**
+	 * Отправляет пустой post-запрос на адрес и получает результат
+	 *
+	 * @param address Адрес запрашиваемого документа
+	 * @return Контент страницы ответа
+	 * @throws Exception Ошибки запроса к серверу
+	 */
+	public static String sendEmptyPostRequest(String address) throws Exception {
+		return sendPostRequest(address, null);
 	}
 
 	/**

@@ -9,7 +9,7 @@ buildscript {
 jar {
 	baseName = 'server'
 	manifest {
-		attributes "Main-Class": "lesson1.task1.Main"
+		attributes "Main-Class": "lesson3.task3.Main"
 		attributes "Implementation-Version": revision
 		attributes "Implementation-Title": baseName
 	}
