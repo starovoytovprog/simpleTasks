@@ -34,33 +34,36 @@ public class TelegramBot extends TelegramLongPollingBot {
 
 	/**
 	 * Инициализировать бота
-	 *
-	 * @throws TelegramApiRequestException ошибка запуска бота
 	 */
-	public static void init() throws TelegramApiRequestException {
+	public static void init() {
 		ApiContextInitializer.init();
 		register();
 		new Reconnector().start();
 	}
 
-	private static void register() throws TelegramApiRequestException {
+	private static void register() {
 		try {
-			unregister();
+			try {
+				unregister();
+			}
+			catch (Exception ex) {
+				ex.printStackTrace();
+			}
+
+			try {
+				Thread.currentThread().sleep(RECONNECT_DELIMITER);
+			}
+			catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			currentBot = new TelegramBot(getConfigureOptions());
+			botSession = botsApi.registerBot(currentBot);
+			System.out.println("telegram bot started");
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
 		}
-
-		try {
-			Thread.currentThread().sleep(RECONNECT_DELIMITER);
-		}
-		catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-		currentBot = new TelegramBot(getConfigureOptions());
-		botSession = botsApi.registerBot(currentBot);
-		System.out.println("telegram bot started");
 	}
 
 	private static void unregister() throws TelegramApiRequestException {
@@ -192,10 +195,6 @@ public class TelegramBot extends TelegramLongPollingBot {
 						}
 						register();
 						err = false;
-					}
-					catch (TelegramApiRequestException e) {
-						e.printStackTrace();
-						err = true;
 					}
 					catch (Exception e) {
 						e.printStackTrace();
