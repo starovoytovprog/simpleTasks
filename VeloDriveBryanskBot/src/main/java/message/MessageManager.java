@@ -1,6 +1,5 @@
 package message;
 
-import org.telegram.telegrambots.exceptions.TelegramApiRequestException;
 import telegram.Constants;
 import telegram.TelegramBot;
 
@@ -19,14 +18,7 @@ public class MessageManager implements MessageConsumer {
 	private static final BlockingQueue<Message> MESSAGES = new LinkedBlockingQueue<>();
 
 	static {
-		Thread messageSender = null;
-		try {
-			messageSender = new MessageSender();
-		}
-		catch (TelegramApiRequestException e) {
-			System.exit(-1);
-		}
-		messageSender.start();
+		new MessageSender().start();
 	}
 
 	private MessageManager() {}
@@ -49,8 +41,7 @@ public class MessageManager implements MessageConsumer {
 	@Override
 	public void messageProcess(String message, boolean inChat) {
 		try {
-			if (Constants.CHANNEL_ID != 0)
-				MESSAGES.put(new Message(message, Constants.CHANNEL_ID));
+			if (Constants.CHANNEL_ID != 0) MESSAGES.put(new Message(message, Constants.CHANNEL_ID));
 			if (inChat && Constants.CHAT_ID != 0) {
 				MESSAGES.put(new Message(message, Constants.CHAT_ID));
 			}
@@ -78,7 +69,7 @@ public class MessageManager implements MessageConsumer {
 	 * Класс для отправки сообщений в отдельном потоке
 	 */
 	private static class MessageSender extends Thread {
-		private MessageSender() throws TelegramApiRequestException {
+		private MessageSender() {
 			TelegramBot.init();
 		}
 
