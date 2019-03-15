@@ -37,11 +37,15 @@ public class TelegramBot extends TelegramLongPollingBot {
 	 */
 	public static void init() {
 		ApiContextInitializer.init();
-		register();
 		new Reconnector().start();
 	}
 
-	private static void register() {
+	/**
+	 * Попытка регистрации бота
+	 *
+	 * @throws TelegramApiRequestException ошибка при регистрации
+	 */
+	private static void register() throws TelegramApiRequestException {
 		try {
 			try {
 				unregister();
@@ -63,6 +67,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
+			throw ex;
 		}
 	}
 
@@ -182,7 +187,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 		@Override
 		public void run() {
 			if (RECONNECT_TIMER > 0) {
-				boolean err = false;
+				boolean err = true;
 				while (true) {
 					try {
 						if (!err) {
